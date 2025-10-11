@@ -936,8 +936,8 @@ const SECTORS = [
     title: "Rechts- & Steuerwesen",
     icon: <Scale className="w-4 h-4" />,
     intro: "Abläufe verschlanken, Fristen sicher überwachen und Fachwissen zentral verfügbar machen. Ohne permanente Zusatzbelastung für Ihre Teams.",
-    hero: "/sectors/legal.jpg",
-    video: "/loops/legal.mp4",
+    hero: "/legal.jpg",
+    video: "/legal.mp4",
     chips: ["Dokumente strukturiert ablegen", "Fristen verlässlich einhalten", "Antwortzeiten verkürzen"],
     highlights: ["Höhere Transparenz", "Schnellere Entscheidungen", "Weniger Routineaufwand"],
     kpis: [{v:"-40%", l:"Bearbeitungszeit"}, {v:"+25%", l:"Zuverlässigkeit"}, {v:"-50%", l:"E-Mail-Volumen"}]
