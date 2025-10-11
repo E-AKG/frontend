@@ -615,14 +615,16 @@ const AboutView = () => {
 };
 
 /* =========================
-   NAVBAR — Titanium Fullscreen Slide Edition
+   NAVBAR — Titanium Fullscreen Slide Edition + Branchen-Mega-Menü
 ========================= */
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [openSectors, setOpenSectors] = useState(false);
 
   const goHome = (e) => {
     e.preventDefault();
     setOpen(false);
+    setOpenSectors(false);
     window.location.href = "/";
   };
 
@@ -634,6 +636,38 @@ const Navbar = () => {
     after:w-0 after:bg-gradient-to-r after:from-[#2b3542] after:to-[#9ca3af]
     hover:after:w-full after:transition-all after:duration-500 after:rounded-full
   `;
+
+  // ESC-Taste schließt Menüs
+  useEffect(() => {
+    const closeOnEsc = (e) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        setOpenSectors(false);
+      }
+    };
+    window.addEventListener("keydown", closeOnEsc);
+    return () => window.removeEventListener("keydown", closeOnEsc);
+  }, []);
+
+  // Klick außerhalb des Branchen-Menüs schließt es
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      const menu = document.getElementById("sectors-menu");
+      const button = document.getElementById("sectors-button");
+      if (
+        openSectors &&
+        menu &&
+        button &&
+        !menu.contains(e.target) &&
+        !button.contains(e.target)
+      ) {
+        setOpenSectors(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [openSectors]);
 
   return (
     <header className="sticky top-0 z-[100] bg-white/70 backdrop-blur-2xl border-b border-[rgba(43,53,66,0.2)] shadow-[0_4px_30px_rgba(0,0,0,0.08)]">
@@ -653,21 +687,127 @@ const Navbar = () => {
           />
         </a>
 
-        {/* Desktop Nav */}
+        {/* ======== DESKTOP NAVIGATION ======== */}
         <div className="hidden md:flex items-center gap-7 text-[15px]">
-          <a href="/" onClick={goHome} className={linkFx}>Home</a>
+          <a href="/" onClick={goHome} className={linkFx}>
+            Home
+          </a>
+
           <button
             onClick={() => (window.location.href = "?page=services")}
             className={linkFx}
           >
             Leistungen
           </button>
+
+          {/* Branchen (Mega-Menü) */}
+          <div className="relative">
+            <button
+              id="sectors-button"
+              onClick={() => setOpenSectors(!openSectors)}
+              className={`${linkFx} inline-flex items-center gap-1`}
+            >
+              Branchen
+              <ChevronRight
+                size={16}
+                className={`transition-transform duration-300 ${
+                  openSectors ? "rotate-90" : ""
+                }`}
+              />
+            </button>
+
+            <AnimatePresence>
+              {openSectors && (
+                <motion.div
+                  id="sectors-menu"
+                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute right-0 mt-4 w-[880px] max-w-[94vw] z-[999] rounded-3xl border border-[rgba(43,53,66,0.2)]
+                             bg-white/95 backdrop-blur-xl shadow-[0_25px_70px_rgba(15,23,42,0.15)] p-5"
+                >
+                  <div className="px-2 pb-2 flex items-center justify-between">
+                    <span className="text-[11px] uppercase tracking-[0.18em] text-graphite-600">
+                      Branchen & Use-Cases
+                    </span>
+                    <a
+                      href="#usecases"
+                      onClick={() => {
+                        setOpenSectors(false);
+                        document
+                          .getElementById("usecases")
+                          ?.scrollIntoView({ behavior: "smooth" });
+                      }}
+                      className="text-xs text-graphite-700 hover:text-graphite-900 flex items-center gap-1"
+                    >
+                      Alle Use Cases <ChevronRight size={14} />
+                    </a>
+                  </div>
+
+                  {/* Branchen-GRID */}
+                  <div className="grid grid-cols-3 gap-3 max-h-[65vh] overflow-y-auto pr-1">
+                    {SECTORS.map((s) => (
+                      <button
+                        key={s.key}
+                        onClick={() => {
+                          setOpenSectors(false);
+                          const base = window.location.origin;
+                          window.location.href = `${base}?sector=${s.key}`;
+                        }}
+                        className="group relative text-left rounded-2xl p-3 border border-[rgba(43,53,66,.12)] bg-white hover:bg-[#f6f8fb]
+                                   transition-all shadow-[0_6px_20px_rgba(15,23,42,.06)] hover:shadow-[0_14px_35px_rgba(15,23,42,.1)]"
+                      >
+                        <div className="relative h-28 rounded-xl overflow-hidden border border-[rgba(43,53,66,.15)]">
+                          <img
+                            src={s.hero}
+                            alt={s.title}
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
+                          <span className="absolute top-2 left-2 inline-flex items-center gap-1 rounded-full bg-white/90 backdrop-blur px-2.5 py-0.5 border border-[rgba(43,53,66,.2)] text-[11px] text-graphite-800">
+                            {s.icon} {s.title.split(" ")[0]}
+                          </span>
+                        </div>
+
+                        <div className="mt-3">
+                          <div className="text-[15px] font-semibold text-graphite-900">
+                            {s.title}
+                          </div>
+                          <div className="text-xs text-graphite-600 line-clamp-2">
+                            {s.intro}
+                          </div>
+                          <div className="mt-2 flex flex-wrap gap-1.5">
+                            {(s.chips || []).slice(0, 3).map((c, i) => (
+                              <span
+                                key={i}
+                                className="px-2.5 py-1 rounded-full border border-[rgba(43,53,66,.16)] bg-white text-[11px] text-graphite-800"
+                              >
+                                {c}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <ChevronRight
+                          size={16}
+                          className="absolute right-3 top-3 text-graphite-700 opacity-0 group-hover:opacity-100 group-hover:translate-x-[2px] transition"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           <button
             onClick={() => (window.location.href = "?page=about")}
             className={linkFx}
           >
             Über mich / Vision
           </button>
+
           <button
             onClick={() => (window.location.href = "/kontakt")}
             className="px-5 py-3 rounded-2xl font-semibold text-white 
@@ -679,7 +819,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Toggle */}
+        {/* ======== MOBILE TOGGLE ======== */}
         <button
           onClick={() => setOpen(true)}
           className="md:hidden rounded-xl px-3 py-2 border border-[rgba(43,53,66,0.25)] text-graphite-900 font-medium transition active:scale-95"
@@ -688,92 +828,101 @@ const Navbar = () => {
         </button>
       </nav>
 
-{/* ======== MOBILE FULLSCREEN SLIDE MENU ======== */}
-<AnimatePresence>
-  {open && (
-    <>
-      {/* Dimmed Background Overlay */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.45 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.35 }}
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[199]"
-        onClick={() => setOpen(false)}
-      />
+      {/* ======== MOBILE FULLSCREEN SLIDE MENU ======== */}
+      <AnimatePresence>
+        {open && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.45 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[199]"
+              onClick={() => setOpen(false)}
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 85, damping: 16 }}
+              className="fixed top-0 right-0 h-screen w-full sm:w-[80%] z-[200]
+                         bg-gradient-to-b from-[#fdfefe] to-[#f7f9fc]
+                         backdrop-blur-2xl shadow-[0_0_50px_rgba(15,23,42,0.25)]
+                         border-l border-[rgba(43,53,66,0.1)]
+                         flex flex-col"
+            >
+              <div className="flex items-center justify-between px-6 h-20 border-b border-[rgba(43,53,66,0.08)]">
+                <span className="font-semibold text-graphite-900 text-lg tracking-tight">
+                  Navigation
+                </span>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="p-2 rounded-xl border border-[rgba(43,53,66,0.2)] 
+                             bg-white/60 backdrop-blur active:scale-95 transition"
+                >
+                  ✕
+                </button>
+              </div>
 
-      {/* FULLSCREEN MENU PANEL */}
-      <motion.div
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        exit={{ x: "100%" }}
-        transition={{ type: "spring", stiffness: 85, damping: 16 }}
-        className="fixed top-0 right-0 h-screen w-full sm:w-[80%] z-[200]
-                   bg-gradient-to-b from-[#fdfefe] to-[#f7f9fc]
-                   backdrop-blur-2xl shadow-[0_0_50px_rgba(15,23,42,0.25)]
-                   border-l border-[rgba(43,53,66,0.1)]
-                   flex flex-col"
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between px-6 h-20 border-b border-[rgba(43,53,66,0.08)]">
-          <span className="font-semibold text-graphite-900 text-lg tracking-tight">
-            Navigation
-          </span>
-          <button
-            onClick={() => setOpen(false)}
-            className="p-2 rounded-xl border border-[rgba(43,53,66,0.2)] 
-                       bg-white/60 backdrop-blur active:scale-95 transition"
-          >
-            ✕
-          </button>
-        </div>
+              <div className="flex-1 px-8 py-10 flex flex-col gap-6 text-[18px] font-medium text-graphite-900">
+                <a onClick={goHome} href="/" className="hover:text-graphite-950 transition">
+                  Home
+                </a>
+                <button
+                  onClick={() => {
+                    setOpen(false);
+                    window.location.href = "?page=services";
+                  }}
+                  className="text-left hover:text-graphite-950 transition"
+                >
+                  Leistungen
+                </button>
+                <details className="text-left">
+                  <summary className="cursor-pointer list-none flex items-center justify-between hover:text-graphite-950 transition">
+                    Branchen <ChevronRight size={16} />
+                  </summary>
+                  <div className="mt-3 pl-2 flex flex-col gap-2">
+                    {SECTORS.map((s) => (
+                      <button
+                        key={s.key}
+                        onClick={() => {
+                          setOpen(false);
+                          window.location.href = `?sector=${s.key}`;
+                        }}
+                        className="text-left text-[16px] text-graphite-800 hover:text-graphite-950 transition"
+                      >
+                        {s.title}
+                      </button>
+                    ))}
+                  </div>
+                </details>
+                <button
+                  onClick={() => {
+                    setOpen(false);
+                    window.location.href = "?page=about";
+                  }}
+                  className="text-left hover:text-graphite-950 transition"
+                >
+                  Über mich / Vision
+                </button>
+                <button
+                  onClick={() => {
+                    setOpen(false);
+                    window.location.href = "/kontakt";
+                  }}
+                  className="text-left hover:text-graphite-950 transition"
+                >
+                  Kontakt / Erstgespräch
+                </button>
+              </div>
 
-        {/* Links */}
-        <div className="flex-1 px-8 py-10 flex flex-col gap-6 text-[18px] font-medium text-graphite-900">
-          <a
-            onClick={goHome}
-            href="/"
-            className="hover:text-graphite-950 transition"
-          >
-            Home
-          </a>
-          <button
-            onClick={() => {
-              setOpen(false);
-              window.location.href = "?page=services";
-            }}
-            className="text-left hover:text-graphite-950 transition"
-          >
-            Leistungen
-          </button>
-          <button
-            onClick={() => {
-              setOpen(false);
-              window.location.href = "?page=about";
-            }}
-            className="text-left hover:text-graphite-950 transition"
-          >
-            Über mich / Vision
-          </button>
-          <button
-            onClick={() => {
-              setOpen(false);
-              window.location.href = "/kontakt";
-            }}
-            className="text-left hover:text-graphite-950 transition"
-          >
-            Kontakt / Erstgespräch
-          </button>
-        </div>
-
-        {/* Footer */}
-        <div className="px-8 py-6 border-t border-[rgba(43,53,66,0.1)] text-sm text-graphite-600">
-          © {new Date().getFullYear()} IZENIC · Alle Rechte vorbehalten
-        </div>
-      </motion.div>
-    </>
-  )}
-</AnimatePresence>
+              <div className="px-8 py-6 border-t border-[rgba(43,53,66,0.1)] text-sm text-graphite-600">
+                © {new Date().getFullYear()} IZENIC · Alle Rechte vorbehalten
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
