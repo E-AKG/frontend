@@ -1,9 +1,13 @@
+// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import fs from 'fs';
 
 export default defineConfig({
+  // 👇 ganz wichtig für Render, Netlify, GitHub Pages etc.
+  base: './',
+
   plugins: [
     react(),
     {
@@ -21,6 +25,7 @@ export default defineConfig({
       },
     },
   ],
+
   server: {
     proxy: {
       '/api': 'http://localhost:8000',
