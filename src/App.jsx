@@ -1219,70 +1219,33 @@ const Hero = () => {
 
 
 /* =========================
-   SECTION: Warum jetzt — Premium Video mit Smart-Fade Controls
+   SECTION: Warum jetzt — Hero-Spot mit Premium-Video
 ========================= */
 const WhyNow = () => {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const [showControls, setShowControls] = useState(false);
-  const fadeTimeout = useRef(null);
 
-  // --- Controls anzeigen / ausblenden ---
-  const triggerControls = () => {
-    setShowControls(true);
-    clearTimeout(fadeTimeout.current);
-    fadeTimeout.current = setTimeout(() => setShowControls(false), 2500);
-  };
-
-  // --- Video-Steuerung ---
   const togglePlay = () => {
     const v = videoRef.current;
     if (!v) return;
-    if (v.paused) {
-      v.play();
-      setPlaying(true);
-    } else {
-      v.pause();
-      setPlaying(false);
-    }
-    triggerControls();
+    if (v.paused) { v.play(); setPlaying(true); }
+    else { v.pause(); setPlaying(false); }
   };
-
   const toggleMute = () => {
     const v = videoRef.current;
     if (!v) return;
     v.muted = !v.muted;
     setMuted(v.muted);
-    triggerControls();
   };
-
-  const handleTimeUpdate = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    setProgress((v.currentTime / v.duration) * 100 || 0);
-  };
-
-  const handleSeek = (e) => {
-    const v = videoRef.current;
-    if (!v) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const pos = (e.clientX - rect.left) / rect.width;
-    v.currentTime = pos * v.duration;
-    triggerControls();
-  };
-
-  // --- Mausbewegung oder Tap zeigt Controls ---
-  const handleUserInteraction = () => triggerControls();
 
   return (
     <section
       id="whynow"
       className="relative py-20 md:py-28 bg-gradient-to-b from-white via-[#f7f9fc] to-white"
     >
-      {/* Headline */}
       <div className="max-w-5xl mx-auto px-4 text-center">
+        {/* Headline */}
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1307,74 +1270,61 @@ const WhyNow = () => {
       {/* Video Hero */}
       <div className="relative mt-12 max-w-6xl mx-auto px-4">
         <div className="relative rounded-[32px] p-[2px] bg-[linear-gradient(135deg,#cfd6df,#aab4c2,#2b3542)] shadow-[0_30px_80px_rgba(15,23,42,.2)]">
-          <div
-            className="relative rounded-[30px] overflow-hidden border border-[rgba(12,18,26,.12)]"
-            onMouseMove={handleUserInteraction}
-            onClick={handleUserInteraction}
-          >
+          <div className="relative rounded-[30px] overflow-hidden border border-[rgba(12,18,26,.12)]">
             <div className="relative aspect-[16/9]">
               <video
                 ref={videoRef}
                 className="absolute inset-0 w-full h-full object-cover"
-                src="https://res.cloudinary.com/dvyj9gcni/video/upload/v1760139698/izenic_zmbgrb.mp4"
+                src="/izenic.mp4"
                 autoPlay
                 loop
                 muted={muted}
                 playsInline
-                onTimeUpdate={handleTimeUpdate}
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              {/* Overlay Effekte */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(800px_400px_at_80%_-10%,rgba(0,0,0,.9),transparent)] bg-white/20" />
+            </div>
 
+            {/* Badge oben links */}
+            <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-3 py-1 border border-[rgba(12,18,26,.18)] text-sm font-medium text-graphite-900 shadow">
+              <Play size={14} /> Vorstellungsvideo
+            </div>
 
-
-              {/* Smart-Fade Controls */}
-              <div
-                className={`absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black/70 via-black/40 to-transparent transition-opacity duration-500 ${
-                  showControls ? "opacity-100" : "opacity-0 pointer-events-none"
-                }`}
-              >
-                {/* Progress Bar */}
-                <div
-                  className="relative h-[5px] rounded-full bg-white/20 cursor-pointer mb-3"
-                  onClick={handleSeek}
+            {/* Controls unten */}
+            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-2">
+              <div className="inline-flex items-center gap-2">
+                <button
+                  onClick={togglePlay}
+                  className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium bg-white/90 backdrop-blur border border-[rgba(12,18,26,.18)] hover:bg-white transition"
+                  aria-label={playing ? "Pause" : "Play"}
                 >
-                  <div
-                    className="absolute top-0 left-0 h-full bg-white rounded-full transition-all duration-150"
-                    style={{ width: `${progress}%` }}
-                  />
-                </div>
-
-                {/* Buttons */}
-                <div className="flex justify-between items-center">
-                  <div className="flex gap-3">
-                    <button
-                      onClick={togglePlay}
-                      className="inline-flex items-center gap-2 text-white text-sm md:text-base font-medium bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg backdrop-blur transition"
-                    >
-                      {playing ? (
-                        <>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                            <rect x="6" y="5" width="4" height="14" />
-                            <rect x="14" y="5" width="4" height="14" />
-                          </svg>
-                          Pause
-                        </>
-                      ) : (
-                        <>
-                          <Play size={16} /> Abspielen
-                        </>
-                      )}
-                    </button>
-                    <button
-                      onClick={toggleMute}
-                      className="inline-flex items-center gap-2 text-white text-sm md:text-base font-medium bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg backdrop-blur transition"
-                    >
-                      {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-                      {muted ? "Stumm" : "Ton"}
-                    </button>
-                  </div>
-                </div>
+                  {playing ? (
+                    <>
+                      <svg width="16" height="16" viewBox="0 0 24 24">
+                        <rect x="6" y="5" width="4" height="14" />
+                        <rect x="14" y="5" width="4" height="14" />
+                      </svg>
+                      Pause
+                    </>
+                  ) : (
+                    <>
+                      <Play size={16} /> Play
+                    </>
+                  )}
+                </button>
+                <button
+                  onClick={toggleMute}
+                  className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium bg-white/90 backdrop-blur border border-[rgba(12,18,26,.18)] hover:bg-white transition"
+                  aria-label={muted ? "Unmute" : "Mute"}
+                >
+                  {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                  {muted ? "Stumm" : "Ton"}
+                </button>
               </div>
+              <span className="hidden md:inline-flex items-center gap-2 rounded-full bg-white/85 backdrop-blur px-3 py-1 border border-[rgba(12,18,26,.18)] text-xs text-graphite-800">
+                60–90 Sek • Full HD
+              </span>
             </div>
           </div>
         </div>
@@ -1386,7 +1336,7 @@ const WhyNow = () => {
           {[
             "Routinen reduzieren, Kapazitäten freilegen",
             "Gezielte KI für Sprache, Bild und Daten",
-            "Skalierbar und sicher: DSGVO, Rollen, Audit-Logs",
+            "Skalierbar und sicher: DSGVO, Rollen, Audit-Logs"
           ].map((item, i) => (
             <motion.li
               key={i}
@@ -2607,30 +2557,30 @@ const Footer = () => (
         {/* === COLUMN 2: NAVIGATION === */}
         <div className="flex md:justify-end">
           <ul className="flex flex-col md:items-end gap-5 text-base font-medium text-graphite-700">
-          {[
-  { name: "Impressum", href: "/impressum" },
-  { name: "Datenschutz", href: "/datenschutz" },
-  { name: "Vertrauen & Sicherheit", href: "/trust" },
-].map((link) => (
-  <li key={link.name}>
-    <a
-      href={link.href}
-      onClick={(e) => {
-        e.preventDefault();                            // ❌ verhindert Seitenreload
-        window.history.pushState({}, "", link.href);   // ✅ ändert die URL
-        window.dispatchEvent(new PopStateEvent("popstate")); // 🔁 triggert dein App-Update
-        window.scrollTo({ top: 0, behavior: "instant" });
-      }}
-      className="relative hover:text-graphite-900 transition 
-                 after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] 
-                 after:bg-gradient-to-r after:from-[#2b3542] after:to-[#aab4c2] 
-                 after:scale-x-0 hover:after:scale-x-100 after:origin-left 
-                 after:transition-transform after:duration-500"
-    >
-      {link.name}
-    </a>
-  </li>
-))}
+            {[
+              { name: "Impressum", href: "/impressum" },
+              { name: "Datenschutz", href: "/datenschutz" },
+              { name: "Vertrauen & Sicherheit", href: "/trust" },
+            ].map((link) => (
+              <li key={link.name}>
+<a
+  href={link.href}
+  onClick={(e) => {
+    e.preventDefault(); // verhindert kompletten Reload
+    window.history.pushState({}, "", link.href); // ändert URL
+    window.dispatchEvent(new PopStateEvent("popstate")); // triggert dein App-UseEffect
+    window.scrollTo({ top: 0, behavior: "instant" }); // nach oben scrollen
+  }}
+  className="relative hover:text-graphite-900 transition 
+             after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] 
+             after:bg-gradient-to-r after:from-[#2b3542] after:to-[#aab4c2] 
+             after:scale-x-0 hover:after:scale-x-100 after:origin-left 
+             after:transition-transform after:duration-500"
+>
+  {link.name}
+</a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -3040,13 +2990,19 @@ const KontaktPage = () => {
    APP ROOT — erkennt ?sector= oder Seiten
 ========================= */
 export default function App() {
+  // 🧭 1) Path in React-State legen, damit Re-Render bei URL-Änderung
+  const [path, setPath] = useState(window.location.pathname);
+
+  // 2) Query-basierte Slugs (wie bei dir)
   const [sectorSlug, setSectorSlug] = useState(getSectorFromQuery());
   const [pageSlug, setPageSlug] = useState(getPageFromQuery()); // "services" | "about" | null
 
+  // 3) Wenn Browsernavigation (Vor/Zurück oder interner Tab-Klick)
   useEffect(() => {
     const onPop = () => {
       setSectorSlug(getSectorFromQuery());
       setPageSlug(getPageFromQuery());
+      setPath(window.location.pathname); // ✅ triggert Re-Render
       window.scrollTo({ top: 0, behavior: "instant" }); // 🚀 immer oben starten
     };
     window.addEventListener("popstate", onPop);
@@ -3085,7 +3041,7 @@ export default function App() {
   }
 
   // 3) Impressum
-  if (window.location.pathname === "/impressum") {
+  if (path === "/impressum") {
     return (
       <div className="min-h-screen bg-white">
         <Navbar />
@@ -3096,7 +3052,7 @@ export default function App() {
   }
 
   // 4) Datenschutz
-  if (window.location.pathname === "/datenschutz") {
+  if (path === "/datenschutz") {
     return (
       <div className="min-h-screen bg-white">
         <Navbar />
@@ -3108,7 +3064,7 @@ export default function App() {
 
 
   // 5) Vertrauen & Sicherheit
-  if (window.location.pathname === "/trust") {
+  if (path === "/trust") {
     return (
       <div className="min-h-screen bg-white">
         <Navbar />
