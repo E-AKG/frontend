@@ -5,13 +5,13 @@ import { resolve } from 'path';
 import fs from 'fs';
 
 export default defineConfig({
-  // 👇 ganz wichtig für Render, Netlify, GitHub Pages etc.
-  base: './',
+  base: './', // 🔥 wichtig für Render & relative Pfade
 
   plugins: [
     react(),
+
+    // 🔁 Plugin 1: Kopiert _redirects automatisch
     {
-      // 🔁 Plugin: kopiert _redirects automatisch in dist/
       name: 'copy-redirects',
       closeBundle() {
         const src = resolve(__dirname, '_redirects');
@@ -21,6 +21,21 @@ export default defineConfig({
           console.log('✅ _redirects wurde erfolgreich nach dist/ kopiert');
         } else {
           console.warn('⚠️  Keine _redirects-Datei im Projekt-Root gefunden');
+        }
+      },
+    },
+
+    // 🔁 Plugin 2: Kopiert public/ assets (z. B. /sectors, /loops, /pdfs)
+    {
+      name: 'copy-public-assets',
+      closeBundle() {
+        const srcDir = resolve(__dirname, 'public');
+        const destDir = resolve(__dirname, 'dist');
+        if (fs.existsSync(srcDir)) {
+          fs.cpSync(srcDir, destDir, { recursive: true });
+          console.log('✅ public/ wurde erfolgreich nach dist/ kopiert');
+        } else {
+          console.warn('⚠️  Kein public/-Ordner gefunden');
         }
       },
     },
