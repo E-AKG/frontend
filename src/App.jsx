@@ -1474,11 +1474,6 @@ const WhyNow = () => {
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
   
-                {/* Label */}
-                <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-3 py-1 border border-[rgba(12,18,26,.18)] text-sm font-medium text-graphite-900 shadow">
-                  <Play size={14} /> Vorstellungsvideo
-                </div>
-  
                 {/* Smart-Fade Controls */}
                 <div
                   className={`absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black/70 via-black/40 to-transparent transition-opacity duration-500 ${
