@@ -1,1 +1,11 @@
+# Statische Dateien zuerst (Render prüft Reihenfolge von oben nach unten)
+# Diese Zeilen erlauben Render, die Dateien wirklich auszuliefern:
+# (Wichtig: Kein Leerzeichen am Anfang)
+
+# Public assets direkt ausliefern:
+/sectors/*   /sectors/:splat   200
+/loops/*     /loops/:splat     200
+/assets/*    /assets/:splat    200
+
+# SPA-Fallback für alle anderen React-Routen
 /* /index.html 200
