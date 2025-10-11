@@ -425,32 +425,21 @@ const AboutView = () => {
 {/* Divider line */}
 <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#2b3542]/10 to-transparent my-10" />
 
-{/* BULLETS – 1 COLUMN STYLE */}
-<ul className="space-y-3 text-[15px] text-graphite-800">
-  <li className="flex items-start gap-2">
-    <CheckCircle2 size={18} className="mt-[2px]" />
-    <span>
-      Master of Science in Data Science
-    </span>
-  </li>
-  <li className="flex items-start gap-2">
-    <CheckCircle2 size={18} className="mt-[2px]" />
-    <span>
-      Bachelor of Science in Wirtschaftsinformatik
-    </span>
-  </li>
-  <li className="flex items-start gap-2">
-    <CheckCircle2 size={18} className="mt-[2px]" />
-    <span>
-      Mehrjährige Erfahrung in praxisorientierten Projekten mit Forschungs- und Startup-Partnern
-    </span>
-  </li>
-  <li className="flex items-start gap-2">
-    <CheckCircle2 size={18} className="mt-[2px]" />
-    <span>
-    Spezialisierung auf künstliche Intelligenz und Automatisierung
-    </span>
-  </li>
+{/* BULLETS – Einheitliche Größe & Zeilenhöhe */}
+<ul className="space-y-3 text-[15px] leading-relaxed text-graphite-800">
+  {[
+    "Master of Science in Data Science",
+    "Bachelor of Science in Wirtschaftsinformatik",
+    "Mehrjährige Erfahrung in praxisorientierten Projekten mit Forschungs- und Startup-Partnern",
+    "Spezialisierung auf künstliche Intelligenz und Automatisierung",
+  ].map((item, i) => (
+    <li key={i} className="flex items-start gap-3">
+      <CheckCircle2 size={18} className="mt-[2px] shrink-0 text-titanium-600" />
+      <span className="block text-[15px] font-medium leading-relaxed">
+        {item}
+      </span>
+    </li>
+  ))}
 </ul>
     </motion.div>
   </div>
@@ -1717,10 +1706,8 @@ const USP = () => {
           viewport={{ once: true, amount: 0.3 }}
           className="text-center"
         >
-          <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-graphite-700 bg-white border border-[rgba(12,18,26,.12)] rounded-full px-3 py-1">
-            <ShieldCheck size={14} /> Premium Approach
-          </div>
-          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-graphite-900">
+
+          <h2 className="text-3xl md:text-5xl font-bold text-center text-graphite-900 leading-tight">
             Drei Wege zum Ergebnis
           </h2>
           <p className="mt-3 text-graphite-700 max-w-3xl mx-auto text-lg">
@@ -1870,10 +1857,10 @@ const Journey = () => {
     <section id="journey" className="relative py-16 md:py-20 bg-white">
       {/* Sticky Headline */}
       <div className="sticky top-16 z-10 bg-white/80 backdrop-blur supports-[backdrop-filter]:backdrop-blur-2xl border-b border-[rgba(12,18,26,.08)]">
-        <div className="max-w-7xl mx-auto px-4 py-4 md:py-5 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 py-4 md:py-5 flex flex-col items-center justify-center text-center">
           <div>
-            <h2 className="text-2xl md:text-4xl font-bold text-graphite-900">Von der Idee zur Wirkung</h2>
-            <p className="text-graphite-700 text-sm md:text-base">Ein klarer Fahrplan: Schritt für Schritt von der ersten Analyse bis zur messbaren Wirkung.</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-center text-graphite-900 leading-tight">Von der Idee zur Wirkung</h2>
+            <p className="mt-3 text-graphite-700 max-w-3xl mx-auto text-lg">Ein klarer Fahrplan: Schritt für Schritt von der ersten Analyse bis zur messbaren Wirkung.</p>
           </div>
         </div>
       </div>
@@ -2203,7 +2190,7 @@ const UseCases = () => {
       <div className="max-w-7xl mx-auto px-4">
         <motion.div {...fadeUp} className="text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-graphite-900">Use Cases mit schneller Wirkung</h2>
-          <p className="mt-3 text-graphite-700 max-w-3xl mx-auto">
+          <p className="mt-3 text-graphite-700 max-w-3xl mx-auto text-lg">
             Wo Automatisierung sofort entlastet und KI gezielt Mehrwert liefert. Ein Klick führt zu den Branchen-Tabs mit Details.
           </p>
         </motion.div>
@@ -3292,11 +3279,11 @@ export default function App() {
       <Hero />
       <SectionCut label="Warum jetzt" />
       <Reveal><WhyNow /></Reveal>
-      <SectionCut label="Pain → Lösung" />
+      <SectionCut label="Herausforderung → Lösung" />
       <Reveal><ProblemSolution /></Reveal>
-      <SectionCut label="USP" />
+      <SectionCut label="Fokuspunkt" />
       <Reveal><USP /></Reveal>
-      <SectionCut label="Journey" />
+      <SectionCut label="Ablauf" />
       <Reveal><Journey /></Reveal>
       <SectionCut label="Automation × KI" />
       <Reveal><Principle /></Reveal>
