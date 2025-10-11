@@ -148,7 +148,7 @@ const ServicesView = () => {
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           >
-            <source src="/loops/impact.mp4" type="video/mp4" />
+            <source src="/impact.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f14]/80 via-[#0b0f14]/60 to-[#0b0f14]/80" />
           <div className="absolute inset-0 bg-[radial-gradient(800px_400px_at_center,rgba(255,255,255,0.12),transparent)] mix-blend-overlay" />
@@ -326,7 +326,7 @@ const AboutView = () => {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/loops/us.mp4" type="video/mp4" />
+          <source src="/us.mp4" type="video/mp4" />
         </video>
 
         <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f14]/90 via-[#0b0f14]/65 to-transparent" />
@@ -947,8 +947,8 @@ const SECTORS = [
     title: "E-Commerce & Onlinehandel",
     icon: <ShoppingCart className="w-4 h-4" />,
     intro: "Vom Erstkontakt bis zur Retoure: Prozesse klar steuern, Servicekosten senken und Kundenerfahrungen messbar verbessern.",
-    hero: "/sectors/ecommerce.jpg",
-    video: "/loops/ecom.mp4",
+    hero: "/ecommerce.jpg",
+    video: "/ecom.mp4",
     chips: ["Customer Journey optimieren", "Service skalierbar machen", "Feedback automatisiert auswerten"],
     highlights: ["Weniger Rückfragen", "Schnellere Reaktion", "Fundierte Datenbasis"],
     kpis: [{v:"+20%", l:"Conversion"}, {v:"-50%", l:"Supportaufwand"}, {v:"-30%", l:"Retourenkosten"}]
@@ -958,8 +958,8 @@ const SECTORS = [
     title: "Immobilienwirtschaft",
     icon: <Building2 className="w-4 h-4" />,
     intro: "Von der Anfrage bis zum Reporting: Verwaltung effizient organisieren, Kommunikation vereinfachen und Compliance sicherstellen.",
-    hero: "/sectors/realestate.jpg",
-    video: "/loops/realestate.mp4",
+    hero: "/realestate.jpg",
+    video: "/realestate.mp4",
     chips: ["Anfragen effizient beantworten", "Dokumente verständlich aufbereiten", "Reports automatisiert erstellen"],
     highlights: ["Weniger Rückfragen", "Klare Strukturen", "Steigende Mieterzufriedenheit"],
     kpis: [{v:"-40%", l:"Durchlaufzeit"}, {v:"+30%", l:"Kundenzufriedenheit"}]
@@ -969,8 +969,8 @@ const SECTORS = [
     title: "Gesundheitswesen",
     icon: <Stethoscope className="w-4 h-4" />,
     intro: "Praxisabläufe und Verwaltung entlasten, Patienten gezielt informieren und medizinische Daten sicher nutzbar machen.",
-    hero: "/sectors/healthcare.jpg",
-    video: "/loops/health.mp4",
+    hero: "/healthcare.jpg",
+    video: "/health.mp4",
     chips: ["Patientenanfragen bündeln", "Informationen verdichten", "Abläufe verlässlich dokumentieren"],
     highlights: ["Weniger Telefonlast", "Schnellere Orientierung", "Nachvollziehbare Prozesse"],
     kpis: [{v:"-35%", l:"Telefonaufkommen"}, {v:"+20%", l:"Planungssicherheit"}]
@@ -980,8 +980,8 @@ const SECTORS = [
     title: "Logistik & Transport",
     icon: <Truck className="w-4 h-4" />,
     intro: "Lieferketten präzise steuern, Abweichungen früh erkennen und Kommunikation durchgängig sichern. Ohne operative Hektik.",
-    hero: "/sectors/logistics.jpg",
-    video: "/loops/logistics.mp4",
+    hero: "/logistics.jpg",
+    video: "/logistics.mp4",
     chips: ["Lieferzeiten zuverlässig planen", "Ausnahmen rechtzeitig erkennen", "Transparenz für alle Beteiligten"],
     highlights: ["Mehr Planungssicherheit", "Weniger Stress", "Frühzeitige Reaktionen"],
     kpis: [{v:"-30%", l:"Verspätungen"}, {v:"-45%", l:"Nachfassaufwand"}]
@@ -991,8 +991,8 @@ const SECTORS = [
     title: "Personal & Recruiting",
     icon: <Users2 className="w-4 h-4" />,
     intro: "Administrative Aufgaben reduzieren, Bewerberprozesse beschleunigen und Mitarbeiterwissen nachhaltig sichern.",
-    hero: "/sectors/hr.jpg",
-    video: "/loops/hr.mp4",
+    hero: "/hr.jpg",
+    video: "/hr.mp4",
     chips: ["Kandidaten schneller bewerten", "Onboarding strukturiert gestalten", "Wissen zentral verfügbar machen"],
     highlights: ["Zeitersparnis", "Mehr Fokus auf das Team", "Klar definierte Abläufe"],
     kpis: [{v:"-45%", l:"Screeningzeit"}, {v:"+18%", l:"Akzeptanzquote"}]
@@ -1002,8 +1002,8 @@ const SECTORS = [
     title: "Finanz- & Versicherungsdienstleister",
     icon: <Landmark className="w-4 h-4" />,
     intro: "Vorgänge prüfen, Risiken bewerten und Entscheidungen fundiert treffen. Mit konsistenter Dokumentation und klarer Nachvollziehbarkeit.",
-    hero: "/sectors/finance.jpg",
-    video: "/loops/finance.mp4",
+    hero: "/finance.jpg",
+    video: "/finance.mp4",
     chips: ["Risiken präzise einschätzen", "Prüfungen konsistent durchführen", "Kunden professionell informieren"],
     highlights: ["Weniger Doppelarbeit", "Mehr Transparenz", "Verlässliche Nachweise"],
     kpis: [{v:"-35%", l:"Durchlaufzeit"}, {v:"+25%", l:"Erstlösungsquote"}]
@@ -1013,8 +1013,8 @@ const SECTORS = [
     title: "Produktion & Mittelstand",
     icon: <Factory className="w-4 h-4" />,
     intro: "Qualität sichern, Ausfälle reduzieren und Ressourcen produktiv einsetzen. Mit datenbasierter Transparenz und planbarer Steuerung.",
-    hero: "/sectors/manufacturing.jpg",
-    video: "/loops/manufacturing.mp4",
+    hero: "/manufacturing.jpg",
+    video: "/manufacturing.mp4",
     chips: ["Wartung planbar machen", "Berichte vereinfachen", "Bedarfe frühzeitig erkennen"],
     highlights: ["Weniger Stillstand", "Höhere Effizienz", "Bessere Prognosen"],
     kpis: [{v:"-25%", l:"Stillstand"}, {v:"+18%", l:"Produktivität"}]
@@ -1024,8 +1024,8 @@ const SECTORS = [
     title: "Marketing- & Werbeagenturen",
     icon: <Megaphone className="w-4 h-4" />,
     intro: "Briefings präzisieren, Content schneller produzieren und Abstimmungsprozesse beschleunigen. Ohne Qualitätsverlust.",
-    hero: "/sectors/marketing.jpg",
-    video: "/loops/marketing.mp4",
+    hero: "/marketing.jpg",
+    video: "/marketing.mp4",
     chips: ["Ideen schneller realisieren", "Freigaben effizient steuern", "Auswertungen automatisieren"],
     highlights: ["Klarere Prozesse", "Weniger Nacharbeit", "Höhere Schlagkraft"],
     kpis: [{v:"+30%", l:"Output"}, {v:"-35%", l:"Korrekturschleifen"}]
@@ -1035,8 +1035,8 @@ const SECTORS = [
     title: "Bauunternehmen",
     icon: <Hammer className="w-4 h-4" />,
     intro: "Von der Planung bis zur Übergabe: Projekte nahtlos steuern, Informationen zentral bündeln und Ausführung zuverlässig absichern.",
-    hero: "/sectors/construction.jpg",
-    video: "/loops/construction.mp4",
+    hero: "/construction.jpg",
+    video: "/construction.mp4",
     chips: ["Angebote strukturiert erstellen", "Baustelleninformationen teilen", "Dokumente sofort verfügbar machen"],
     highlights: ["Schnellere Angebote", "Weniger Missverständnisse", "Mehr Projektsicherheit"],
     kpis: [{v:"-30%", l:"Bearbeitungszeit"}, {v:"+20%", l:"Projektsicherheit"}] 
@@ -1780,35 +1780,35 @@ const Journey = () => {
       n: 1,
       title: "Erstgespräch",
       copy: "Ein kurzes Gespräch (ca. 20 Minuten), in dem Situation und Ziele analysiert werden. Dabei wird klar, wo aktuell Potenziale bestehen und ob eine Zusammenarbeit Mehrwert schafft.",
-      clip: "/loops/kickstart.mp4",
+      clip: "/kickstart.mp4",
       badge: "Kickstart"
     },
     {
       n: 2,
       title: "Prozess-Mapping",
       copy: "Bestehende Abläufe werden aufgenommen und Engpässe sichtbar gemacht. Quick-Wins werden priorisiert und eine klare Roadmap mit messbaren Ansatzpunkten definiert.",
-      clip: "/loops/ui1.mp4",
+      clip: "/ui1.mp4",
       badge: "Struktur schaffen"
     },
     {
       n: 3,
       title: "Proof of Concept",
       copy: "Ein schlanker Test mit echten Daten prüft die Machbarkeit, vergleicht KPIs mit der bestehenden Baseline und zeigt anhand einer Demo, wie die Lösung in der Praxis wirkt.",
-      clip: "/loops/poc.mp4",
+      clip: "/poc.mp4",
       badge: "Machbarkeit prüfen"
     },
     {
       n: 4,
       title: "Pilot & Integration",
       copy: "Ausgewählte Prozesse gehen live. Ob API oder UI: Rechte, Rollen und Nachvollziehbarkeit sind sichergestellt. Ihr Team wird geschult und kann die Lösung aktiv nutzen.",
-      clip: "/loops/pilot.mp4",
+      clip: "/pilot.mp4",
       badge: "Lösungen einführen"
     },
     {
       n: 5,
       title: "Betrieb & Wirkung",
       copy: "Begleitung des laufenden Betriebs mit Monitoring, Drift-Checks und Optimierungen sorgt dafür, dass die Lösung stabil läuft, Ergebnisse messbar bleiben und sich nachhaltig skalieren lassen.",
-      clip: "/loops/ui2.mp4",
+      clip: "/ui2.mp4",
       badge: "Langfristiger Nutzen"
     }
   ];
@@ -2345,7 +2345,7 @@ const FinalCall = () => {
       {/* Hintergrundvideo */}
       <div className="absolute inset-0 -z-10">
         <video autoPlay muted loop playsInline className="w-full h-full object-cover">
-          <source src="/loops/ui3.mp4" type="video/mp4" />
+          <source src="/ui3.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-white/50 backdrop-blur-sm" />
       </div>
@@ -2496,7 +2496,7 @@ const TrustPage = () => {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/loops/trust.mp4" type="video/mp4" />
+          <source src="/trust.mp4" type="video/mp4" />
         </video>
 
         {/* Layered Gradients */}
