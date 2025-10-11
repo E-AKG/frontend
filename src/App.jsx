@@ -2226,7 +2226,7 @@ const FinalCall = () => {
 
     try {
       setSubmitting(true);
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://backend-0jvt.onrender.com/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -2607,24 +2607,30 @@ const Footer = () => (
         {/* === COLUMN 2: NAVIGATION === */}
         <div className="flex md:justify-end">
           <ul className="flex flex-col md:items-end gap-5 text-base font-medium text-graphite-700">
-            {[
-              { name: "Impressum", href: "/impressum" },
-              { name: "Datenschutz", href: "/datenschutz" },
-              { name: "Vertrauen & Sicherheit", href: "/trust" },
-            ].map((link) => (
-              <li key={link.name}>
-                <a
-                  href={link.href}
-                  className="relative hover:text-graphite-900 transition 
-                             after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] 
-                             after:bg-gradient-to-r after:from-[#2b3542] after:to-[#aab4c2] 
-                             after:scale-x-0 hover:after:scale-x-100 after:origin-left 
-                             after:transition-transform after:duration-500"
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))}
+          {[
+  { name: "Impressum", href: "/impressum" },
+  { name: "Datenschutz", href: "/datenschutz" },
+  { name: "Vertrauen & Sicherheit", href: "/trust" },
+].map((link) => (
+  <li key={link.name}>
+    <a
+      href={link.href}
+      onClick={(e) => {
+        e.preventDefault();                            // ❌ verhindert Seitenreload
+        window.history.pushState({}, "", link.href);   // ✅ ändert die URL
+        window.dispatchEvent(new PopStateEvent("popstate")); // 🔁 triggert dein App-Update
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }}
+      className="relative hover:text-graphite-900 transition 
+                 after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] 
+                 after:bg-gradient-to-r after:from-[#2b3542] after:to-[#aab4c2] 
+                 after:scale-x-0 hover:after:scale-x-100 after:origin-left 
+                 after:transition-transform after:duration-500"
+    >
+      {link.name}
+    </a>
+  </li>
+))}
           </ul>
         </div>
       </div>
@@ -2902,7 +2908,7 @@ const KontaktPage = () => {
 
     try {
       setSubmitting(true);
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://backend-0jvt.onrender.com/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
