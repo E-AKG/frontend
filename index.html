@@ -27,33 +27,36 @@
     <meta property="og:image" content="/og-hero.jpg" />
     <meta property="og:type" content="website" />
 
-    <!-- ========== Controlled Preload (Critical Videos) ========== -->
+    <!-- ========== FULL CRITICAL PRELOAD (alle Videos + Logos) ========== -->
+    <!-- Hauptvideos -->
     <link rel="preload" as="video" href="/hero.mp4" type="video/mp4" />
     <link rel="preload" as="video" href="/trust.mp4" type="video/mp4" />
     <link rel="preload" as="video" href="/us.mp4" type="video/mp4" />
     <link rel="preload" as="video" href="/impact.mp4" type="video/mp4" />
 
-    <!-- ========== Deferred Preload (Background Assets) ========== -->
-    <script>
-      // Lädt nach dem ersten Render weitere Medien im Hintergrund
-      window.addEventListener("load", () => {
-        const assets = [
-          "/loops/legal.mp4",
-          "/loops/finance.mp4",
-          "/loops/health.mp4",
-          "/sectors/legal.jpg",
-          "/sectors/finance.jpg",
-          "/sectors/health.jpg"
-        ];
-        assets.forEach((src) => {
-          const link = document.createElement("link");
-          link.rel = "preload";
-          link.as = src.endsWith(".mp4") ? "video" : "image";
-          link.href = src;
-          document.head.appendChild(link);
-        });
-      });
-    </script>
+    <!-- Branchen-Videos -->
+    <link rel="preload" as="video" href="/loops/construction.mp4" type="video/mp4" />
+    <link rel="preload" as="video" href="/loops/ecom.mp4" type="video/mp4" />
+    <link rel="preload" as="video" href="/loops/finance.mp4" type="video/mp4" />
+    <link rel="preload" as="video" href="/loops/health.mp4" type="video/mp4" />
+    <link rel="preload" as="video" href="/loops/hr.mp4" type="video/mp4" />
+    <link rel="preload" as="video" href="/loops/legal.mp4" type="video/mp4" />
+    <link rel="preload" as="video" href="/loops/logistics.mp4" type="video/mp4" />
+    <link rel="preload" as="video" href="/loops/manufacturing.mp4" type="video/mp4" />
+    <link rel="preload" as="video" href="/loops/marketing.mp4" type="video/mp4" />
+    <link rel="preload" as="video" href="/loops/realestate.mp4" type="video/mp4" />
+
+    <!-- Logos -->
+    <link rel="preload" as="image" href="/izenic-logo.png" />
+    <link rel="preload" as="image" href="/izenic-logo-2.png" />
+
+    <!-- Performance-Optimierung -->
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/sora/v8/xyz.woff2" type="font/woff2" crossorigin />
+
+    <!-- Sicherheit: Verhindert Blockierung -->
+    <style>
+      body { background-color: #0b0f14; margin: 0; }
+    </style>
   </head>
 
   <body>
