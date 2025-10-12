@@ -140,19 +140,16 @@ const ServicesView = () => {
         className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden"
       >
         {/* Background Video */}
-        <motion.div className="absolute inset-0" style={{ y }}>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src="/impact.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f14]/80 via-[#0b0f14]/60 to-[#0b0f14]/80" />
-          <div className="absolute inset-0 bg-[radial-gradient(800px_400px_at_center,rgba(255,255,255,0.12),transparent)] mix-blend-overlay" />
-        </motion.div>
+{/* Background Image */}
+<motion.div className="absolute inset-0" style={{ y }}>
+  <img
+    src="/impact.jpg"
+    alt="Impact Background"
+    className="absolute inset-0 w-full h-full object-cover"
+    loading="eager"
+    fetchpriority="high"
+  />
+</motion.div>
 
         {/* Hero Content */}
         <motion.div
@@ -1279,16 +1276,16 @@ const Hero = () => {
          Background Video + Depth Layers
       ========================== */}
       <motion.div className="absolute inset-0" style={{ y }}>
-      <video
-  autoPlay
-  muted
-  loop
-  playsInline
-  preload="auto"
-  className="absolute inset-0 w-full h-full object-cover"
->
-  <source src="/hero.mp4" type="video/mp4" />
-</video>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/hero.webm" type="video/webm" />
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
         {/* Gradient Depth Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f14]/80 via-[#0b0f14]/65 to-[#0b0f14]/85" />
         <div className="absolute inset-0 bg-[radial-gradient(800px_400px_at_center,rgba(255,255,255,0.12),transparent)] mix-blend-overlay" />
