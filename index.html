@@ -6,19 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IZENIC</title>
 
-    <!-- Premium Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- ========== Premium Fonts ========== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <meta name="description" content="IZENIC – Von Klarheit zu Wirkung: Beratung, PoC, Pilot & Produkte. DSGVO-konform, on-prem möglich, mit klaren KPIs." />
+
+    <!-- ========== SEO & Meta ========== -->
+    <meta
+      name="description"
+      content="IZENIC – Von Klarheit zu Wirkung: Beratung, PoC, Pilot & Produkte. DSGVO-konform, on-prem möglich, mit klaren KPIs."
+    />
     <meta property="og:title" content="IZENIC – KI in Titanium-Qualität" />
-    <meta property="og:description" content="Beratung, PoC, Pilot & Produkte – klar, sicher, wirkungsvoll." />
+    <meta
+      property="og:description"
+      content="Beratung, PoC, Pilot & Produkte – klar, sicher, wirkungsvoll."
+    />
     <meta property="og:image" content="/og-hero.jpg" />
     <meta property="og:type" content="website" />
+
+    <!-- ========== Controlled Preload (Critical Videos) ========== -->
+    <link rel="preload" as="video" href="/hero.mp4" type="video/mp4" />
+    <link rel="preload" as="video" href="/trust.mp4" type="video/mp4" />
+    <link rel="preload" as="video" href="/us.mp4" type="video/mp4" />
+    <link rel="preload" as="video" href="/impact.mp4" type="video/mp4" />
+
+    <!-- ========== Deferred Preload (Background Assets) ========== -->
+    <script>
+      // Lädt nach dem ersten Render weitere Medien im Hintergrund
+      window.addEventListener("load", () => {
+        const assets = [
+          "/loops/legal.mp4",
+          "/loops/finance.mp4",
+          "/loops/health.mp4",
+          "/sectors/legal.jpg",
+          "/sectors/finance.jpg",
+          "/sectors/health.jpg"
+        ];
+        assets.forEach((src) => {
+          const link = document.createElement("link");
+          link.rel = "preload";
+          link.as = src.endsWith(".mp4") ? "video" : "image";
+          link.href = src;
+          document.head.appendChild(link);
+        });
+      });
+    </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
