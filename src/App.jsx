@@ -529,7 +529,7 @@ const AboutView = () => {
           Automatisierung ist kein Selbstzweck.  
           Sie ist <span className="font-semibold text-white">Klarheit in einer Zeit der Komplexität.</span>  
           Und genau das ist die Mission von IZENIC:  
-          <span className="text-white font-semibold">Strukturen zu schaffen, die bleiben. Auch wenn sich alles verändert.</span>
+          <span className="text-white font-semibold"> Strukturen zu schaffen, die bleiben. Auch wenn sich alles verändert.</span>
         </p>
       </motion.div>
     </div>
