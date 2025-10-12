@@ -1284,21 +1284,20 @@ const Hero = () => {
       {/* =========================
          Background Video + Depth Layers
       ========================== */}
-      <motion.div className="absolute inset-0" style={{ y }}>
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/hero.webm" type="video/webm" />
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
-        {/* Gradient Depth Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f14]/80 via-[#0b0f14]/65 to-[#0b0f14]/85" />
-        <div className="absolute inset-0 bg-[radial-gradient(800px_400px_at_center,rgba(255,255,255,0.12),transparent)] mix-blend-overlay" />
-      </motion.div>
+<motion.div className="absolute inset-0" style={{ y }}>
+  {/* Hintergrundbild */}
+  <img
+    src="/hero.jpg"
+    alt="IZENIC Hero Background"
+    className="absolute inset-0 w-full h-full object-cover"
+    loading="eager"
+    fetchpriority="high"
+  />
+
+  {/* Gradient Depth Overlay */}
+  <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f14]/80 via-[#0b0f14]/65 to-[#0b0f14]/85" />
+  <div className="absolute inset-0 bg-[radial-gradient(800px_400px_at_center,rgba(255,255,255,0.12),transparent)] mix-blend-overlay" />
+</motion.div>
 
       {/* =========================
          Moving Light Spot
