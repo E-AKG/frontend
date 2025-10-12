@@ -139,9 +139,9 @@ const ServicesView = () => {
         ref={ref}
         className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden"
       >
-        {/* Background Video */}
 {/* Background Image */}
 <motion.div className="absolute inset-0" style={{ y }}>
+  {/* Hintergrundbild */}
   <img
     src="/impact.jpg"
     alt="Impact Background"
@@ -149,8 +149,11 @@ const ServicesView = () => {
     loading="eager"
     fetchpriority="high"
   />
-</motion.div>
 
+  {/* Dunkles Overlay */}
+  <div className="absolute inset-0 bg-black/40" /> 
+  {/* bg-black/40 = 40% Schwarz, kannst du feintunen: /30 = heller, /60 = dunkler */}
+</motion.div>
         {/* Hero Content */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -316,15 +319,13 @@ const AboutView = () => {
     <main className="min-h-screen bg-[#f9fafc] text-graphite-900 overflow-x-hidden">
       {/* ============= HERO ============= */}
       <section className="relative h-[90vh] flex items-center justify-center text-center overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/us.mp4" type="video/mp4" />
-        </video>
+      <img
+  src="/us.jpg"
+  alt="IZENIC Vision Background"
+  className="absolute inset-0 w-full h-full object-cover"
+  loading="eager"
+  fetchpriority="high"
+/>
 
         <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f14]/90 via-[#0b0f14]/65 to-transparent" />
         <div className="absolute inset-0 bg-[radial-gradient(800px_400px_at_center,rgba(255,255,255,0.12),transparent)] mix-blend-overlay" />
@@ -923,7 +924,7 @@ const SECTORS = [
     icon: <Scale className="w-4 h-4" />,
     intro: "Abläufe verschlanken, Fristen sicher überwachen und Fachwissen zentral verfügbar machen. Ohne permanente Zusatzbelastung für Ihre Teams.",
     hero: "/legal.jpg",
-    video: "/legal.mp4",
+    video: "/legal2.jpg",
     chips: ["Dokumente strukturiert ablegen", "Fristen verlässlich einhalten", "Antwortzeiten verkürzen"],
     highlights: ["Höhere Transparenz", "Schnellere Entscheidungen", "Weniger Routineaufwand"],
     kpis: [{v:"-40%", l:"Bearbeitungszeit"}, {v:"+25%", l:"Zuverlässigkeit"}, {v:"-50%", l:"E-Mail-Volumen"}]
@@ -934,7 +935,7 @@ const SECTORS = [
     icon: <ShoppingCart className="w-4 h-4" />,
     intro: "Vom Erstkontakt bis zur Retoure: Prozesse klar steuern, Servicekosten senken und Kundenerfahrungen messbar verbessern.",
     hero: "/ecommerce.jpg",
-    video: "/ecom.mp4",
+    video: "/ecommerce2.jpg",
     chips: ["Customer Journey optimieren", "Service skalierbar machen", "Feedback automatisiert auswerten"],
     highlights: ["Weniger Rückfragen", "Schnellere Reaktion", "Fundierte Datenbasis"],
     kpis: [{v:"+20%", l:"Conversion"}, {v:"-50%", l:"Supportaufwand"}, {v:"-30%", l:"Retourenkosten"}]
@@ -945,7 +946,7 @@ const SECTORS = [
     icon: <Building2 className="w-4 h-4" />,
     intro: "Von der Anfrage bis zum Reporting: Verwaltung effizient organisieren, Kommunikation vereinfachen und Compliance sicherstellen.",
     hero: "/realestate.jpg",
-    video: "/realestate.mp4",
+    video: "/realestate2.jpg",
     chips: ["Anfragen effizient beantworten", "Dokumente verständlich aufbereiten", "Reports automatisiert erstellen"],
     highlights: ["Weniger Rückfragen", "Klare Strukturen", "Steigende Mieterzufriedenheit"],
     kpis: [{v:"-40%", l:"Durchlaufzeit"}, {v:"+30%", l:"Kundenzufriedenheit"}]
@@ -956,7 +957,7 @@ const SECTORS = [
     icon: <Stethoscope className="w-4 h-4" />,
     intro: "Praxisabläufe und Verwaltung entlasten, Patienten gezielt informieren und medizinische Daten sicher nutzbar machen.",
     hero: "/healthcare.jpg",
-    video: "/health.mp4",
+    video: "/healthcare2.jpg",
     chips: ["Patientenanfragen bündeln", "Informationen verdichten", "Abläufe verlässlich dokumentieren"],
     highlights: ["Weniger Telefonlast", "Schnellere Orientierung", "Nachvollziehbare Prozesse"],
     kpis: [{v:"-35%", l:"Telefonaufkommen"}, {v:"+20%", l:"Planungssicherheit"}]
@@ -967,7 +968,7 @@ const SECTORS = [
     icon: <Truck className="w-4 h-4" />,
     intro: "Lieferketten präzise steuern, Abweichungen früh erkennen und Kommunikation durchgängig sichern. Ohne operative Hektik.",
     hero: "/logistics.jpg",
-    video: "/logistics.mp4",
+    video: "/logistics2.jpg",
     chips: ["Lieferzeiten zuverlässig planen", "Ausnahmen rechtzeitig erkennen", "Transparenz für alle Beteiligten"],
     highlights: ["Mehr Planungssicherheit", "Weniger Stress", "Frühzeitige Reaktionen"],
     kpis: [{v:"-30%", l:"Verspätungen"}, {v:"-45%", l:"Nachfassaufwand"}]
@@ -978,7 +979,7 @@ const SECTORS = [
     icon: <Users2 className="w-4 h-4" />,
     intro: "Administrative Aufgaben reduzieren, Bewerberprozesse beschleunigen und Mitarbeiterwissen nachhaltig sichern.",
     hero: "/hr.jpg",
-    video: "/hr.mp4",
+    video: "/hr2.jpg",
     chips: ["Kandidaten schneller bewerten", "Onboarding strukturiert gestalten", "Wissen zentral verfügbar machen"],
     highlights: ["Zeitersparnis", "Mehr Fokus auf das Team", "Klar definierte Abläufe"],
     kpis: [{v:"-45%", l:"Screeningzeit"}, {v:"+18%", l:"Akzeptanzquote"}]
@@ -989,7 +990,7 @@ const SECTORS = [
     icon: <Landmark className="w-4 h-4" />,
     intro: "Vorgänge prüfen, Risiken bewerten und Entscheidungen fundiert treffen. Mit konsistenter Dokumentation und klarer Nachvollziehbarkeit.",
     hero: "/finance.jpg",
-    video: "/finance.mp4",
+    video: "/finance2.jpg",
     chips: ["Risiken präzise einschätzen", "Prüfungen konsistent durchführen", "Kunden professionell informieren"],
     highlights: ["Weniger Doppelarbeit", "Mehr Transparenz", "Verlässliche Nachweise"],
     kpis: [{v:"-35%", l:"Durchlaufzeit"}, {v:"+25%", l:"Erstlösungsquote"}]
@@ -1000,7 +1001,7 @@ const SECTORS = [
     icon: <Factory className="w-4 h-4" />,
     intro: "Qualität sichern, Ausfälle reduzieren und Ressourcen produktiv einsetzen. Mit datenbasierter Transparenz und planbarer Steuerung.",
     hero: "/manufacturing.jpg",
-    video: "/manufacturing.mp4",
+    video: "/manufacturing2.jpg",
     chips: ["Wartung planbar machen", "Berichte vereinfachen", "Bedarfe frühzeitig erkennen"],
     highlights: ["Weniger Stillstand", "Höhere Effizienz", "Bessere Prognosen"],
     kpis: [{v:"-25%", l:"Stillstand"}, {v:"+18%", l:"Produktivität"}]
@@ -1011,7 +1012,7 @@ const SECTORS = [
     icon: <Megaphone className="w-4 h-4" />,
     intro: "Briefings präzisieren, Content schneller produzieren und Abstimmungsprozesse beschleunigen. Ohne Qualitätsverlust.",
     hero: "/marketing.jpg",
-    video: "/marketing.mp4",
+    video: "/marketing2.jpg",
     chips: ["Ideen schneller realisieren", "Freigaben effizient steuern", "Auswertungen automatisieren"],
     highlights: ["Klarere Prozesse", "Weniger Nacharbeit", "Höhere Schlagkraft"],
     kpis: [{v:"+30%", l:"Output"}, {v:"-35%", l:"Korrekturschleifen"}]
@@ -1022,7 +1023,7 @@ const SECTORS = [
     icon: <Hammer className="w-4 h-4" />,
     intro: "Von der Planung bis zur Übergabe: Projekte nahtlos steuern, Informationen zentral bündeln und Ausführung zuverlässig absichern.",
     hero: "/construction.jpg",
-    video: "/construction.mp4",
+    image: "/construction2.jpg",
     chips: ["Angebote strukturiert erstellen", "Baustelleninformationen teilen", "Dokumente sofort verfügbar machen"],
     highlights: ["Schnellere Angebote", "Weniger Missverständnisse", "Mehr Projektsicherheit"],
     kpis: [{v:"-30%", l:"Bearbeitungszeit"}, {v:"+20%", l:"Projektsicherheit"}] 
@@ -1067,22 +1068,30 @@ const SectorView = ({ slug }) => {
         ref={ref}
         className="relative min-h-screen flex items-center justify-center text-center overflow-hidden"
       >
-        {/* Background Video */}
-        <motion.div className="absolute inset-0" style={{ y }}>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src={sector.video} type="video/mp4" />
-          </video>
+{/* Background Media */}
+<motion.div className="absolute inset-0" style={{ y }}>
+  {sector.video?.endsWith(".mp4") ? (
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      className="absolute inset-0 w-full h-full object-cover"
+    >
+      <source src={sector.video} type="video/mp4" />
+    </video>
+  ) : (
+    <img
+      src={sector.image || sector.video}
+      alt={sector.title}
+      className="absolute inset-0 w-full h-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+    />
+  )}
 
-          {/* Gradient Depth Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f14]/80 via-[#0b0f14]/60 to-[#0b0f14]/85" />
-          <div className="absolute inset-0 bg-[radial-gradient(800px_400px_at_center,rgba(255,255,255,0.12),transparent)] mix-blend-overlay" />
-        </motion.div>
+  <div className="absolute inset-0 bg-black/40" />
+</motion.div>
 
         {/* Moving Light Spot */}
         <div
