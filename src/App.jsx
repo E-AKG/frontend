@@ -2739,10 +2739,10 @@ const Footer = () => (
                             animate-spin-slow blur-sm mix-blend-overlay" />
           </div>
 
-          {/* Claim */}
-          <p className="text-graphite-900 text-center md:text-left text-lg md:text-xl font-medium tracking-tight max-w-sm leading-snug">
-            Automatisierung, wo sie wirkt. <br className="hidden md:block"/> KI, wo sie muss.
-          </p>
+{/* Claim */}
+<p className="text-graphite-900 text-center md:text-left text-lg md:text-xl font-medium tracking-tight max-w-sm leading-snug">
+  Automatisierung, wo sie wirkt.<br />KI, wo sie muss.
+</p>
         </div>
 
         {/* === COLUMN 2: NAVIGATION === */}
