@@ -2533,15 +2533,14 @@ const TrustPage = () => {
          HERO — Cinematic Intro
       ========================== */}
       <section className="relative min-h-[90vh] flex items-center justify-center text-center overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/trust.mp4" type="video/mp4" />
-        </video>
+  {/* Hintergrundbild */}
+  <img
+    src="/trust.jpg"
+    alt="Trust and Security Background"
+    className="absolute inset-0 w-full h-full object-cover"
+    loading="eager"
+    fetchpriority="high"
+  />
 
         {/* Layered Gradients */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f14]/85 via-[#0b0f14]/60 to-[#0b0f14]/85" />
