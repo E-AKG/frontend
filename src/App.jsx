@@ -141,7 +141,7 @@ const ServicesView = () => {
             Leistungen mit messbarem Impact
           </h1>
           <p className="mt-5 text-white/90 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Izenic hilft Unternehmen, ihre Prozesse mit Automatisierung und KI zu optimieren. Strategisch beratend, technisch entwickelnd und menschlich befähigend.
+            IZENIC hilft Unternehmen, ihre Prozesse mit Automatisierung und KI zu optimieren. Strategisch beratend, technisch entwickelnd und menschlich befähigend.
           </p>
         </div>
 
@@ -300,15 +300,16 @@ const AboutView = () => {
   </span>
 </h1>
           <p className="mt-6 text-white/85 text-lg sm:text-xl md:text-2xl leading-relaxed">
-          Izenic steht für intelligente Systeme, die verstehen, strukturieren und Entscheidungen stärken. Technologie, die den Menschen entlastet.
+          IZENIC steht für intelligente Systeme, die verstehen, strukturieren und Entscheidungen stärken. Technologie, die den Menschen entlastet.
           </p>
         </div>
       </section>
 
 {/* =========================
-   FOUNDER — Titanium Harmony Edition
+   FOUNDER — IZENIC Titanium Harmony Refined v3
 ========================= */}
 <section className="relative py-36 overflow-hidden bg-gradient-to-b from-[#f9fafb] via-[#eef2f6] to-[#e4e8ee] text-[#1c242e]">
+  {/* Subtle Noise & Glow */}
   <div className="absolute inset-0 opacity-[.04] [background-image:url('/noise.png')] [background-size:300px]" />
 
   <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
@@ -331,52 +332,56 @@ const AboutView = () => {
     {/* RIGHT — TEXT & STRUCTURE */}
     <div className="relative flex flex-col items-start">
       {/* Header */}
-      <h2 className="text-3xl sm:text-4xl md:text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-[#2b3542] via-[#4b5460] to-[#9098a4]">
+      <h2 className="text-[2.2rem] sm:text-[2.4rem] md:text-[2.5rem] font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-[#2b3542] via-[#4b5460] to-[#9098a4]">
         Emirkaan Akgün
       </h2>
-      <p className="text-[#7a828b] text-sm uppercase tracking-[0.15em] mb-8">
+      <p className="text-[#7a828b] text-xs sm:text-sm uppercase tracking-[0.17em] mb-8">
         Gründer
       </p>
 
       {/* Intro Text */}
-      <p className="text-[17px] leading-relaxed text-[#2b3542]/90 mb-8">
-      Verbindet technologische Präzision mit unternehmerischer Weitsicht.
-Der Fokus liegt auf KI-gestützter Prozessoptimierung, Automatisierung
-und datenbasierter Entscheidungsfindung mit dem Anspruch,
-Strukturen zu schaffen, die Effizienz, Klarheit und Wirkung vereinen.
+      <p className="text-[17px] leading-relaxed text-[#2b3542]/90 mb-10">
+        Verbindet technologische Präzision mit unternehmerischer Weitsicht.  
+        Der Fokus liegt auf KI-gestützter Prozessoptimierung, Automatisierung  
+        und datenbasierter Entscheidungsfindung mit dem Anspruch,  
+        Strukturen zu schaffen, die Effizienz, Klarheit und Wirkung vereinen.
       </p>
 
-      {/* Dual Info Cards (side-by-side on desktop) */}
-      <div className="grid sm:grid-cols-2 gap-6 w-full mb-10">
+      {/* Dual Info Cards */}
+      <div className="grid sm:grid-cols-2 gap-6 w-full mb-12">
         <div className="rounded-[24px] bg-white/90 backdrop-blur-xl border border-[rgba(12,18,26,0.08)] p-6 shadow-[0_15px_40px_rgba(15,23,42,0.08)]">
           <h3 className="text-lg font-semibold mb-2 text-[#1c242e]">Profil</h3>
           <p className="text-sm text-[#2b3542]/90 leading-relaxed">
             Technologische Tiefe, analytisches Denken und klare Strukturen.  
-            Ziel: KI und Automatisierung als Werkzeug einsetzen, um Organisationen messbar zu stärken.
+            Ziel ist es, KI und Automatisierung als Werkzeuge einzusetzen,  
+            um Organisationen messbar zu stärken.
           </p>
         </div>
         <div className="rounded-[24px] bg-white/90 backdrop-blur-xl border border-[rgba(12,18,26,0.08)] p-6 shadow-[0_15px_40px_rgba(15,23,42,0.08)]">
           <h3 className="text-lg font-semibold mb-2 text-[#1c242e]">Erfahrung</h3>
           <p className="text-sm text-[#2b3542]/90 leading-relaxed">
-          Kombination aus akademischem Fundament und praxisnaher Umsetzung
-in Forschung, Industrie und Startups mit Fokus auf Automatisierung und KI.
+            Kombination aus akademischem Fundament und praxisnaher Umsetzung  
+            in Forschung, Industrie und Startups – mit Fokus auf Automatisierung und KI.
           </p>
         </div>
       </div>
 
-      {/* Highlight List — now as modern horizontal tags */}
-      <div className="flex flex-wrap gap-3">
+      {/* Harmonized Bullet Tags */}
+      <div className="flex flex-wrap justify-start gap-4">
         {[
-          "Master of Science in Data Science",
-          "Bachelor of Science in Wirtschaftsinformatik",
-          "Erfahrung in praxisorientierten Projekten mit Forschungs- und Startup-Partnern",
+          "M.Sc. Data Science",
+          "B.Sc. Wirtschaftsinformatik",
+          "Erfahrung in Forschungs- & Industrieprojekten",
           "Spezialisierung auf KI & Automation",
         ].map((item, i) => (
           <div
             key={i}
-            className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#d0d6dc] bg-white/80 shadow-[0_6px_18px_rgba(10,16,25,0.08)] text-sm text-[#2b3542] font-medium"
+            className="flex items-center justify-center gap-2 w-[280px] sm:w-[260px] md:w-[270px] h-[46px]
+                       rounded-full border border-[#d0d6dc] bg-white/85 
+                       shadow-[0_6px_18px_rgba(10,16,25,0.08)] 
+                       text-[15px] text-[#2b3542] font-medium tracking-tight"
           >
-            <CheckCircle2 size={16} className="text-[#7f8896]" />
+            <CheckCircle2 size={18} className="text-[#7f8896]" />
             {item}
           </div>
         ))}
@@ -435,8 +440,8 @@ in Forschung, Industrie und Startups mit Fokus auf Automatisierung und KI.
           desc: (
             <>
               Automatisierung ist kein Selbstzweck. Sie ist{" "}
-              <span className="font-semibold text-[#cfd6de]">Klarheit in einer Zeit der Komplexität.</span>  
-              Und genau das ist die Mission von Izenic:{" "}
+              <span className="font-semibold text-[#cfd6de]">Klarheit in einer Zeit der Komplexität.{" "}</span>  
+               Und genau das ist die Mission von Izenic:{" "}
               <span className="font-semibold text-[#cfd6de]">Strukturen zu schaffen, die bleiben. Auch wenn sich alles verändert.</span>
             </>
           ),
@@ -479,7 +484,7 @@ in Forschung, Industrie und Startups mit Fokus auf Automatisierung und KI.
         
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold mb-20 bg-clip-text text-transparent bg-gradient-to-r from-[#1c242e] via-[#4b5560] to-[#8d96a2]">
-            Werte, die Izenic prägen
+            Werte, die IZENIC prägen
           </h2>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
@@ -1182,9 +1187,9 @@ const Hero = () => {
                      bg-clip-text text-transparent bg-[linear-gradient(100deg,#ffffff_0%,#cfd6df_45%,#9ca6b3_100%)]
                      drop-shadow-[0_4px_20px_rgba(255,255,255,0.15)]"
         >
-          Automatisieren, was bremst. <br className="hidden md:block" />
+          Automatisiere, was aufhält. <br className="hidden md:block" />
           <span className="bg-clip-text text-transparent bg-[linear-gradient(90deg,#aab4c2_0%,#e3e8ef_50%,#b7bec7_100%)]">
-            KI einsetzen, wo es zählt.
+          Nutze KI, wo sie wirkt.
           </span>
         </h1>
 
