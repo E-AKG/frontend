@@ -9,6 +9,7 @@ import {
   Scale, ShoppingCart, Building2, Stethoscope, Truck, Users2,
   Landmark, Factory, Megaphone, Hammer, PlayCircle
 } from "lucide-react";
+import { GraduationCap, BarChart2, Cpu, Settings2 } from "lucide-react";
 
 
 /* =========================
@@ -305,9 +306,9 @@ const AboutView = () => {
         </div>
       </section>
 
-{/* =========================
-   FOUNDER — IZENIC Titanium Harmony Refined v3
-========================= */}
+      /* =========================
+   FOUNDER — IZENIC Titanium Harmony Refined v4
+========================= */
 <section className="relative py-36 overflow-hidden bg-gradient-to-b from-[#f9fafb] via-[#eef2f6] to-[#e4e8ee] text-[#1c242e]">
   {/* Subtle Noise & Glow */}
   <div className="absolute inset-0 opacity-[.04] [background-image:url('/noise.png')] [background-size:300px]" />
@@ -348,7 +349,7 @@ const AboutView = () => {
       </p>
 
       {/* Dual Info Cards */}
-      <div className="grid sm:grid-cols-2 gap-6 w-full mb-12">
+      <div className="grid sm:grid-cols-2 gap-6 w-full mb-16">
         <div className="rounded-[24px] bg-white/90 backdrop-blur-xl border border-[rgba(12,18,26,0.08)] p-6 shadow-[0_15px_40px_rgba(15,23,42,0.08)]">
           <h3 className="text-lg font-semibold mb-2 text-[#1c242e]">Profil</h3>
           <p className="text-sm text-[#2b3542]/90 leading-relaxed">
@@ -366,32 +367,30 @@ const AboutView = () => {
         </div>
       </div>
 
-      {/* Harmonized Bullet Tags */}
-      <div className="flex flex-wrap justify-center gap-4 mt-4">
-  {[
-    "M.Sc. Data Science",
-    "B.Sc. Wirtschaftsinformatik",
-    "Projekte in Forschung & Industrie",
-    "Spezialisierung auf KI & Automation",
-  ].map((item, i) => (
-    <div
-      key={i}
-      className="flex items-center justify-center gap-3 
-                 w-[280px] sm:w-[260px] md:w-[270px] h-[48px]
-                 rounded-full border border-[#d0d6dc] bg-white/85 
-                 shadow-[0_6px_18px_rgba(10,16,25,0.08)] 
-                 text-[15px] text-[#2b3542] font-medium tracking-tight"
-    >
-      <div className="flex items-center justify-center translate-y-[1px]">
-        <CheckCircle2 size={17} strokeWidth={2.3} className="text-[#7f8896]" />
+      {/* EXPERTISE CARDS — Premium Titanium Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 w-full">
+      {[
+  { label: "M.Sc. Data Science", icon: <GraduationCap size={18} className="text-[#7f8896]" /> },
+  { label: "B.Sc. Wirtschaftsinformatik", icon: <BarChart2 size={18} className="text-[#7f8896]" /> },
+  { label: "Projekte in Forschung & Industrie", icon: <Settings2 size={18} className="text-[#7f8896]" /> },
+  { label: "Spezialisierung auf KI & Automation", icon: <Cpu size={18} className="text-[#7f8896]" /> },
+].map((item, i) => (
+  <div
+    key={i}
+    className="flex items-center gap-3 px-5 py-4 rounded-[18px] border border-[#cfd6de]/70 
+               bg-gradient-to-br from-[#ffffff]/90 to-[#f2f4f7]/90 backdrop-blur-md
+               shadow-[0_6px_20px_rgba(10,16,25,0.08)] hover:shadow-[0_8px_25px_rgba(10,16,25,0.12)]
+               transition-all duration-300"
+  >
+    {item.icon}
+    <span className="text-[15px] text-[#1c242e] font-medium leading-none">{item.label}</span>
+  </div>
+))}
       </div>
-      <span className="leading-none">{item}</span>
-    </div>
-  ))}
-</div>
     </div>
   </div>
 </section>
+
 
 {/* ============= MISSION & PHILOSOPHIE — Titanium Vision Line Edition ============= */}
 <section className="relative py-52 text-center bg-gradient-to-b from-[#0b0f14] via-[#121821] to-[#1a212b] text-white overflow-hidden">
