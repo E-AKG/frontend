@@ -10,10 +10,10 @@ body { @apply bg-white text-graphite-800 antialiased; }
 /* Core Cards & Buttons */
 .card { position:relative; border-radius:1.25rem; background:white; border:1px solid #E6E9EE; box-shadow: var(--card-shadow, 0 12px 48px rgba(10,16,25,.06)); }
 .card-glass { position:relative; border-radius:1.25rem; background:rgba(255,255,255,.7); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,.5); box-shadow:0 12px 48px rgba(10,16,25,.10); }
-.btn-primary{ @apply inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold text-white; background:linear-gradient(135deg,#00C2FF 0%, #7C9DFF 100%); box-shadow: var(--btn-shadow, 0 12px 30px rgba(0,194,255,.35)); transition: transform .2s ease; }
-.btn-primary:hover{ transform: translateY(-1px);}
+.btn-primary{ @apply inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold text-white; background:linear-gradient(135deg,#00C2FF 0%, #7C9DFF 100%); box-shadow: var(--btn-shadow, 0 12px 30px rgba(0,194,255,.35)); }
+.btn-primary:hover{}
 .btn-ghost{ @apply inline-flex items-center gap-2 rounded-xl px-5 py-3 font-medium border; border-color:#E6E9EE; background:white; }
-.input{ @apply w-full rounded-xl px-4 py-3 bg-white border border-titanium-300 focus:outline-none focus:border-graphite-700 focus:shadow-ring transition; }
+.input{ @apply w-full rounded-xl px-4 py-3 bg-white border border-titanium-300 focus:outline-none focus:border-graphite-700 focus:shadow-ring; }
 
 /* HERO Video */
 .video-hero{ position:relative; overflow:hidden; border-bottom:1px solid #E6E9EE; }
@@ -43,30 +43,9 @@ body { @apply bg-white text-graphite-800 antialiased; }
 .glare{ position:relative; overflow:hidden; }
 .glare::after{
   content:""; position:absolute; inset:-100% -40% auto -40%; height:160%;
-  transform:rotate(20deg) translateY(0);
+
   background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.28) 50%, transparent 100%);
-  animation:glare 7s linear infinite; mix-blend-mode:screen;
-}
-@keyframes glare{ 0%{ transform:rotate(20deg) translateY(-30%);} 100%{ transform:rotate(20deg) translateY(50%);} }
-.hover-tilt{ transform:perspective(1000px) rotateX(0) rotateY(0) translateZ(0); transition: transform .35s ease; }
-.hover-tilt:hover{ transform:perspective(1000px) rotateX(2deg) rotateY(-2deg) translateZ(0); }
-
-.divider{ height:1px; background:linear-gradient(90deg, rgba(0,0,0,0) 0%, #E6E9EE 20%, #C7CDD5 50%, #E6E9EE 80%, rgba(0,0,0,0) 100%); opacity:.9; }
-
-/* Plate (Titanium) */
-.plate{ position:relative; border-radius:1.4rem; background:linear-gradient(180deg,#fefefe 0%,#e9edf2 60%,#d8dde3 100%); border:1px solid #d8dde3; box-shadow: inset 0 1px 0 rgba(255,255,255,.8), 0 18px 40px rgba(10,16,25,.12); }
-.float{ animation:float 7s ease-in-out infinite; } @keyframes float{ 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} }
-
-/* Terminal / Code block */
-.terminal { @apply rounded-xl border border-titanium-200 bg-white shadow-card overflow-hidden; }
-.terminal .bar { @apply flex items-center gap-2 px-4 py-2 border-b border-titanium-200 bg-titanium-50; }
-.dot { width:10px; height:10px; border-radius:999px; }
-
-/* ===== Roadmap FX ===== */
-.roadmap-wrap { position: relative; }
-.roadmap-canvas { position: absolute; inset: 0; pointer-events: none; }
-.rm-gradient {
-  /* SVG gradient via stroke="url(#rmGradient)" – keep placeholder class for hooks */
+ mix-blend-mode:screen;
 }
 .rm-dot {
   width: 14px; height: 14px; border-radius: 999px;
@@ -112,11 +91,7 @@ body { @apply bg-white text-graphite-800 antialiased; }
   background: radial-gradient(circle at 40% 40%, #fff, #dfe5ec 35%, #a7afb9 60%, #7f8896 100%);
   border: 1px solid #E6E9EE;
   box-shadow: 0 0 0 6px rgba(183,191,201,.25), 0 12px 30px rgba(10,16,25,.18);
-  animation: rmPulse 3.2s ease-in-out infinite;
-}
-@keyframes rmPulse {
-  0%,100% { box-shadow: 0 0 0 6px rgba(183,191,201,.25), 0 12px 30px rgba(10,16,25,.18);}
-  50%     { box-shadow: 0 0 0 10px rgba(183,191,201,.35), 0 18px 40px rgba(10,16,25,.20);}
+
 }
 /* optional subtle grain on the whole section if du willst */
 .rm-grain:before{
@@ -137,11 +112,7 @@ body { @apply bg-white text-graphite-800 antialiased; }
   background: radial-gradient(circle at 40% 40%, #ffffff, #dfe5ec 35%, #a7afb9 60%, #7f8896 100%);
   border: 1px solid #E6E9EE;
   box-shadow: 0 0 0 6px rgba(183,191,201,.25), 0 12px 30px rgba(10,16,25,.18);
-  animation: rmPulse 3.2s ease-in-out infinite;
-}
-@keyframes rmPulse {
-  0%,100% { box-shadow: 0 0 0 6px rgba(183,191,201,.25), 0 12px 30px rgba(10,16,25,.18);}
-  50%     { box-shadow: 0 0 0 10px rgba(183,191,201,.35), 0 18px 40px rgba(10,16,25,.20);}
+
 }
 .rm-grain:before{
   content:"";position:absolute;inset:0;pointer-events:none;opacity:.06;
@@ -210,11 +181,6 @@ body { @apply bg-white text-graphite-800 antialiased; }
   overflow: visible;
 }
 
-/* Rail flow animation (wird für Rail & Connector genutzt) */
-@keyframes railFlow {
-  0%   { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: -44; }
-}
 
 /* ===== Dots ===== */
 .vr-dot{
@@ -233,11 +199,7 @@ body { @apply bg-white text-graphite-800 antialiased; }
   opacity: .7;
 }
 .vr-dot--active{
-  animation: dotPulse 1.8s ease-in-out infinite;
-}
-@keyframes dotPulse{
-  0%,100% { transform: scale(1); box-shadow: 0 0 0 6px rgba(183,191,201,.26), 0 16px 40px rgba(10,16,25,.18); }
-  50%     { transform: scale(1.08); box-shadow: 0 0 0 10px rgba(183,191,201,.20), 0 22px 54px rgba(10,16,25,.22); }
+
 }
 
 /* ===== Connector zwischen Rail & Card ===== */
@@ -320,4 +282,29 @@ body { @apply bg-white text-graphite-800 antialiased; }
 /* Optional: Legenden leicht matter */
 .neo-legend{ background:linear-gradient(180deg,#fff,#fafbfc); }
 
- 
+/* =====================================
+   NAVIGATION LINK — Titanium Hover Line
+   ===================================== */
+.nav-link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 4px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #7f8896 0%, #a7afb9 50%, #cfd6de 100%);
+  transition: width 0.25s ease-in-out;
+}
+
+.nav-link:hover::after,
+.nav-link:focus::after {
+  width: 100%;
+}
