@@ -141,7 +141,7 @@ const ServicesView = () => {
             Leistungen mit messbarem Impact
           </h1>
           <p className="mt-5 text-white/90 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            IZENIC hilft Unternehmen, ihre Prozesse mit Automatisierung und KI zu optimieren. Strategisch beratend, technisch entwickelnd und menschlich befähigend.
+            Izenic hilft Unternehmen, ihre Prozesse mit Automatisierung und KI zu optimieren. Strategisch beratend, technisch entwickelnd und menschlich befähigend.
           </p>
         </div>
 
@@ -284,7 +284,7 @@ const AboutView = () => {
       <section className="relative h-[95vh] flex items-center justify-center text-center overflow-hidden">
         <img
           src="/us.jpg"
-          alt="IZENIC Vision Background"
+          alt="Izenic Vision Background"
           className="absolute inset-0 w-full h-full object-cover object-center opacity-90"
           loading="eager"
           fetchpriority="high"
@@ -300,7 +300,7 @@ const AboutView = () => {
   </span>
 </h1>
           <p className="mt-6 text-white/85 text-lg sm:text-xl md:text-2xl leading-relaxed">
-          IZENIC steht für intelligente Systeme, die verstehen, strukturieren und Entscheidungen stärken. Technologie, die den Menschen entlastet.
+          Izenic steht für intelligente Systeme, die verstehen, strukturieren und Entscheidungen stärken. Technologie, die den Menschen entlastet.
           </p>
         </div>
       </section>
@@ -413,7 +413,7 @@ in Forschung, Industrie und Startups mit Fokus auf Automatisierung und KI.
           title: "Technologie mit Haltung",
           desc: (
             <>
-              IZENIC glaubt daran, dass Automatisierung und KI keine Werkzeuge  
+              Izenic glaubt daran, dass Automatisierung und KI keine Werkzeuge  
               für Bequemlichkeit sind, sondern{" "}
               <span className="font-semibold text-[#cfd6de]">Instrumente für Fokus, Struktur und echten Fortschritt.</span>
             </>
@@ -436,7 +436,7 @@ in Forschung, Industrie und Startups mit Fokus auf Automatisierung und KI.
             <>
               Automatisierung ist kein Selbstzweck. Sie ist{" "}
               <span className="font-semibold text-[#cfd6de]">Klarheit in einer Zeit der Komplexität.</span>  
-              Und genau das ist die Mission von IZENIC:{" "}
+              Und genau das ist die Mission von Izenic:{" "}
               <span className="font-semibold text-[#cfd6de]">Strukturen zu schaffen, die bleiben. Auch wenn sich alles verändert.</span>
             </>
           ),
@@ -479,7 +479,7 @@ in Forschung, Industrie und Startups mit Fokus auf Automatisierung und KI.
         
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold mb-20 bg-clip-text text-transparent bg-gradient-to-r from-[#1c242e] via-[#4b5560] to-[#8d96a2]">
-            Werte, die IZENIC prägen
+            Werte, die Izenic prägen
           </h2>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
@@ -565,11 +565,11 @@ const Navbar = () => {
           href="/"
           onClick={goHome}
           className="flex items-center group"
-          aria-label="IZENIC Home"
+          aria-label="Izenic Home"
         >
           <img
             src={LOGO}
-            alt="IZENIC Logo"
+            alt="Izenic Logo"
             className="h-28 w-auto md:h-36 object-contain shrink-0                         group- group- drop-shadow-[0_8px_24px_rgba(43,53,66,0.25)]"
           />
         </a>
@@ -788,7 +788,7 @@ const Navbar = () => {
               </div>
 
               <div className="px-8 py-6 border-t border-[rgba(43,53,66,0.1)] text-sm text-graphite-600">
-                © {new Date().getFullYear()} IZENIC · Alle Rechte vorbehalten
+                © {new Date().getFullYear()} Izenic · Alle Rechte vorbehalten
               </div>
             </div>
           </>
@@ -1145,7 +1145,7 @@ const Hero = () => {
   {/* Hintergrundbild */}
   <img
     src="/hero.jpg"
-    alt="IZENIC Hero Background"
+    alt="Izenic Hero Background"
     className="absolute inset-0 w-full h-full object-cover"
     loading="eager"
     fetchpriority="high"
@@ -1545,7 +1545,7 @@ const USP = () => {
           </h2>
           <p className="mt-3 text-graphite-700 max-w-3xl mx-auto text-lg">
           Strategie, Umsetzung und Befähigung sind die drei Hebel erfolgreicher Digitalisierung.
-Ob einzeln oder kombiniert, IZENIC unterstützt Unternehmen mit Beratung, Entwicklung und Coaching genau dort, wo Automatisierung und KI den größten Mehrwert schaffen.
+Ob einzeln oder kombiniert, Izenic unterstützt Unternehmen mit Beratung, Entwicklung und Coaching genau dort, wo Automatisierung und KI den größten Mehrwert schaffen.
           </p>
         </div>
 
@@ -2308,7 +2308,7 @@ const FinalCall = () => {
 
 
 /* =========================
-   VERTRAUEN & SICHERHEIT — IZENIC Cinematic Titanium Edition
+   VERTRAUEN & SICHERHEIT — Izenic Cinematic Titanium Edition
 ========================= */
 const TrustPage = () => {
 
@@ -2347,7 +2347,7 @@ const TrustPage = () => {
           </h1>
           <p className="mt-5 text-white/90 text-base md:text-lg max-w-2xl leading-relaxed">
             Datenschutz, Nachhaltigkeit und verantwortungsvolle KI:  
-            Das Fundament jeder Automatisierung bei IZENIC.
+            Das Fundament jeder Automatisierung bei Izenic.
           </p>
         </div>
       </section>
@@ -2417,7 +2417,7 @@ So bleiben Ihre Daten jederzeit geschützt.
             </h2>
             <p className="mt-4 text-graphite-700 leading-relaxed">
               Fortschritt bedeutet Verantwortung.  
-              IZENIC setzt auf energieeffiziente Infrastruktur und einen ressourcenschonenden Betrieb.
+              Izenic setzt auf energieeffiziente Infrastruktur und einen ressourcenschonenden Betrieb.
             </p>
             <p className="mt-3 text-graphite-700 leading-relaxed">
             Das Ziel ist Technologie, die echten Wert schafft ohne Überverbrauch.
@@ -2486,7 +2486,7 @@ So bleibt Automatisierung nicht nur intelligent, sondern auch nachhaltig und zuk
 };
 
 /* =========================
-   FOOTER — IZENIC Signature Fade Edition
+   FOOTER — Izenic Signature Fade Edition
 ========================= */
 const Footer = () => (
   <footer className="relative border-t border-[rgba(12,18,26,.1)] bg-gradient-to-b from-white via-[#f9fafc] to-[#fdfdfd] overflow-hidden">
@@ -2505,7 +2505,7 @@ const Footer = () => (
             {/* Transparent Logo */}
             <img
               src="/izenic-logo-2.png"
-              alt="IZENIC"
+              alt="Izenic"
               className="relative h-40 md:h-52 lg:h-60 w-auto 
                          mix-blend-luminosity opacity-95 
 -all                          hover:opacity-100 hover:scale-[1.02]"
@@ -2559,7 +2559,7 @@ const Footer = () => (
 
     {/* Bottom Copy */}
     <div className="border-t border-[rgba(12,18,26,.08)] py-6 text-center text-xs md:text-sm text-graphite-600 backdrop-blur-sm bg-white/40">
-      © {new Date().getFullYear()} IZENIC • Alle Rechte vorbehalten
+      © {new Date().getFullYear()} Izenic • Alle Rechte vorbehalten
     </div>
 
     {/* Animations */}
@@ -2583,7 +2583,7 @@ const ImpressumPage = () => (
         <div>
           <h2 className="font-semibold text-xl text-graphite-900">Anbieter</h2>
           <p className="text-graphite-700 mt-1">
-            IZENIC <br />
+          Izenic <br />
             Inhaber: Emirkaan Akgün <br />
             Franziusallee 158 <br />
             24148 Kiel <br />
@@ -2667,7 +2667,7 @@ const DatenschutzPage = () => (
         <div>
           <h2 className="font-semibold text-xl text-graphite-900">1. Verantwortlicher</h2>
           <p className="text-graphite-700 mt-1">
-            IZENIC <br />
+          Izenic <br />
             Emirkaan Akgün <br />
             Franziusallee 158, 24148 Kiel <br />
             E-Mail: kontakt@izenic.com
