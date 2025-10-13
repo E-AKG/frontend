@@ -306,9 +306,9 @@ const AboutView = () => {
         </div>
       </section>
 
-      /* =========================
+      {/* =========================
    FOUNDER — IZENIC Titanium Harmony Refined v4
-========================= */
+========================= */}
 <section className="relative py-36 overflow-hidden bg-gradient-to-b from-[#f9fafb] via-[#eef2f6] to-[#e4e8ee] text-[#1c242e]">
   {/* Subtle Noise & Glow */}
   <div className="absolute inset-0 opacity-[.04] [background-image:url('/noise.png')] [background-size:300px]" />
