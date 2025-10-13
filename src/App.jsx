@@ -367,25 +367,27 @@ const AboutView = () => {
       </div>
 
       {/* Harmonized Bullet Tags */}
-      <div className="flex flex-wrap justify-start gap-4">
-        {[
-          "M.Sc. Data Science",
-          "B.Sc. Wirtschaftsinformatik",
-          "Erfahrung in Forschungs- & Industrieprojekten",
-          "Spezialisierung auf KI & Automation",
-        ].map((item, i) => (
-          <div
-            key={i}
-            className="flex items-center justify-center gap-2 w-[280px] sm:w-[260px] md:w-[270px] h-[46px]
-                       rounded-full border border-[#d0d6dc] bg-white/85 
-                       shadow-[0_6px_18px_rgba(10,16,25,0.08)] 
-                       text-[15px] text-[#2b3542] font-medium tracking-tight"
-          >
-            <CheckCircle2 size={18} className="text-[#7f8896]" />
-            {item}
-          </div>
-        ))}
-      </div>
+      <div className="flex flex-wrap justify-center gap-4 mt-4">
+  {[
+    "M.Sc. Data Science",
+    "B.Sc. Wirtschaftsinformatik",
+    "Erfahrung in Forschungs- & Industrieprojekten",
+    "Spezialisierung auf KI & Automation",
+  ].map((item, i) => (
+    <div
+      key={i}
+      className="flex items-center justify-center gap-2 
+                 w-[280px] sm:w-[260px] md:w-[270px] 
+                 min-h-[48px] text-center text-wrap
+                 rounded-full border border-[#d0d6dc] bg-white/85 
+                 shadow-[0_6px_18px_rgba(10,16,25,0.08)] 
+                 text-[15px] text-[#2b3542] font-medium tracking-tight"
+    >
+      <CheckCircle2 size={18} className="text-[#7f8896]" />
+      <span className="leading-snug">{item}</span>
+    </div>
+  ))}
+</div>
     </div>
   </div>
 </section>
