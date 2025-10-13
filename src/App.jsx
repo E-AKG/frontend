@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import {
   ArrowRight, ChevronRight, Sparkles, CheckCircle2, Workflow, FileText, BrainCircuit,
   Users, Wrench, LineChart, ShieldCheck, Phone, Mail, Star, Clock4, Wallet, Trophy, Play
@@ -19,12 +18,10 @@ const LOGO = "/izenic-logo.png";
 const btnSolid =
   "inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 font-semibold text-white " +
   "bg-[linear-gradient(135deg,#2b3542,#0b121a)] border border-white/10 " +
-  "shadow-[0_14px_28px_rgba(13,18,26,.32),inset_0_1px_0_rgba(255,255,255,.10)] " +
-  "hover:-translate-y-0.5 active:translate-y-0 transition";
+  "shadow-[0_14px_28px_rgba(13,18,26,.32),inset_0_1px_0_rgba(255,255,255,.10)]";
 const btnGhost =
   "inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 font-medium " +
-  "border border-[rgba(12,18,26,.18)] bg-white/80 backdrop-blur text-graphite-900 hover:border-graphite-900 transition";
-const fadeUp = { initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.25 } };
+  "border border-[rgba(12,18,26,.18)] bg-white/80 backdrop-blur text-graphite-900";
 
 
 /* =========================
@@ -47,11 +44,7 @@ const SectionCut = ({ label = "", subtle = false, icon = null }) => (
       />
       {/* Shine Effekt */}
       {!subtle && (
-        <motion.div
-          initial={{ x: "-30%" }}
-          whileInView={{ x: "130%" }}
-          viewport={{ once: true }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+        <div
           className="absolute top-0 bottom-0 w-1/4 bg-gradient-to-r from-transparent via-white/60 to-transparent"
         />
       )}
@@ -73,14 +66,9 @@ const SectionCut = ({ label = "", subtle = false, icon = null }) => (
 );
 
 const Reveal = ({ children, delay = 0 }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 18 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.25 }}
-    transition={{ duration: 0.5, delay }}
-  >
+  <div>
     {children}
-  </motion.div>
+  </div>
 );
 // --- Helpers (oberhalb deiner Components platzieren) ---
 const isSectorPage = () => new URLSearchParams(window.location.search).has("sector");
@@ -114,21 +102,8 @@ const openPageTab = (slug /* "services" | "about" */) => {
    VIEW: Leistungen — Cinematic Titanium Experience
 ========================= */
 const ServicesView = () => {
-  const container = {
-    hidden: {},
-    show: {
-      transition: { staggerChildren: 0.2 },
-    },
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 24 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-  };
 
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
 
   return (
     <main className="min-h-screen bg-white text-graphite-900 overflow-x-hidden">
@@ -140,7 +115,7 @@ const ServicesView = () => {
         className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden"
       >
 {/* Background Image */}
-<motion.div className="absolute inset-0" style={{ y }}>
+        <div className="absolute inset-0">
   {/* Hintergrundbild */}
   <img
     src="/impact.jpg"
@@ -153,12 +128,9 @@ const ServicesView = () => {
   {/* Dunkles Overlay */}
   <div className="absolute inset-0 bg-black/40" /> 
   {/* bg-black/40 = 40% Schwarz, kannst du feintunen: /30 = heller, /60 = dunkler */}
-</motion.div>
+</div>
         {/* Hero Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+        <div
           className="relative z-10 max-w-4xl px-6"
         >
           <h1
@@ -171,17 +143,14 @@ const ServicesView = () => {
           <p className="mt-5 text-white/90 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
             IZENIC hilft Unternehmen, ihre Prozesse mit Automatisierung und KI zu optimieren. Strategisch beratend, technisch entwickelnd und menschlich befähigend.
           </p>
-        </motion.div>
+        </div>
 
       </header>
 
       {/* =========================
          SERVICES GRID
       ========================== */}
-      <motion.section
-        variants={container}
-        initial="hidden"
-        animate="show"
+      <section
         className="relative max-w-7xl mx-auto px-6 py-28"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[#f8fafc] via-white to-[#f7f9fc]" />
@@ -224,18 +193,16 @@ const ServicesView = () => {
               bg: "/leistung-coaching.jpg",
             },
           ].map((c, i) => (
-            <motion.div
+            <div
               key={i}
-              variants={fadeUp}
-              whileHover={{ scale: 1.04 }}
               className="relative group rounded-[28px] overflow-hidden
                          border border-[rgba(255,255,255,0.15)] bg-white/90 backdrop-blur-xl
-                         shadow-[0_20px_50px_rgba(15,23,42,.08)] transition-all duration-500"
+                         shadow-[0_20px_50px_rgba(15,23,42,.08)] "
             >
               <img
                 src={c.bg}
                 alt={c.title}
-                className="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-55 transition duration-700"
+                className="absolute inset-0 w-full h-full object-cover opacity-35  "
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
               <div className="relative z-10 p-8 flex flex-col justify-end text-white">
@@ -253,15 +220,12 @@ const ServicesView = () => {
                   ))}
                 </ul>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Trust Row */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
+        <div
           className="relative z-10 mt-20 grid sm:grid-cols-3 gap-5 text-sm text-graphite-700"
         >
           {[
@@ -269,21 +233,19 @@ const ServicesView = () => {
             { icon: <LineChart size={18} />, text: "Transparente KPIs & klarer ROI" },
             { icon: <Wrench size={18} />, text: "Flexibel in EU-Cloud oder On-Premises" },
           ].map((t, i) => (
-            <motion.div
+            <div
               key={i}
-              variants={fadeUp}
               className="flex items-center justify-center gap-2 rounded-2xl bg-white/95 backdrop-blur
                          px-4 py-3 border border-[rgba(12,18,26,.12)]
-                         shadow-sm hover:shadow-md transition"
+                         shadow-sm  "
             >
               {t.icon} {t.text}
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* CTA Stripe */}
-        <motion.div
-          variants={fadeUp}
+        <div
           className="relative z-10 mt-24 rounded-[32px] p-[2px]
                      bg-[linear-gradient(135deg,#cfd6df,#aab4c2,#2b3542)]
                      shadow-[0_30px_80px_rgba(15,23,42,.15)]"
@@ -299,304 +261,246 @@ const ServicesView = () => {
     href="/kontakt"
     className={
       btnSolid +
-      " mt-6 inline-flex px-8 py-4 justify-center text-lg transition-transform hover:scale-105"
+      " mt-6 inline-flex px-8 py-4 justify-center text-lg  "
     }
   >
     Erstgespräch vereinbaren
   </a>
 </div>
-        </motion.div>
-      </motion.section>
+        </div>
+      </section>
     </main>
   );
 };
 
 /* =========================
-   VIEW: Über mich — IZENIC Vision Flow Edition
+   VIEW: Über mich — IZENIC Titanium Vision Contrast v2
 ========================= */
 const AboutView = () => {
   return (
-    <main className="min-h-screen bg-[#f9fafc] text-graphite-900 overflow-x-hidden">
-      {/* ============= HERO ============= */}
-      <section className="relative h-[90vh] flex items-center justify-center text-center overflow-hidden">
-      <img
-  src="/us.jpg"
-  alt="IZENIC Vision Background"
-  className="absolute inset-0 w-full h-full object-cover"
-  loading="eager"
-  fetchpriority="high"
-/>
+    <main className="min-h-screen bg-[#0b0f14] text-graphite-100 overflow-x-hidden">
 
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f14]/90 via-[#0b0f14]/65 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(800px_400px_at_center,rgba(255,255,255,0.12),transparent)] mix-blend-overlay" />
+      {/* ============= HERO ============= */}
+      <section className="relative h-[95vh] flex items-center justify-center text-center overflow-hidden">
+        <img
+          src="/us.jpg"
+          alt="IZENIC Vision Background"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-90"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f14]/60 via-[#121821]/70 to-[#f9fafc]/10" />
+        <div className="absolute inset-0 bg-[radial-gradient(1000px_600px_at_center,rgba(255,255,255,0.08),transparent_70%)] mix-blend-overlay" />
 
         <div className="relative z-10 max-w-4xl px-6">
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight"
-          >
-            Mehr als Technologie.  
-            <span className="text-white/80"> Eine Vision von Klarheit.</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.3, delay: 0.2 }}
-            className="mt-4 text-white/90 text-base sm:text-lg md:text-xl leading-relaxed"
-          >
-            IZENIC steht für intelligente Systeme, die verstehen, strukturieren und Entscheidungen stärken.
-            Technologie, die den Menschen entlastet.
-          </motion.p>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight text-white">
+  Mehr als Technologie.<br />
+  <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#a3b4c4] via-[#cfd6de] to-[#e4ebf2]">
+    Eine Vision von Klarheit.
+  </span>
+</h1>
+          <p className="mt-6 text-white/85 text-lg sm:text-xl md:text-2xl leading-relaxed">
+          IZENIC steht für intelligente Systeme, die verstehen, strukturieren und Entscheidungen stärken. Technologie, die den Menschen entlastet.
+          </p>
         </div>
       </section>
 
-{/* ============= FOUNDER (Refined Titanium Edition) ============= */}
-<section className="relative py-32 overflow-hidden">
-  {/* Hintergrund-Glow */}
-  <div className="absolute inset-0 bg-gradient-to-b from-[#f8fafc] via-white to-[#f7f9fc]" />
-  <div className="absolute inset-0 opacity-[.05] [background-image:url('/noise.png')] [background-size:300px]" />
+{/* =========================
+   FOUNDER — Titanium Harmony Edition
+========================= */}
+<section className="relative py-36 overflow-hidden bg-gradient-to-b from-[#f9fafb] via-[#eef2f6] to-[#e4e8ee] text-[#1c242e]">
+  <div className="absolute inset-0 opacity-[.04] [background-image:url('/noise.png')] [background-size:300px]" />
 
-  <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+  <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
+    
     {/* LEFT — IMAGE */}
-    <motion.div
-      initial={{ opacity: 0, x: -60 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-      viewport={{ once: true }}
-      className="relative flex justify-center"
-    >
-      <div className="relative w-[280px] sm:w-[320px] md:w-[380px] aspect-square rounded-[36px] overflow-hidden 
-                      shadow-[0_30px_80px_rgba(15,23,42,0.25)] border border-[rgba(12,18,26,.08)] bg-gradient-to-br 
-                      from-[#fdfdfd] to-[#eef2f6]">
+    <div className="relative flex justify-center md:justify-end">
+      <div className="relative w-[320px] sm:w-[360px] md:w-[400px] aspect-square rounded-[36px] overflow-hidden shadow-[0_30px_80px_rgba(15,23,42,0.25)] border border-[rgba(12,18,26,.08)] bg-gradient-to-br from-[#fdfdfd] to-[#e9edf3]">
         <img
           src="/founder.jpg"
           alt="Emirkaan Akgün"
-          className="w-full h-full object-cover scale-[1.05]"
+          className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white/40 via-transparent to-transparent" />
       </div>
-      <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[240px] h-[240px] bg-[radial-gradient(circle,rgba(43,53,66,0.18),transparent_70%)] blur-3xl opacity-70" />
-    </motion.div>
+
+      {/* Ambient glow */}
+      <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[260px] h-[260px] bg-[radial-gradient(circle,rgba(150,170,200,0.25),transparent_70%)] blur-3xl opacity-70" />
+    </div>
 
     {/* RIGHT — TEXT & STRUCTURE */}
-    <motion.div
-      initial={{ opacity: 0, x: 60 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-      viewport={{ once: true }}
-      className="relative"
-    >
+    <div className="relative flex flex-col items-start">
       {/* Header */}
-      <h2 className="text-3xl md:text-4xl font-bold mb-2">Emirkaan Akgün</h2>
-      <p className="text-graphite-600 text-sm uppercase tracking-[0.15em] mb-8">
+      <h2 className="text-3xl sm:text-4xl md:text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-[#2b3542] via-[#4b5460] to-[#9098a4]">
+        Emirkaan Akgün
+      </h2>
+      <p className="text-[#7a828b] text-sm uppercase tracking-[0.15em] mb-8">
         Gründer
       </p>
 
-      {/* Two Info Cards */}
-      <div className="space-y-6">
-        <div className="rounded-[28px] bg-white/90 backdrop-blur-xl border border-[rgba(12,18,26,0.08)] 
-                        p-6 shadow-[0_10px_40px_rgba(15,23,42,0.08)] hover:shadow-[0_18px_60px_rgba(15,23,42,0.12)] 
-                        transition-all duration-500">
-          <h3 className="text-xl font-semibold text-graphite-900 mb-2">Profil</h3>
-          <p className="text-graphite-700 text-[15px] leading-relaxed">
-            Verbindet technologische Tiefe mit strategischem Denken.  
-            Der Schwerpunkt liegt auf KI-gestützter Prozessoptimierung, Automatisierung  
-            und datengetriebener Entscheidungsfindung. Ziel ist es, Strukturen zu schaffen,  
-            die Effizienz, Klarheit und Stabilität vereinen.
+      {/* Intro Text */}
+      <p className="text-[17px] leading-relaxed text-[#2b3542]/90 mb-8">
+      Verbindet technologische Präzision mit unternehmerischer Weitsicht.
+Der Fokus liegt auf KI-gestützter Prozessoptimierung, Automatisierung
+und datenbasierter Entscheidungsfindung mit dem Anspruch,
+Strukturen zu schaffen, die Effizienz, Klarheit und Wirkung vereinen.
+      </p>
+
+      {/* Dual Info Cards (side-by-side on desktop) */}
+      <div className="grid sm:grid-cols-2 gap-6 w-full mb-10">
+        <div className="rounded-[24px] bg-white/90 backdrop-blur-xl border border-[rgba(12,18,26,0.08)] p-6 shadow-[0_15px_40px_rgba(15,23,42,0.08)]">
+          <h3 className="text-lg font-semibold mb-2 text-[#1c242e]">Profil</h3>
+          <p className="text-sm text-[#2b3542]/90 leading-relaxed">
+            Technologische Tiefe, analytisches Denken und klare Strukturen.  
+            Ziel: KI und Automatisierung als Werkzeug einsetzen, um Organisationen messbar zu stärken.
           </p>
         </div>
-
-        <div className="rounded-[28px] bg-white/90 backdrop-blur-xl border border-[rgba(12,18,26,0.08)] 
-                        p-6 shadow-[0_10px_40px_rgba(15,23,42,0.08)] hover:shadow-[0_18px_60px_rgba(15,23,42,0.12)] 
-                        transition-all duration-500">
-          <h3 className="text-xl font-semibold text-graphite-900 mb-2">Erfahrung</h3>
-          <p className="text-graphite-700 text-[15px] leading-relaxed">
-            Die Erfahrung basiert auf einem fundierten akademischen Hintergrund und praxisnahen Projekten  
-            in Forschung und Industrie. Von datenintensiven Anwendungen im Gesundheitswesen bis hin zu  
-            agilen Startup-Umgebungen, immer mit dem Anspruch, Technologie als Werkzeug für echten Fortschritt einzusetzen.
+        <div className="rounded-[24px] bg-white/90 backdrop-blur-xl border border-[rgba(12,18,26,0.08)] p-6 shadow-[0_15px_40px_rgba(15,23,42,0.08)]">
+          <h3 className="text-lg font-semibold mb-2 text-[#1c242e]">Erfahrung</h3>
+          <p className="text-sm text-[#2b3542]/90 leading-relaxed">
+          Kombination aus akademischem Fundament und praxisnaher Umsetzung
+in Forschung, Industrie und Startups mit Fokus auf Automatisierung und KI.
           </p>
         </div>
       </div>
 
-{/* Divider line */}
-<div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#2b3542]/10 to-transparent my-10" />
-
-{/* BULLETS – Einheitliche Größe & Zeilenhöhe */}
-<ul className="space-y-3 text-[15px] leading-relaxed text-graphite-800">
-  {[
-    "Master of Science in Data Science",
-    "Bachelor of Science in Wirtschaftsinformatik",
-    "Mehrjährige Erfahrung in praxisorientierten Projekten mit Forschungs- und Startup-Partnern",
-    "Spezialisierung auf künstliche Intelligenz und Automatisierung",
-  ].map((item, i) => (
-    <li key={i} className="flex items-start gap-3">
-      <CheckCircle2 size={18} className="mt-[2px] shrink-0 text-titanium-600" />
-      <span className="block text-[15px] font-medium leading-relaxed">
-        {item}
-      </span>
-    </li>
-  ))}
-</ul>
-    </motion.div>
-  </div>
-</section>
-
-{/* =========================
-   PHASE 2 — Mission & Philosophie (Cinematic Structure Edition)
-========================= */}
-<section className="relative py-44 text-center overflow-hidden bg-gradient-to-b from-[#0c0f13] via-[#10161d] to-[#1c242e] text-white">
-  {/* ====== Background Motion & Texture ====== */}
-  <div className="absolute inset-0 overflow-hidden">
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] bg-[radial-gradient(circle_at_center,rgba(90,130,255,0.08),transparent_70%)] blur-[140px]" />
-    <div className="absolute bottom-0 right-1/3 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05),transparent_80%)] blur-[120px]" />
-  </div>
-
-  {/* Particles overlay */}
-  <div className="absolute inset-0 [background-image:url('/textures/particles.svg')] opacity-[0.07] bg-cover bg-center mix-blend-overlay" />
-
-  {/* ====== Section Content ====== */}
-  <div className="relative z-10 max-w-5xl mx-auto px-6">
-    <motion.h2
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
-      viewport={{ once: true }}
-      className="text-3xl sm:text-5xl font-extrabold mb-12 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#e2e8f0] via-white to-[#b0b8c4]"
-    >
-      Mission & Philosophie
-    </motion.h2>
-
-    <div className="space-y-24">
-      {/* Block 1 */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9 }}
-        viewport={{ once: true }}
-        className="relative"
-      >
-        <div className="absolute left-1/2 -translate-x-1/2 -top-10 w-[2px] h-10 bg-gradient-to-b from-transparent via-white/30 to-white/70" />
-        <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto">
-          Die Gewinner der KI-Revolution werden nicht diejenigen sein, die verstehen, <br className="hidden sm:block" />
-          <span className="text-white font-semibold">wie KI funktioniert</span>,  
-          sondern diejenigen, die früh erkennen, <span className="text-white/80">wo sie wirkt.</span>
-        </p>
-      </motion.div>
-
-      {/* Block 2 */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.2 }}
-        viewport={{ once: true }}
-        className="relative"
-      >
-        <div className="absolute left-1/2 -translate-x-1/2 -top-10 w-[2px] h-10 bg-gradient-to-b from-transparent via-white/25 to-white/70" />
-        <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-3xl mx-auto">
-          IZENIC glaubt daran, dass Automatisierung und KI keine Werkzeuge <br className="hidden sm:block" />
-          für Bequemlichkeit sind, sondern <span className="font-semibold text-white">Instrumente für Fokus, Struktur und echten Fortschritt.</span>
-        </p>
-      </motion.div>
-
-      {/* Block 3 */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.4 }}
-        viewport={{ once: true }}
-        className="relative"
-      >
-        <div className="absolute left-1/2 -translate-x-1/2 -top-10 w-[2px] h-10 bg-gradient-to-b from-transparent via-white/25 to-white/70" />
-        <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-3xl mx-auto">
-          Wer heute lernt, KI gezielt einzusetzen, verschafft sich denselben Vorteil, <br className="hidden sm:block" />
-          den jede Generation von <span className="font-semibold text-white">Pionieren</span> hatte:  
-          den Mut, neue Technologie nicht nur zu verstehen, sondern sie anzuwenden.
-        </p>
-      </motion.div>
-
-      {/* Block 4 */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.6 }}
-        viewport={{ once: true }}
-        className="relative"
-      >
-        <div className="absolute left-1/2 -translate-x-1/2 -top-10 w-[2px] h-10 bg-gradient-to-b from-transparent via-white/25 to-white/70" />
-        <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-3xl mx-auto">
-          Automatisierung ist kein Selbstzweck.  
-          Sie ist <span className="font-semibold text-white">Klarheit in einer Zeit der Komplexität.</span>  
-          Und genau das ist die Mission von IZENIC:  
-          <span className="text-white font-semibold"> Strukturen zu schaffen, die bleiben. Auch wenn sich alles verändert.</span>
-        </p>
-      </motion.div>
+      {/* Highlight List — now as modern horizontal tags */}
+      <div className="flex flex-wrap gap-3">
+        {[
+          "Master of Science in Data Science",
+          "Bachelor of Science in Wirtschaftsinformatik",
+          "Erfahrung in praxisorientierten Projekten mit Forschungs- und Startup-Partnern",
+          "Spezialisierung auf KI & Automation",
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#d0d6dc] bg-white/80 shadow-[0_6px_18px_rgba(10,16,25,0.08)] text-sm text-[#2b3542] font-medium"
+          >
+            <CheckCircle2 size={16} className="text-[#7f8896]" />
+            {item}
+          </div>
+        ))}
+      </div>
     </div>
   </div>
-
-  {/* ====== Bottom Divider Transition ====== */}
-  <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] rotate-180">
-    <svg
-      className="relative block w-[calc(100%+1.3px)] h-[120px]"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1200 120"
-      preserveAspectRatio="none"
-    >
-      <path
-        d="M321.39,56.14C165.52,32.36,0,120,0,120V0H1200V120S477.26,79.91,321.39,56.14Z"
-        className="fill-[#f9fafb]"
-      ></path>
-    </svg>
-  </div>
 </section>
-{/* =========================
-   PHASE 3 — Werte (Titanium Elevation)
-========================= */}
-<section className="relative py-40 bg-gradient-to-b from-[#f9fafb] via-white to-[#f7f9fc] text-center overflow-hidden">
-  {/* Titanium shimmer */}
-  <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.6)_0%,rgba(240,245,255,0.4)_50%,rgba(255,255,255,0.6)_100%)] opacity-[0.4] blur-[100px]" />
 
-  <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 1.1 }}
-    viewport={{ once: true }}
-    className="relative z-10 max-w-6xl mx-auto px-6"
-  >
-    <h2 className="text-3xl md:text-4xl font-bold mb-16 bg-clip-text text-transparent bg-gradient-to-r from-[#1c242e] via-[#2e333a] to-[#6b7480]">
-      Werte, die IZENIC prägen
+{/* ============= MISSION & PHILOSOPHIE — Titanium Vision Line Edition ============= */}
+<section className="relative py-52 text-center bg-gradient-to-b from-[#0b0f14] via-[#121821] to-[#1a212b] text-white overflow-hidden">
+  {/* Subtle radial light */}
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05),transparent_70%)] blur-[100px]" />
+
+  <div className="relative z-10 max-w-6xl mx-auto px-6">
+    <h2 className="text-3xl sm:text-5xl font-extrabold mb-24 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#e2e8f0] via-white to-[#b0b8c4]">
+      Mission & Philosophie
     </h2>
 
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
+    {/* === CONNECTED CLEAN FLOW === */}
+    <div className="relative flex flex-col items-center space-y-16">
       {[
-        { icon: <ShieldCheck size={30} />, title: "Datensouveränität", desc: "Verantwortungsvoller Umgang mit Daten. Transparent, sicher, nachvollziehbar." },
-        { icon: <Factory size={30} />, title: "Made in Germany", desc: "Lokale Entwicklung, geprüfte Qualität und höchste Standards in jedem Schritt." },
-        { icon: <Users2 size={30} />, title: "Partnerschaft", desc: "Erfolg entsteht im Dialog, nicht in Isolation. Vertrauen ist Teil des Systems." },
-      ].map((v, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: i * 0.15 }}
-          viewport={{ once: true }}
-          className="relative rounded-[28px] border border-[rgba(12,18,26,.08)] bg-white/90 backdrop-blur-xl
-                     shadow-[0_15px_45px_rgba(15,23,42,0.08)] hover:shadow-[0_25px_60px_rgba(15,23,42,0.15)]
-                     hover:-translate-y-2 transition-all duration-500 group p-10"
-        >
-          <div className="flex justify-center mb-4 text-[#2b3542] group-hover:scale-110 transition-transform">
-            {v.icon}
-          </div>
-          <h3 className="font-semibold text-xl text-graphite-900 mb-2">{v.title}</h3>
-          <p className="text-sm text-graphite-700 leading-relaxed">{v.desc}</p>
+        {
+          title: "Verstehen, wo KI wirkt",
+          desc: (
+            <>
+              Die Gewinner der KI-Revolution werden nicht diejenigen sein, die verstehen,{" "}
+              <span className="font-semibold text-[#cfd6de]">wie KI funktioniert</span>,  
+              sondern diejenigen, die früh erkennen,{" "}
+              <span className="font-semibold text-[#cfd6de]">wo sie wirkt.</span>
+            </>
+          ),
+        },
+        {
+          title: "Technologie mit Haltung",
+          desc: (
+            <>
+              IZENIC glaubt daran, dass Automatisierung und KI keine Werkzeuge  
+              für Bequemlichkeit sind, sondern{" "}
+              <span className="font-semibold text-[#cfd6de]">Instrumente für Fokus, Struktur und echten Fortschritt.</span>
+            </>
+          ),
+        },
+        {
+          title: "Pioniergeist der Gegenwart",
+          desc: (
+            <>
+              Wer heute lernt, KI gezielt einzusetzen, verschafft sich denselben Vorteil,  
+              den jede Generation von{" "}
+              <span className="font-semibold text-[#cfd6de]">Pionieren</span> hatte.  
+              Den Mut, neue Technologie nicht nur zu verstehen, sondern sie anzuwenden.
+            </>
+          ),
+        },
+        {
+          title: "Klarheit in Komplexität",
+          desc: (
+            <>
+              Automatisierung ist kein Selbstzweck. Sie ist{" "}
+              <span className="font-semibold text-[#cfd6de]">Klarheit in einer Zeit der Komplexität.</span>  
+              Und genau das ist die Mission von IZENIC:{" "}
+              <span className="font-semibold text-[#cfd6de]">Strukturen zu schaffen, die bleiben. Auch wenn sich alles verändert.</span>
+            </>
+          ),
+        },
+      ].map((step, i) => (
+        <div key={i} className="relative flex flex-col items-center w-full max-w-3xl">
+          {/* Verbindungspfeil zwischen den Boxen */}
+          {i > 0 && (
+            <div className="flex items-center justify-center -mt-6 mb-8">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-6 h-6 text-[#a7afb9]/80"
+              >
+                <path d="M12 5v14m0 0l-4-4m4 4l4-4" />
+              </svg>
+            </div>
+          )}
 
-          {/* Glow ring on hover */}
-          <div className="absolute inset-0 rounded-[28px] bg-[radial-gradient(circle_at_center,rgba(43,53,66,0.07),transparent_60%)] opacity-0 group-hover:opacity-100 transition duration-700" />
-        </motion.div>
+          {/* Card */}
+          <div className="relative w-full p-10 rounded-3xl bg-gradient-to-b from-[#1b222d]/90 via-[#1e252f]/90 to-[#141a22]/90 border border-[rgba(255,255,255,0.08)] shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
+            <h3 className="text-xl font-bold mb-3 text-[#e2e8f0]">{step.title}</h3>
+            <p className="text-[17px] leading-relaxed text-white/80">{step.desc}</p>
+          </div>
+        </div>
       ))}
     </div>
-  </motion.div>
+  </div>
 </section>
+
+      {/* ============= WERTE — jetzt hell & clean ============= */}
+      <section className="relative py-44 bg-gradient-to-b from-[#f9fafb] via-[#eef2f6] to-[#dfe5ec] text-center text-[#1c242e] overflow-hidden">
+        <div className="absolute inset-0 opacity-[.05] [background-image:url('/noise.png')] [background-size:300px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(180,200,230,0.08),transparent_70%)] blur-[100px]" />
+        
+        <div className="relative z-10 max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-20 bg-clip-text text-transparent bg-gradient-to-r from-[#1c242e] via-[#4b5560] to-[#8d96a2]">
+            Werte, die IZENIC prägen
+          </h2>
+
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
+            {[
+              { icon: <ShieldCheck size={30} />, title: "Datensouveränität", desc: "Verantwortungsvoller Umgang mit Daten. Transparent, sicher, nachvollziehbar." },
+              { icon: <Factory size={30} />, title: "Made in Germany", desc: "Lokale Entwicklung, geprüfte Qualität und höchste Standards in jedem Schritt." },
+              { icon: <Users2 size={30} />, title: "Partnerschaft", desc: "Erfolg entsteht im Dialog, nicht in Isolation. Vertrauen ist Teil des Systems." },
+            ].map((v, i) => (
+              <div
+                key={i}
+                className="relative rounded-[28px] border border-[rgba(12,18,26,.08)] bg-white/90 backdrop-blur-xl shadow-[0_15px_45px_rgba(15,23,42,0.08)] p-10 group"
+              >
+                <div className="flex justify-center mb-5 text-[#4c5662]">{v.icon}</div>
+                <h3 className="font-semibold text-xl text-[#1c242e] mb-2">{v.title}</h3>
+                <p className="text-sm text-[#2b3542] leading-relaxed">{v.desc}</p>
+                <div className="absolute inset-0 rounded-[28px] bg-[radial-gradient(circle_at_center,rgba(160,180,200,0.07),transparent_60%)] opacity-0 group-hover:opacity-60 transition-opacity duration-500" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 };
@@ -616,12 +520,9 @@ const Navbar = () => {
   };
 
   const linkFx = `
-    relative transition-all duration-300
-    hover:text-graphite-900 hover:scale-[1.04]
-    active:scale-[0.96]
-    after:absolute after:bottom-[-6px] after:left-0 after:h-[2px]
+    relative -all              after:absolute after:bottom-[-6px] after:left-0 after:h-[2px]
     after:w-0 after:bg-gradient-to-r after:from-[#2b3542] after:to-[#9ca3af]
-    hover:after:w-full after:transition-all after:duration-500 after:rounded-full
+    hover:after:w-full after:-all after: after:rounded-full
   `;
 
   // ESC-Taste schließt Menüs
@@ -669,8 +570,7 @@ const Navbar = () => {
           <img
             src={LOGO}
             alt="IZENIC Logo"
-            className="h-28 w-auto md:h-36 object-contain shrink-0 transition-transform duration-500 
-                       group-hover:scale-105 group-active:scale-95 drop-shadow-[0_8px_24px_rgba(43,53,66,0.25)]"
+            className="h-28 w-auto md:h-36 object-contain shrink-0                         group- group- drop-shadow-[0_8px_24px_rgba(43,53,66,0.25)]"
           />
         </a>
 
@@ -697,21 +597,16 @@ const Navbar = () => {
               Branchen
               <ChevronRight
                 size={16}
-                className={`transition-transform duration-300 ${
-                  openSectors ? "rotate-90" : ""
+                className={`  ${
+                  openSectors ? "" : ""
                 }`}
               />
             </button>
 
-            <AnimatePresence>
-              {openSectors && (
-                <motion.div
-                  id="sectors-menu"
-                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute right-0 mt-4 w-[880px] max-w-[94vw] z-[999] rounded-3xl border border-[rgba(43,53,66,0.2)]
+            {openSectors && (
+              <div
+                id="sectors-menu"
+                className="absolute right-0 mt-4 w-[880px] max-w-[94vw] z-[999] rounded-3xl border border-[rgba(43,53,66,0.2)]
                              bg-white/95 backdrop-blur-xl shadow-[0_25px_70px_rgba(15,23,42,0.15)] p-5"
                 >
                   <div className="px-2 pb-2 flex items-center justify-between">
@@ -726,7 +621,7 @@ const Navbar = () => {
                           .getElementById("usecases")
                           ?.scrollIntoView({ behavior: "smooth" });
                       }}
-                      className="text-xs text-graphite-700 hover:text-graphite-900 flex items-center gap-1"
+                      className="text-xs text-graphite-700  flex items-center gap-1"
                     >
                       Alle Use Cases <ChevronRight size={14} />
                     </a>
@@ -742,14 +637,13 @@ const Navbar = () => {
                           const base = window.location.origin;
                           window.location.href = `${base}?sector=${s.key}`;
                         }}
-                        className="group relative text-left rounded-2xl p-3 border border-[rgba(43,53,66,.12)] bg-white hover:bg-[#f6f8fb]
-                                   transition-all shadow-[0_6px_20px_rgba(15,23,42,.06)] hover:shadow-[0_14px_35px_rgba(15,23,42,.1)]"
+                        className="group relative text-left rounded-2xl p-3 border border-[rgba(43,53,66,.12)] bg-white -all shadow-[0_6px_20px_rgba(15,23,42,.06)] hover:shadow-[0_14px_35px_rgba(15,23,42,.1)]"
                       >
                         <div className="relative h-28 rounded-xl overflow-hidden border border-[rgba(43,53,66,.15)]">
                           <img
                             src={s.hero}
                             alt={s.title}
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                            className="absolute inset-0 w-full h-full object-cover group-  "
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
                           <span className="absolute top-2 left-2 inline-flex items-center gap-1 rounded-full bg-white/90 backdrop-blur px-2.5 py-0.5 border border-[rgba(43,53,66,.2)] text-[11px] text-graphite-800">
@@ -778,14 +672,13 @@ const Navbar = () => {
 
                         <ChevronRight
                           size={16}
-                          className="absolute right-3 top-3 text-graphite-700 opacity-0 group-hover:opacity-100 group-hover:translate-x-[2px] transition"
+                          className="absolute right-3 top-3 text-graphite-700 opacity-0   "
                         />
                       </button>
                     ))}
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+              </div>
+            )}
           </div>
 
           <button
@@ -800,7 +693,7 @@ const Navbar = () => {
             className="px-5 py-3 rounded-2xl font-semibold text-white 
                        bg-gradient-to-r from-[#2b3542] to-[#6c737f] 
                        shadow-[0_8px_20px_rgba(43,53,66,0.35)] 
-                       transition-transform duration-300 hover:scale-[1.05]"
+  "
           >
             Kontakt / Erstgespräch
           </button>
@@ -809,29 +702,20 @@ const Navbar = () => {
         {/* ======== MOBILE TOGGLE ======== */}
         <button
           onClick={() => setOpen(true)}
-          className="md:hidden rounded-xl px-3 py-2 border border-[rgba(43,53,66,0.25)] text-graphite-900 font-medium transition active:scale-95"
+          className="md:hidden rounded-xl px-3 py-2 border border-[rgba(43,53,66,0.25)] text-graphite-900 font-medium  "
         >
           Menü
         </button>
       </nav>
 
       {/* ======== MOBILE FULLSCREEN SLIDE MENU ======== */}
-      <AnimatePresence>
-        {open && (
+      {open && (
           <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.45 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.35 }}
+            <div
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[199]"
               onClick={() => setOpen(false)}
             />
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 85, damping: 16 }}
+            <div
               className="fixed top-0 right-0 h-screen w-full sm:w-[80%] z-[200]
                          bg-gradient-to-b from-[#fdfefe] to-[#f7f9fc]
                          backdrop-blur-2xl shadow-[0_0_50px_rgba(15,23,42,0.25)]
@@ -845,14 +729,14 @@ const Navbar = () => {
                 <button
                   onClick={() => setOpen(false)}
                   className="p-2 rounded-xl border border-[rgba(43,53,66,0.2)] 
-                             bg-white/60 backdrop-blur active:scale-95 transition"
+                             bg-white/60 backdrop-blur  "
                 >
                   ✕
                 </button>
               </div>
 
               <div className="flex-1 px-8 py-10 flex flex-col gap-6 text-[18px] font-medium text-graphite-900">
-                <a onClick={goHome} href="/" className="hover:text-graphite-950 transition">
+                <a onClick={goHome} href="/" className=" ">
                   Home
                 </a>
                 <button
@@ -860,12 +744,12 @@ const Navbar = () => {
                     setOpen(false);
                     window.location.href = "?page=services";
                   }}
-                  className="text-left hover:text-graphite-950 transition"
+                  className="text-left  "
                 >
                   Leistungen
                 </button>
                 <details className="text-left">
-                  <summary className="cursor-pointer list-none flex items-center justify-between hover:text-graphite-950 transition">
+                  <summary className="cursor-pointer list-none flex items-center justify-between  ">
                     Branchen <ChevronRight size={16} />
                   </summary>
                   <div className="mt-3 pl-2 flex flex-col gap-2">
@@ -876,7 +760,7 @@ const Navbar = () => {
                           setOpen(false);
                           window.location.href = `?sector=${s.key}`;
                         }}
-                        className="text-left text-[16px] text-graphite-800 hover:text-graphite-950 transition"
+                        className="text-left text-[16px] text-graphite-800  "
                       >
                         {s.title}
                       </button>
@@ -888,7 +772,7 @@ const Navbar = () => {
                     setOpen(false);
                     window.location.href = "?page=about";
                   }}
-                  className="text-left hover:text-graphite-950 transition"
+                  className="text-left  "
                 >
                   Über mich / Vision
                 </button>
@@ -897,7 +781,7 @@ const Navbar = () => {
                     setOpen(false);
                     window.location.href = "/kontakt";
                   }}
-                  className="text-left hover:text-graphite-950 transition"
+                  className="text-left  "
                 >
                   Kontakt / Erstgespräch
                 </button>
@@ -906,10 +790,9 @@ const Navbar = () => {
               <div className="px-8 py-6 border-t border-[rgba(43,53,66,0.1)] text-sm text-graphite-600">
                 © {new Date().getFullYear()} IZENIC · Alle Rechte vorbehalten
               </div>
-            </motion.div>
+            </div>
           </>
         )}
-      </AnimatePresence>
     </header>
   );
 };
@@ -1038,11 +921,6 @@ const SectorView = ({ slug }) => {
   if (!sector) return null;
 
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
   const [spot, setSpot] = useState({ x: 55, y: 60 });
 
   useEffect(() => {
@@ -1069,7 +947,7 @@ const SectorView = ({ slug }) => {
         className="relative min-h-screen flex items-center justify-center text-center overflow-hidden"
       >
 {/* Background Media */}
-<motion.div className="absolute inset-0" style={{ y }}>
+        <div className="absolute inset-0">
   {sector.video?.endsWith(".mp4") ? (
     <video
       autoPlay
@@ -1091,7 +969,7 @@ const SectorView = ({ slug }) => {
   )}
 
   <div className="absolute inset-0 bg-black/40" />
-</motion.div>
+</div>
 
         {/* Moving Light Spot */}
         <div
@@ -1104,10 +982,7 @@ const SectorView = ({ slug }) => {
         />
 
         {/* Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+        <div
           className="relative z-10 max-w-4xl px-6 flex flex-col items-center justify-center"
         >
           <h1
@@ -1127,13 +1002,13 @@ const SectorView = ({ slug }) => {
             {sector.chips.map((chip, i) => (
               <span
                 key={i}
-                className="px-4 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15 transition"
+                className="px-4 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-sm  "
               >
                 {chip}
               </span>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Glow Bottom */}
         <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[1200px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.12)_0%,transparent_70%)] blur-[120px] opacity-70" />
@@ -1143,15 +1018,11 @@ const SectorView = ({ slug }) => {
          IMPULSE SECTION
       ========================== */}
       <section className="py-24 px-6 bg-gradient-to-b from-white to-[#f8fafc] text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+        <h2
           className="text-2xl md:text-4xl font-bold text-graphite-900"
         >
           Neue Impulse für messbare Fortschritte
-        </motion.h2>
+        </h2>
         <p className="mt-4 max-w-3xl mx-auto text-graphite-700 text-lg leading-relaxed">
           Effizienz entsteht nicht durch radikale Brüche, sondern durch gezielte
           Verbesserungen. Strukturen, die Komplexität reduzieren, Entscheidungswege
@@ -1178,17 +1049,13 @@ const SectorView = ({ slug }) => {
               d: "Relevante Informationen sind jederzeit abrufbar und sichern fundierte Entscheidungen.",
             },
           ].map((b, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="group rounded-3xl bg-white/70 backdrop-blur-xl border border-white/30 shadow-xl p-8 hover:scale-[1.04] hover:shadow-2xl transition-transform"
+              className="group rounded-3xl bg-white/70 backdrop-blur-xl border border-white/30 shadow-xl p-8   "
             >
               <h3 className="text-lg font-semibold text-graphite-900 mb-2">{b.t}</h3>
               <p className="text-graphite-700">{b.d}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -1198,15 +1065,11 @@ const SectorView = ({ slug }) => {
       ========================== */}
       <section className="py-24 px-6 bg-gradient-to-b from-[#f8fafc] to-white">
         <div className="max-w-5xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+          <h2
             className="text-2xl md:text-4xl font-bold text-graphite-900"
           >
             Nachweisbare Resultate
-          </motion.h2>
+          </h2>
           <p className="mt-4 text-graphite-700 text-lg max-w-3xl mx-auto leading-relaxed">
             Entscheidend sind Ergebnisse, die sich messen lassen. Weniger operative
             Belastung, klarere Abläufe und mehr Transparenz in jedem Schritt. Kein
@@ -1215,19 +1078,15 @@ const SectorView = ({ slug }) => {
 
           <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-6">
             {sector.kpis.map((k, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
                 className="rounded-3xl p-[1px] bg-gradient-to-br from-[#2b3542] via-[#4a515a] to-[#aab4c2] shadow-lg"
               >
                 <div className="rounded-3xl bg-white py-6 px-4">
                   <div className="text-2xl font-bold text-graphite-900">{k.v}</div>
                   <div className="text-graphite-700 mt-1 text-sm">{k.l}</div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -1258,8 +1117,6 @@ const openSectorTab = (slug) => {
 ========================= */
 const Hero = () => {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
   const [spot, setSpot] = useState({ x: 55, y: 60 });
 
   useEffect(() => {
@@ -1284,7 +1141,7 @@ const Hero = () => {
       {/* =========================
          Background Video + Depth Layers
       ========================== */}
-<motion.div className="absolute inset-0" style={{ y }}>
+        <div className="absolute inset-0">
   {/* Hintergrundbild */}
   <img
     src="/hero.jpg"
@@ -1297,7 +1154,7 @@ const Hero = () => {
   {/* Gradient Depth Overlay */}
   <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f14]/80 via-[#0b0f14]/65 to-[#0b0f14]/85" />
   <div className="absolute inset-0 bg-[radial-gradient(800px_400px_at_center,rgba(255,255,255,0.12),transparent)] mix-blend-overlay" />
-</motion.div>
+</div>
 
       {/* =========================
          Moving Light Spot
@@ -1314,10 +1171,7 @@ const Hero = () => {
       {/* =========================
          Content (Perfectly Centered)
       ========================== */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+      <div
         className="relative z-10 max-w-4xl px-6 flex flex-col items-center justify-center"
       >
 
@@ -1345,12 +1199,12 @@ const Hero = () => {
           {[{icon:<Clock4 size={18}/>,t:"Zeit sparen"},
             {icon:<Wallet size={18}/>,t:"Kosten senken"},
             {icon:<Trophy size={18}/>,t:"Wettbewerbsvorteil"}].map((x,i)=>(
-            <div key={i} className="flex justify-center items-center gap-2 hover:text-white transition">
+            <div key={i} className="flex justify-center items-center gap-2  ">
               {x.icon}<span>{x.t}</span>
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       {/* =========================
          Subtle Ambient Glow Bottom
@@ -1426,25 +1280,17 @@ const WhyNow = () => {
       >
         {/* Headline */}
         <div className="max-w-5xl mx-auto px-4 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
+          <h2
             className="text-3xl md:text-5xl font-bold text-graphite-900"
           >
             Jetzt ist das Zeitfenster für Vorsprung
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
+          </h2>
+          <p
             className="mt-4 text-lg md:text-xl text-graphite-700 max-w-3xl mx-auto"
           >
             Automatisierung und KI setzen eine der größten Chancen des Jahrzehnts
             frei. Wer früh Potenziale erkennt und mutig nutzt, gibt den Takt vor.
-          </motion.p>
+          </p>
         </div>
   
         {/* Video Hero */}
@@ -1470,7 +1316,7 @@ const WhyNow = () => {
   
                 {/* Smart-Fade Controls */}
                 <div
-                  className={`absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black/70 via-black/40 to-transparent transition-opacity duration-500 ${
+                  className={`absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black/70 via-black/40 to-transparent -opacity  ${
                     showControls ? "opacity-100" : "opacity-0 pointer-events-none"
                   }`}
                 >
@@ -1480,7 +1326,7 @@ const WhyNow = () => {
                     onClick={handleSeek}
                   >
                     <div
-                      className="absolute top-0 left-0 h-full bg-white rounded-full transition-all duration-150"
+                      className="absolute top-0 left-0 h-full bg-white rounded-full -all "
                       style={{ width: `${progress}%` }}
                     />
                   </div>
@@ -1490,7 +1336,7 @@ const WhyNow = () => {
                     <div className="flex gap-3">
                       <button
                         onClick={togglePlay}
-                        className="inline-flex items-center gap-2 text-white text-sm md:text-base font-medium bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg backdrop-blur transition"
+                        className="inline-flex items-center gap-2 text-white text-sm md:text-base font-medium bg-white/10  px-3 py-1.5 rounded-lg backdrop-blur "
                       >
                         {playing ? (
                           <>
@@ -1508,7 +1354,7 @@ const WhyNow = () => {
                       </button>
                       <button
                         onClick={toggleMute}
-                        className="inline-flex items-center gap-2 text-white text-sm md:text-base font-medium bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg backdrop-blur transition"
+                        className="inline-flex items-center gap-2 text-white text-sm md:text-base font-medium bg-white/10  px-3 py-1.5 rounded-lg backdrop-blur "
                       >
                         {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
                         {muted ? "Stumm" : "Ton"}
@@ -1532,17 +1378,13 @@ const WhyNow = () => {
               "Gezielte KI für Sprache, Bild und Daten",
               "Skalierbar und sicher: DSGVO, Rollen, Audit-Logs",
             ].map((item, i) => (
-              <motion.li
+              <li
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
-                viewport={{ once: true }}
                 className="flex items-start gap-2 text-sm md:text-base"
               >
                 <CheckCircle2 className="mt-[2px] shrink-0 text-titanium-600" />
                 {item}
-              </motion.li>
+              </li>
             ))}
           </ul>
         </div>
@@ -1560,12 +1402,11 @@ const ProblemSolution = () => (
   >
     <div className="max-w-7xl mx-auto px-4">
       {/* Headline */}
-      <motion.h2
-        {...fadeUp}
+      <h2
         className="text-3xl md:text-5xl font-bold text-center text-graphite-900 leading-tight"
       >
         Wo Unternehmen heute an Effizienz verlieren
-      </motion.h2>
+      </h2>
       <p className="mt-4 text-center text-graphite-700 max-w-3xl mx-auto text-lg md:text-xl">
         Ob Kanzlei, Agentur, Klinik, Produktion oder Handel.  
         Viele Organisationen kämpfen mit denselben Engpässen, die Ressourcen binden, Entscheidungen verzögern und Wachstum verhindern.
@@ -1590,26 +1431,18 @@ const ProblemSolution = () => (
             s: "Automatisierungspotenziale bleiben ungenutzt, da klare Einsatzfelder und ein sicherer Rahmen für KI fehlen."
           }
         ].map((b, i) => (
-          <motion.div
+          <div
             key={i}
-            {...fadeUp}
-            transition={{ delay: i * 0.15 }}
-            whileHover={{
-              y: -8,
-              scale: 1.04,
-              boxShadow: "0 18px 40px rgba(15,23,42,0.14)"
-            }}
             className="group rounded-3xl border border-[rgba(12,18,26,.12)] 
                        bg-white/90 backdrop-blur-xl p-8 md:p-9 
                        shadow-[0_8px_24px_rgba(15,23,42,.06)] 
-                       text-center md:text-left transition-all duration-300"
+                       text-center md:text-left"
           >
             {/* Icon */}
             <div
               className="w-16 h-16 mx-auto md:mx-0 rounded-2xl flex items-center justify-center 
                          bg-gradient-to-br from-gray-100 to-gray-200 text-graphite-800 
-                         group-hover:from-[#cfd6df] group-hover:to-[#2b3542] group-hover:text-white 
-                         transition-all duration-300 shadow-inner"
+                         group-hover:from-[#cfd6df] group-hover:to-[#2b3542] shadow-inner"
             >
               {b.icon}
             </div>
@@ -1623,14 +1456,12 @@ const ProblemSolution = () => (
             <p className="mt-3 text-sm md:text-base text-graphite-700 leading-relaxed">
               {b.s}
             </p>
-          </motion.div>
+          </div>
         ))}
       </div>
 
       {/* Lösung */}
-      <motion.div
-        {...fadeUp}
-        transition={{ delay: 0.4 }}
+      <div
         className="mt-16 md:mt-20 rounded-3xl p-[2px] 
                    bg-[linear-gradient(135deg,#cfd6df,#aab4c2,#2b3542)] 
                    shadow-[0_24px_70px_rgba(15,23,42,.14)]"
@@ -1648,7 +1479,7 @@ const ProblemSolution = () => (
   Dies gilt unabhängig von Branche und Unternehmensgröße.
 </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   </section>
 );
@@ -1705,10 +1536,7 @@ const USP = () => {
     <section id="usp" className="relative py-14 md:py-20 bg-gradient-to-b from-white via-[#f7f9fc] to-white">
       <div className="max-w-7xl mx-auto px-4">
         {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+        <div
           className="text-center"
         >
 
@@ -1719,7 +1547,7 @@ const USP = () => {
           Strategie, Umsetzung und Befähigung sind die drei Hebel erfolgreicher Digitalisierung.
 Ob einzeln oder kombiniert, IZENIC unterstützt Unternehmen mit Beratung, Entwicklung und Coaching genau dort, wo Automatisierung und KI den größten Mehrwert schaffen.
           </p>
-        </motion.div>
+        </div>
 
         {/* Segmented Control */}
         <div className="mt-6 md:mt-8 w-full max-w-2xl mx-auto p-1.5 rounded-2xl 
@@ -1727,7 +1555,7 @@ Ob einzeln oder kombiniert, IZENIC unterstützt Unternehmen mit Beratung, Entwic
                         bg-[linear-gradient(135deg,#2e333a,#2b3542)] 
                         shadow-[0_6px_18px_rgba(0,0,0,.45)] relative">
           <div className="grid grid-cols-3 relative">
-            <motion.span
+            <span
               layout
               className="absolute inset-y-1 rounded-xl 
                          bg-[linear-gradient(135deg,#4a515a,#2b3542)] 
@@ -1741,14 +1569,12 @@ Ob einzeln oder kombiniert, IZENIC unterstützt Unternehmen mit Beratung, Entwic
                     : "67.3%",
                 width: "31.2%"
               }}
-              transition={{ type: "spring", stiffness: 380, damping: 30 }}
             />
             {tabs.map((t) => (
               <button
                 key={t.key}
                 onClick={() => setActive(t.key)}
-                className={`relative z-10 h-11 rounded-xl text-sm font-medium transition 
-                  ${active === t.key ? "text-white font-semibold" : "text-gray-200 hover:text-white"}`}
+                className={`relative z-10 h-11 rounded-xl text-sm font-medium                   ${active === t.key ? "text-white font-semibold" : "text-gray-200 "}`}
               >
                 {t.label}
               </button>
@@ -1757,11 +1583,8 @@ Ob einzeln oder kombiniert, IZENIC unterstützt Unternehmen mit Beratung, Entwic
         </div>
 
         {/* Content */}
-        <motion.div
+        <div
           key={current.key}
-          initial={{ opacity: 0, y: 12, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.35 }}
           className="mt-6 md:mt-10 rounded-3xl overflow-hidden border border-[rgba(12,18,26,.12)] bg-white"
         >
           <div className="grid md:grid-cols-[1.1fr_.9fr] items-stretch">
@@ -1806,7 +1629,7 @@ Ob einzeln oder kombiniert, IZENIC unterstützt Unternehmen mit Beratung, Entwic
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -1875,10 +1698,9 @@ const Journey = () => {
         {/* Progress Rail */}
         <div className="relative">
           <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-[rgba(12,18,26,.12)] rounded-full" />
-          <motion.div
+          <div
             className="absolute left-1/2 -translate-x-1/2 top-0 w-[2px] bg-[linear-gradient(180deg,#2b3542,rgba(43,53,66,.2))] rounded-full"
             style={{ height: `${(active - 1) * (100 / (steps.length - 1))}%` }}
-            transition={{ type: "spring", stiffness: 140, damping: 24 }}
           />
           <div className="relative h-full flex flex-col justify-between py-2">
             {steps.map((s) => {
@@ -1890,10 +1712,9 @@ const Journey = () => {
                   className="relative -ml-2 w-8 h-8 grid place-items-center group"
                   aria-label={`Step ${s.n}: ${s.title}`}
                 >
-                  <span className={`w-3.5 h-3.5 rounded-full border transition
-                    ${isActive ? "bg-graphite-900 border-graphite-900" : "bg-white border-[rgba(12,18,26,.25)] group-hover:border-graphite-900"}`} />
+                  <span className={`w-3.5 h-3.5 rounded-full border                     ${isActive ? "bg-graphite-900 border-graphite-900" : "bg-white border-[rgba(12,18,26,.25)] group-hover:border-graphite-900"}`} />
                   {isActive && (
-                    <span className="absolute inset-0 rounded-full animate-ping bg-graphite-900/20" />
+                    <span className="absolute inset-0 rounded-full  bg-graphite-900/20" />
                   )}
                 </button>
               );
@@ -1906,14 +1727,10 @@ const Journey = () => {
           {steps.map((s) => {
             const isActive = s.n === active;
             return (
-              <motion.div
+              <div
                 key={s.n}
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: isActive ? 1 : 0.55, y: 0, scale: isActive ? 1 : 0.99 }}
-                transition={{ duration: 0.35 }}
                 onMouseEnter={() => setActive(s.n)}
-                className={`rounded-3xl overflow-hidden border backdrop-blur bg-white transition
-                  ${isActive ? "border-[rgba(12,18,26,.18)] shadow-[0_24px_50px_rgba(15,23,42,.08)]" : "border-[rgba(12,18,26,.10)]"}`}
+                className={`rounded-3xl overflow-hidden border backdrop-blur bg-white                   ${isActive ? "border-[rgba(12,18,26,.18)] shadow-[0_24px_50px_rgba(15,23,42,.08)]" : "border-[rgba(12,18,26,.10)]"}`}
               >
                 <div className="grid grid-cols-[1.05fr_.95fr] items-stretch">
                   {/* Text */}
@@ -1940,7 +1757,7 @@ const Journey = () => {
                     <div className="absolute inset-0 bg-gradient-to-l from-white via-white/30 to-transparent pointer-events-none" />
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -1960,16 +1777,12 @@ const Journey = () => {
                   <span className="text-graphite-900 font-medium">
                     {String(s.n).padStart(2, "0")} {s.title}
                   </span>
-                  <svg className={`h-5 w-5 transition ${open ? "rotate-90" : ""}`} viewBox="0 0 24 24" fill="none">
+                  <svg className={`h-5 w-5  ${open ? "" : ""}`} viewBox="0 0 24 24" fill="none">
                     <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </button>
-                <AnimatePresence initial={false}>
-                  {open && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
+                {open && (
+                  <div
                       className="px-4 pb-4"
                     >
                       <div className="rounded-xl overflow-hidden border border-[rgba(12,18,26,.12)]">
@@ -1990,9 +1803,8 @@ const Journey = () => {
                           <p className="mt-2 text-graphite-700 text-sm">{s.copy}</p>
                         </div>
                       </div>
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             );
           })}
@@ -2069,10 +1881,7 @@ const Principle = () => {
 
       <div className="max-w-6xl mx-auto px-5">
         {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+        <div
           className="text-center"
         >
           <h2 className="text-3xl md:text-5xl font-bold text-graphite-900">
@@ -2081,7 +1890,7 @@ const Principle = () => {
           <p className="mt-4 text-graphite-700 max-w-3xl mx-auto text-lg md:text-xl">
             Erst Regeln für Stabilität, dann KI für Flexibilität. So entsteht Geschwindigkeit mit Governance.
           </p>
-        </motion.div>
+        </div>
 
         {/* Segmented Control */}
         <div className="mt-10 w-full max-w-2xl mx-auto p-1.5 rounded-2xl 
@@ -2089,7 +1898,7 @@ const Principle = () => {
                         bg-[linear-gradient(135deg,#2e333a,#2b3542)] 
                         shadow-[0_6px_18px_rgba(0,0,0,.45)] relative">
           <div className="relative grid grid-cols-3">
-            <motion.span
+            <span
               layout
               className="absolute inset-y-1 rounded-xl 
                          bg-[linear-gradient(135deg,#4a515a,#2b3542)] 
@@ -2098,14 +1907,12 @@ const Principle = () => {
                 left: mode === "rule" ? "0.5rem" : mode === "ai" ? "33.8%" : "67.3%",
                 width: "31.2%"
               }}
-              transition={{ type: "spring", stiffness: 380, damping: 30 }}
             />
             {MODES.map((m) => (
               <button
                 key={m.key}
                 onClick={() => setMode(m.key)}
-                className={`relative z-10 h-11 rounded-xl text-sm font-medium transition 
-                  ${mode === m.key ? "text-white font-semibold" : "text-gray-300 hover:text-white"}`}
+                className={`relative z-10 h-11 rounded-xl text-sm font-medium                   ${mode === m.key ? "text-white font-semibold" : "text-gray-300 "}`}
               >
                 {m.title}
               </button>
@@ -2114,11 +1921,8 @@ const Principle = () => {
         </div>
 
         {/* Card */}
-        <motion.div
+        <div
           key={mode}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35 }}
           className="mt-10 md:mt-12 rounded-3xl p-[1px] 
                      bg-[linear-gradient(135deg,#cfd6df,#aab4c2,#2b3542)] 
                      shadow-[0_20px_50px_rgba(15,23,42,.12)]"
@@ -2139,7 +1943,7 @@ const Principle = () => {
                 <div
                   key={i}
                   className="rounded-2xl border border-[rgba(12,18,26,.12)] bg-white/90 p-5 text-center md:text-left
-                             shadow-[0_6px_14px_rgba(15,23,42,.06)] hover:shadow-[0_10px_24px_rgba(15,23,42,.12)] transition"
+                             shadow-[0_6px_14px_rgba(15,23,42,.06)] hover:shadow-[0_10px_24px_rgba(15,23,42,.12)] "
                 >
                   <h4 className="font-semibold text-graphite-900 mb-2">{line.h}</h4>
                   <p className="text-sm md:text-base text-graphite-700 leading-relaxed">{line.t}</p>
@@ -2172,7 +1976,7 @@ const Principle = () => {
               <div className="flex items-center justify-center sm:justify-start gap-2"><Wrench size={16}/> on-prem oder EU-Cloud</div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -2193,12 +1997,12 @@ const UseCases = () => {
   return (
     <section id="usecases" className="relative py-16 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4">
-        <motion.div {...fadeUp} className="text-center">
+        <div className="text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-graphite-900">Use Cases mit schneller Wirkung</h2>
           <p className="mt-3 text-graphite-700 max-w-3xl mx-auto text-lg">
             Wo Automatisierung sofort entlastet und KI gezielt Mehrwert liefert. Ein Klick führt zu den Branchen-Tabs mit Details.
           </p>
-        </motion.div>
+        </div>
 
         {/* Desktop: zweispaltig – links kompakte Liste, rechts großes Preview */}
         <div className="mt-8 hidden md:grid grid-cols-[0.9fr_1.1fr] gap-8">
@@ -2222,11 +2026,10 @@ const UseCases = () => {
   }}
 >
                     {/* Hover-Highlight */}
-                    <motion.div
+                    <div
                       layoutId="usecase-highlight"
                       className={`absolute inset-x-0 ${isActive ? "bg-[#f5f7fa]" : "bg-transparent"}`}
                       style={{ top: 0, bottom: 0 }}
-                      transition={{ type: "spring", stiffness: 420, damping: 32 }}
                     />
                     <div className="relative z-10 px-5 py-4 flex items-center justify-between">
                       <div className="flex items-center gap-3">
@@ -2236,7 +2039,7 @@ const UseCases = () => {
                           <div className="text-xs text-graphite-600 line-clamp-1">{s.intro}</div>
                         </div>
                       </div>
-                      <ChevronRight size={18} className="text-graphite-800 group-hover:translate-x-[2px] transition" />
+                      <ChevronRight size={18} className="text-graphite-800  " />
                     </div>
                   </li>
                 );
@@ -2508,22 +2311,7 @@ const FinalCall = () => {
    VERTRAUEN & SICHERHEIT — IZENIC Cinematic Titanium Edition
 ========================= */
 const TrustPage = () => {
-  const fadeLeft = {
-    hidden: { opacity: 0, x: -50 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
-  };
 
-  const fadeRight = {
-    hidden: { opacity: 0, x: 50 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
-  };
-
-  const container = {
-    hidden: {},
-    show: {
-      transition: { staggerChildren: 0.3 },
-    },
-  };
 
   return (
     <main className="min-h-screen bg-[#f9fafc] text-graphite-900 overflow-x-hidden">
@@ -2546,10 +2334,7 @@ const TrustPage = () => {
         <div className="absolute inset-0 bg-[radial-gradient(900px_500px_at_center,rgba(255,255,255,0.12),transparent)] mix-blend-overlay" />
 
         {/* Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+        <div
           className="relative z-10 max-w-4xl px-6 flex flex-col items-center justify-center"
         >
           <h1
@@ -2564,21 +2349,18 @@ const TrustPage = () => {
             Datenschutz, Nachhaltigkeit und verantwortungsvolle KI:  
             Das Fundament jeder Automatisierung bei IZENIC.
           </p>
-        </motion.div>
+        </div>
       </section>
 
       {/* =========================
          CONTENT SECTIONS
       ========================== */}
-      <motion.section
-        variants={container}
-        initial="hidden"
-        animate="show"
+      <section
         className="max-w-6xl mx-auto px-6 py-24 space-y-40"
       >
         {/* Datenschutz */}
-        <motion.div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div variants={fadeLeft}>
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div >
             <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-[linear-gradient(90deg,#1c242e,#4b5563,#1c242e)]">
               Datenschutz & Informationssicherheit
             </h2>
@@ -2590,26 +2372,26 @@ const TrustPage = () => {
             Sicherheit bedeutet transparente Audit-Logs, differenzierte Rollenrechte und regelmäßige Penetrationstests.
 So bleiben Ihre Daten jederzeit geschützt.
             </p>
-          </motion.div>
-          <motion.div variants={fadeRight}>
+          </div>
+          <div >
             <img
               src="/datenschutz.jpg"
               alt="Datenschutz"
-              className="rounded-3xl shadow-[0_25px_60px_rgba(15,23,42,0.15)] hover:scale-[1.04] transition-transform duration-700 ease-out"
+              className="rounded-3xl shadow-[0_25px_60px_rgba(15,23,42,0.15)]   "
             />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* AGB */}
-        <motion.div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div variants={fadeLeft} className="order-2 md:order-1">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div  className="order-2 md:order-1">
             <img
               src="/agb.jpg"
               alt="AGB"
-              className="rounded-3xl shadow-[0_25px_60px_rgba(15,23,42,0.15)] hover:scale-[1.04] transition-transform duration-700 ease-out"
+              className="rounded-3xl shadow-[0_25px_60px_rgba(15,23,42,0.15)]   "
             />
-          </motion.div>
-          <motion.div variants={fadeRight} className="order-1 md:order-2">
+          </div>
+          <div  className="order-1 md:order-2">
             <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-[linear-gradient(90deg,#1c242e,#4b5563,#1c242e)]">
               Allgemeine Geschäftsbedingungen
             </h2>
@@ -2620,16 +2402,16 @@ So bleiben Ihre Daten jederzeit geschützt.
               href="/agb_izenic.pdf"
               download
               className="mt-6 inline-flex items-center gap-2 rounded-2xl px-5 py-3 font-semibold text-white 
-                         bg-[linear-gradient(135deg,#2b3542,#0b121a)] shadow hover:scale-105 transition"
+                         bg-[linear-gradient(135deg,#2b3542,#0b121a)] shadow  "
             >
               AGB herunterladen (PDF)
             </a>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Nachhaltigkeit */}
-        <motion.div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div variants={fadeLeft}>
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div >
             <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-[linear-gradient(90deg,#1c242e,#4b5563,#1c242e)]">
               Nachhaltigkeit & Verantwortung
             </h2>
@@ -2641,26 +2423,26 @@ So bleiben Ihre Daten jederzeit geschützt.
             Das Ziel ist Technologie, die echten Wert schafft ohne Überverbrauch.
 So bleibt Automatisierung nicht nur intelligent, sondern auch nachhaltig und zukunftsfähig.
             </p>
-          </motion.div>
-          <motion.div variants={fadeRight}>
+          </div>
+          <div >
             <img
               src="/nachhaltigkeit.jpg"
               alt="Nachhaltigkeit"
-              className="rounded-3xl shadow-[0_25px_60px_rgba(15,23,42,0.15)] hover:scale-[1.04] transition-transform duration-700 ease-out"
+              className="rounded-3xl shadow-[0_25px_60px_rgba(15,23,42,0.15)]   "
             />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Verantwortungsvolle Automatisierung */}
-        <motion.div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div variants={fadeLeft} className="order-2 md:order-1">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div  className="order-2 md:order-1">
             <img
               src="/automation.jpg"
               alt="Automatisierung"
-              className="rounded-3xl shadow-[0_25px_60px_rgba(15,23,42,0.15)] hover:scale-[1.04] transition-transform duration-700 ease-out"
+              className="rounded-3xl shadow-[0_25px_60px_rgba(15,23,42,0.15)]   "
             />
-          </motion.div>
-          <motion.div variants={fadeRight} className="order-1 md:order-2">
+          </div>
+          <div  className="order-1 md:order-2">
             <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-[linear-gradient(90deg,#1c242e,#4b5563,#1c242e)]">
               Verantwortungsvolle Automatisierung
             </h2>
@@ -2671,12 +2453,12 @@ So bleibt Automatisierung nicht nur intelligent, sondern auch nachhaltig und zuk
             <p className="mt-3 text-graphite-700 leading-relaxed">
               So entsteht eine Governance, die Fehler minimiert und Vertrauen in technologische Prozesse schafft.
             </p>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* KI-Ethik */}
-        <motion.div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div variants={fadeLeft}>
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div >
             <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-[linear-gradient(90deg,#1c242e,#4b5563,#1c242e)]">
               Verantwortungsvoller Einsatz von KI
             </h2>
@@ -2689,16 +2471,16 @@ So bleibt Automatisierung nicht nur intelligent, sondern auch nachhaltig und zuk
             Im Mittelpunkt stehen <strong>Fairness, Transparenz, Datenschutz und Menschzentrierung.</strong>  
               KI soll den Menschen stärken.
             </p>
-          </motion.div>
-          <motion.div variants={fadeRight}>
+          </div>
+          <div >
             <img
               src="/ki.jpg"
               alt="KI Ethik"
-              className="rounded-3xl shadow-[0_25px_60px_rgba(15,23,42,0.15)] hover:scale-[1.04] transition-transform duration-700 ease-out"
+              className="rounded-3xl shadow-[0_25px_60px_rgba(15,23,42,0.15)]   "
             />
-          </motion.div>
-        </motion.div>
-      </motion.section>
+          </div>
+        </div>
+      </section>
     </main>
   );
 };
@@ -2726,8 +2508,7 @@ const Footer = () => (
               alt="IZENIC"
               className="relative h-40 md:h-52 lg:h-60 w-auto 
                          mix-blend-luminosity opacity-95 
-                         transition-all duration-700 ease-out
-                         hover:opacity-100 hover:scale-[1.02]"
+-all                          hover:opacity-100 hover:scale-[1.02]"
               style={{
                 filter: "drop-shadow(0 0 40px rgba(43,53,66,0.2)) brightness(1.05)",
               }}
@@ -2736,13 +2517,13 @@ const Footer = () => (
             {/* Animated soft shine ring */}
             <div className="absolute -inset-12 rounded-full 
                             bg-[conic-gradient(from_0deg,transparent,rgba(255,255,255,0.15),transparent)] 
-                            animate-spin-slow blur-sm mix-blend-overlay" />
+ blur-sm mix-blend-overlay" />
           </div>
 
-{/* Claim */}
-<p className="text-graphite-900 text-center md:text-left text-lg md:text-xl font-medium tracking-tight max-w-sm leading-snug">
-  Automatisierung, wo sie wirkt.<br />KI, wo sie muss.
-</p>
+          {/* Claim */}
+          <p className="text-graphite-900 text-center md:text-left text-lg md:text-xl font-medium tracking-tight max-w-sm leading-snug">
+            Automatisierung, wo sie wirkt.<br />KI, wo sie muss.
+          </p>
         </div>
 
         {/* === COLUMN 2: NAVIGATION === */}
@@ -2762,11 +2543,10 @@ const Footer = () => (
     window.dispatchEvent(new PopStateEvent("popstate")); // triggert dein App-UseEffect
     window.scrollTo({ top: 0, behavior: "instant" }); // nach oben scrollen
   }}
-  className="relative hover:text-graphite-900 transition 
-             after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] 
+  className="relative               after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] 
              after:bg-gradient-to-r after:from-[#2b3542] after:to-[#aab4c2] 
              after:scale-x-0 hover:after:scale-x-100 after:origin-left 
-             after:transition-transform after:duration-500"
+             after: after:"
 >
   {link.name}
 </a>
@@ -2783,15 +2563,6 @@ const Footer = () => (
     </div>
 
     {/* Animations */}
-    <style>{`
-      @keyframes spin-slow {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-      }
-      .animate-spin-slow {
-        animation: spin-slow 35s linear infinite;
-      }
-    `}</style>
   </footer>
 );
 
