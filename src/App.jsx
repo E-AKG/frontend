@@ -309,6 +309,7 @@ const AboutView = () => {
       {/* =========================
    FOUNDER — IZENIC Titanium Harmony Refined v4
 ========================= */}
+
 <section className="relative py-36 overflow-hidden bg-gradient-to-b from-[#f9fafb] via-[#eef2f6] to-[#e4e8ee] text-[#1c242e]">
   {/* Subtle Noise & Glow */}
   <div className="absolute inset-0 opacity-[.04] [background-image:url('/noise.png')] [background-size:300px]" />
@@ -1189,16 +1190,16 @@ const Hero = () => {
                      bg-clip-text text-transparent bg-[linear-gradient(100deg,#ffffff_0%,#cfd6df_45%,#9ca6b3_100%)]
                      drop-shadow-[0_4px_20px_rgba(255,255,255,0.15)]"
         >
-          Automatisiere, was aufhält. <br className="hidden md:block" />
+          Der Partner für Automatisierung und KI{" "}
+  <br className="hidden md:block" />
           <span className="bg-clip-text text-transparent bg-[linear-gradient(90deg,#aab4c2_0%,#e3e8ef_50%,#b7bec7_100%)]">
-          Nutze KI, wo sie wirkt.
+           im DACH-Raum
           </span>
         </h1>
 
         {/* Subline */}
         <p className="mt-5 text-white/90 text-base md:text-lg max-w-2xl leading-relaxed">
-          Die Automations- und KI-Revolution schafft die nächste Generation von Marktführern.  
-          Gewinner sind die, die früh nutzen, statt nur zu verstehen.
+IZENIC verbindet Technologie und Wirkung, um Unternehmen im DACH-Raum effizienter, klarer und zukunftsfähig zu machen. Weil morgen nicht wartet.
         </p>
 
         {/* Benefits */}
@@ -1211,6 +1212,18 @@ const Hero = () => {
             </div>
           ))}
         </div>
+
+        {/* Mobile CTA Button */}
+        <a
+          href="/kontakt"
+          className="mt-6 sm:hidden inline-flex items-center justify-center px-8 py-3 
+                     bg-white/90 text-[#0b0f14] rounded-full font-semibold text-base
+                     shadow-[0_4px_20px_rgba(255,255,255,0.2)] 
+                     hover:scale-[1.03] hover:bg-white transition-all duration-300
+                     backdrop-blur-sm"
+        >
+          Erstgespräch starten
+        </a>
       </div>
 
       {/* =========================
