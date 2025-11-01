@@ -41,9 +41,54 @@ export default defineConfig({
     },
   ],
 
+  // 🚀 SEO & Performance Optimierung
+  build: {
+    // Code Splitting für bessere Ladezeiten
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'ui-vendor': ['lucide-react'],
+        },
+      },
+    },
+    // Kompakte Produktionsversion
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true, // Entfernt console.logs in Production
+        drop_debugger: true,
+      },
+    },
+    // Assets generieren
+    assetsInlineLimit: 4096, // Kleinere Assets inline
+    // Sourcemaps für Debugging
+    sourcemap: false, // Nur in Development
+  },
+
+  // Performance-Optimierungen
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'lucide-react'],
+  },
+
+  // Prefetch-Optimierung
+  experimental: {
+    renderBuiltUrl(filename, { hostType }) {
+      if (hostType === 'js') {
+        return { runtime: `window.__getAssetUrl(${JSON.stringify(filename)})` };
+      }
+    },
+  },
+
   server: {
     proxy: {
       '/api': 'http://localhost:8000',
+    },
+    // Headers für SEO & Security (in Production über Server)
+    headers: {
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+      'X-XSS-Protection': '1; mode=block',
     },
   },
 });
