@@ -12,6 +12,7 @@ export default {
         izenic: {
           accent: "#00C2FF", // sanftes Cyan, modern
           accent2: "#7C9DFF", // bläulicher Verlaufspartner
+          blue: "#0041C4", // IZENIC Blue accent
           ink: "#0F1216"
         }
       },
