@@ -5,7 +5,7 @@ import { resolve } from 'path';
 import fs from 'fs';
 
 export default defineConfig({
-  base: './', // 🔥 wichtig für Render & relative Pfade
+  base: '/', // 🔥 wichtig für Render & absolute Pfade
 
   plugins: [
     react(),
@@ -69,15 +69,6 @@ export default defineConfig({
   // Performance-Optimierungen
   optimizeDeps: {
     include: ['react', 'react-dom', 'lucide-react'],
-  },
-
-  // Prefetch-Optimierung
-  experimental: {
-    renderBuiltUrl(filename, { hostType }) {
-      if (hostType === 'js') {
-        return { runtime: `window.__getAssetUrl(${JSON.stringify(filename)})` };
-      }
-    },
   },
 
   server: {
