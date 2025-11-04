@@ -645,8 +645,7 @@ const Navbar = () => {
                         key={s.key}
                         onClick={() => {
                           setOpenSectors(false);
-                          const base = window.location.origin;
-                          window.location.href = `${base}?sector=${s.key}`;
+                          window.location.href = `/branchen/${s.key}`;
                         }}
                         className="group relative text-left rounded-2xl p-3 border border-[rgba(43,53,66,.12)] bg-white -all shadow-[0_6px_20px_rgba(15,23,42,.06)] hover:shadow-[0_14px_35px_rgba(15,23,42,.1)]"
                       >
@@ -693,7 +692,7 @@ const Navbar = () => {
           </div>
 
           <button
-            onClick={() => (window.location.href = "?page=about")}
+            onClick={() => (window.location.href = "/ueber-mich")}
             className={linkFx}
           >
             Über mich / Vision
@@ -800,7 +799,7 @@ const Navbar = () => {
                         key={s.key}
                         onClick={() => {
                           setOpen(false);
-                          window.location.href = `?sector=${s.key}`;
+                          window.location.href = `/branchen/${s.key}`;
                         }}
                         className="text-left px-4 py-2.5 rounded-xl text-[15px] text-graphite-700 hover:bg-titanium-100 hover:text-graphite-900 transition-colors font-sans"
                       >
@@ -813,7 +812,7 @@ const Navbar = () => {
                 <button
                   onClick={() => {
                     setOpen(false);
-                    window.location.href = "?page=about";
+                    window.location.href = "/ueber-mich";
                   }}
                   className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-white border border-titanium-200 hover:border-titanium-300 hover:bg-titanium-50 transition-all group shadow-sm text-left"
                 >
@@ -868,7 +867,7 @@ const Navbar = () => {
 // ========================= */
 const SECTORS = [
   {
-    key: "legal",
+    key: "recht",
     title: "Rechts- & Steuerwesen",
     icon: <Scale className="w-4 h-4" />,
     intro: "Abläufe verschlanken, Fristen sicher überwachen und Fachwissen zentral verfügbar machen. Ohne permanente Zusatzbelastung für Ihre Teams.",
@@ -879,7 +878,7 @@ const SECTORS = [
     kpis: [{v:"-40%", l:"Bearbeitungszeit"}, {v:"+25%", l:"Zuverlässigkeit"}, {v:"-50%", l:"E-Mail-Volumen"}]
   },
   {
-    key: "ecom",
+    key: "onlinehandel",
     title: "E-Commerce & Onlinehandel",
     icon: <ShoppingCart className="w-4 h-4" />,
     intro: "Vom Erstkontakt bis zur Retoure: Prozesse klar steuern, Servicekosten senken und Kundenerfahrungen messbar verbessern.",
@@ -890,7 +889,7 @@ const SECTORS = [
     kpis: [{v:"+20%", l:"Conversion"}, {v:"-50%", l:"Supportaufwand"}, {v:"-30%", l:"Retourenkosten"}]
   },
   {
-    key: "realestate",
+    key: "immobilien",
     title: "Immobilienwirtschaft",
     icon: <Building2 className="w-4 h-4" />,
     intro: "Von der Anfrage bis zum Reporting: Verwaltung effizient organisieren, Kommunikation vereinfachen und Compliance sicherstellen.",
@@ -901,7 +900,7 @@ const SECTORS = [
     kpis: [{v:"-40%", l:"Durchlaufzeit"}, {v:"+30%", l:"Kundenzufriedenheit"}]
   },
   {
-    key: "health",
+    key: "gesundheitswesen",
     title: "Gesundheitswesen",
     icon: <Stethoscope className="w-4 h-4" />,
     intro: "Praxisabläufe und Verwaltung entlasten, Patienten gezielt informieren und medizinische Daten sicher nutzbar machen.",
@@ -912,7 +911,7 @@ const SECTORS = [
     kpis: [{v:"-35%", l:"Telefonaufkommen"}, {v:"+20%", l:"Planungssicherheit"}]
   },
   {
-    key: "logistics",
+    key: "logistik",
     title: "Logistik & Transport",
     icon: <Truck className="w-4 h-4" />,
     intro: "Lieferketten präzise steuern, Abweichungen früh erkennen und Kommunikation durchgängig sichern. Ohne operative Hektik.",
@@ -923,7 +922,7 @@ const SECTORS = [
     kpis: [{v:"-30%", l:"Verspätungen"}, {v:"-45%", l:"Nachfassaufwand"}]
   },
   {
-    key: "hr",
+    key: "personal",
     title: "Personal & Recruiting",
     icon: <Users2 className="w-4 h-4" />,
     intro: "Administrative Aufgaben reduzieren, Bewerberprozesse beschleunigen und Mitarbeiterwissen nachhaltig sichern.",
@@ -934,7 +933,7 @@ const SECTORS = [
     kpis: [{v:"-45%", l:"Screeningzeit"}, {v:"+18%", l:"Akzeptanzquote"}]
   },
   {
-    key: "finance",
+    key: "finanzen",
     title: "Finanz- & Versicherungsdienstleister",
     icon: <Landmark className="w-4 h-4" />,
     intro: "Vorgänge prüfen, Risiken bewerten und Entscheidungen fundiert treffen. Mit konsistenter Dokumentation und klarer Nachvollziehbarkeit.",
@@ -945,7 +944,7 @@ const SECTORS = [
     kpis: [{v:"-35%", l:"Durchlaufzeit"}, {v:"+25%", l:"Erstlösungsquote"}]
   },
   {
-    key: "manufacturing",
+    key: "produktion",
     title: "Produktion & Mittelstand",
     icon: <Factory className="w-4 h-4" />,
     intro: "Qualität sichern, Ausfälle reduzieren und Ressourcen produktiv einsetzen. Mit datenbasierter Transparenz und planbarer Steuerung.",
@@ -967,7 +966,7 @@ const SECTORS = [
     kpis: [{v:"+30%", l:"Output"}, {v:"-35%", l:"Korrekturschleifen"}]
   },
   {
-    key: "construction",
+    key: "bau",
     title: "Bauunternehmen",
     icon: <Hammer className="w-4 h-4" />,
     intro: "Von der Planung bis zur Übergabe: Projekte nahtlos steuern, Informationen zentral bündeln und Ausführung zuverlässig absichern.",
@@ -2066,7 +2065,7 @@ const Principle = () => {
 ========================= */
 const UseCases = () => {
   // kuratierte Auswahl für das Teasing
-  const FEATURED = ["legal", "ecom", "realestate", "health", "logistics", "hr", "finance", "manufacturing", "marketing", "construction"];
+  const FEATURED = ["recht", "onlinehandel", "immobilien", "gesundheitswesen", "logistik", "personal", "finanzen", "produktion", "marketing", "bau"];
 
   const list = SECTORS.filter(s => FEATURED.includes(s.key));
   const [active, setActive] = React.useState(list[0]?.key || null);
@@ -2097,10 +2096,7 @@ const UseCases = () => {
   className="group cursor-pointer relative"
   onClick={(e) => {
     e.preventDefault(); // 🚫 blockiert Standard-Href Verhalten
-    const url = new URL(window.location.href);
-    url.searchParams.set("sector", s.key);
-    window.history.pushState({}, "", url); // URL ändern ohne Reload
-    window.dispatchEvent(new PopStateEvent("popstate")); // App reagiert auf neuen State
+    window.location.href = `/branchen/${s.key}`;
   }}
 >
                     {/* Hover-Highlight */}
@@ -2155,8 +2151,7 @@ const UseCases = () => {
               <div className="mt-5 flex flex-wrap gap-3">
               <button
   onClick={() => {
-    const base = window.location.origin;
-    window.location.href = `${base}?sector=${current.key}`;
+    window.location.href = `/branchen/${current.key}`;
   }}
   className={btnSolid}
 >
@@ -2198,8 +2193,7 @@ const UseCases = () => {
                   </div>
                   <button
   onClick={() => {
-    const base = window.location.origin;
-    window.location.href = `${base}?sector=${s.key}`;
+    window.location.href = `/branchen/${s.key}`;
   }}
   className={btnSolid + " mt-4 w-full justify-center"}
 >
@@ -3067,7 +3061,20 @@ export default function App() {
     };
   }, [path]);
 
-  // 1) Branchen-Tab
+  // 1) Branchen-Route (neue Route /branchen/:slug)
+  const branchMatch = path.match(/^\/branchen\/(.+)$/);
+  if (branchMatch) {
+    const branchSlug = branchMatch[1];
+    return (
+      <div className="min-h-screen bg-white">
+        <Navbar />
+        <SectorView slug={branchSlug} />
+        <Footer />
+      </div>
+    );
+  }
+
+  // 2) Branchen-Tab (Query-basiert für Rückwärtskompatibilität)
   if (sectorSlug) {
     return (
       <div className="min-h-screen bg-white">
@@ -3078,7 +3085,7 @@ export default function App() {
     );
   }
 
-  // 2) Leistungen (neue Route /leistungen)
+  // 3) Leistungen (neue Route /leistungen)
   if (path === "/leistungen") {
     return (
       <div className="min-h-screen bg-white">
@@ -3089,7 +3096,18 @@ export default function App() {
     );
   }
 
-  // 3) Eigene Tabs: Leistungen / Über mich (Query-basiert für Rückwärtskompatibilität)
+  // 4) Über mich (neue Route /ueber-mich)
+  if (path === "/ueber-mich") {
+    return (
+      <div className="min-h-screen bg-white">
+        <Navbar />
+        <AboutView />
+        <Footer />
+      </div>
+    );
+  }
+
+  // 5) Eigene Tabs: Leistungen / Über mich (Query-basiert für Rückwärtskompatibilität)
   if (pageSlug === "services") {
     return (
       <div className="min-h-screen bg-white">
