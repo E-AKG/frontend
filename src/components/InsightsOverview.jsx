@@ -4,7 +4,7 @@ import { ArrowRight, Calendar } from "lucide-react";
 // Sample insights data
 const SAMPLE_INSIGHTS = [
   {
-    id: "1",
+    id: "usecases",
     title: "Der Use Case beginnt bei euch",
     excerpt: "Warum erfolgreiche KI-Projekte nicht mit Technologie, sondern mit Klarheit starten. Und warum KI nicht gleich Automatisierung ist.",
     date: new Date("2024-11-04T21:00:00"),

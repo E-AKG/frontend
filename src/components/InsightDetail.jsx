@@ -4,13 +4,13 @@ import CommentSection from "./CommentSection";
 
 // Sample insights data (same as in Overview)
 const INSIGHTS_DATA = {
-  "1": {
-    id: "1",
+  "usecases": {
+    id: "usecases",
     title: "Der Use Case beginnt bei euch",
     subtitle: "Warum erfolgreiche KI-Projekte nicht mit Technologie, sondern mit Klarheit starten.",
     date: new Date("2024-11-04T21:00:00"),
     image: "/insights-1.jpg",
-    category: "Strategie",
+    category: "Use Case",
     content: `
 # Ihr Use Case. Ihre Wirkung.
 
@@ -78,6 +78,23 @@ Starten Sie dort, wo Sie schnell Ergebnisse sehen. Skalieren Sie dann schrittwei
 };
 
 const InsightDetail = ({ insightId }) => {
+  // Fallback für fehlende insightId
+  if (!insightId) {
+    return (
+      <main className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-graphite-900 mb-4">Insight nicht gefunden</h1>
+          <button
+            onClick={() => (window.location.href = "/insights")}
+            className="btn-primary"
+          >
+            Zurück zu Insights
+          </button>
+        </div>
+      </main>
+    );
+  }
+
   const insight = INSIGHTS_DATA[insightId];
 
   if (!insight) {
@@ -97,10 +114,14 @@ const InsightDetail = ({ insightId }) => {
   }
 
   const formatDate = (date) => {
-    const options = { day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" };
-    const formatted = date.toLocaleDateString("de-DE", options);
-    // Format: "4. November, 21:00" -> "4. November, 21:00 Uhr"
-    return formatted.replace(/(\d{1,2}):(\d{2})/, "$1:$2 Uhr");
+    try {
+      const options = { day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" };
+      const formatted = date.toLocaleDateString("de-DE", options);
+      // Format: "4. November, 21:00" -> "4. November, 21:00 Uhr"
+      return formatted.replace(/(\d{1,2}):(\d{2})/, "$1:$2 Uhr");
+    } catch (e) {
+      return "Datum unbekannt";
+    }
   };
 
   const handleBack = () => {
@@ -262,10 +283,16 @@ const InsightDetail = ({ insightId }) => {
     }
   };
 
-  const contentElements = parseContent(insight.content);
+  let contentElements = [];
+  try {
+    contentElements = parseContent(insight.content || "");
+  } catch (e) {
+    console.error("Error parsing content:", e);
+    contentElements = [{ type: "p", content: "Fehler beim Laden des Inhalts." }];
+  }
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white" style={{ backgroundColor: "#ffffff" }}>
       {/* Back Button */}
       <div className="container-max pt-8 px-4 md:px-6">
           <button
@@ -321,9 +348,9 @@ const InsightDetail = ({ insightId }) => {
       </section>
 
       {/* Article Content */}
-      <article className="py-6 md:py-8 lg:py-12 bg-white">
+      <article className="py-6 md:py-8 lg:py-12 bg-white" style={{ backgroundColor: "#ffffff" }}>
         <div className="container-max max-w-4xl px-4 md:px-6">
-          <div className="prose prose-lg max-w-none">
+          <div className="max-w-none">
             {contentElements.map((element, index) => (
               <div key={index}>{renderContent(element)}</div>
             ))}
