@@ -592,7 +592,7 @@ const Navbar = () => {
           </a>
 
           <button
-            onClick={() => (window.location.href = "?page=services")}
+            onClick={() => (window.location.href = "/leistungen")}
             className={linkFx}
           >
             Leistungen
@@ -774,7 +774,7 @@ const Navbar = () => {
                 <button
                   onClick={() => {
                     setOpen(false);
-                    window.location.href = "?page=services";
+                    window.location.href = "/leistungen";
                   }}
                   className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-white border border-titanium-200 hover:border-titanium-300 hover:bg-titanium-50 transition-all group shadow-sm text-left"
                 >
@@ -3078,7 +3078,18 @@ export default function App() {
     );
   }
 
-  // 2) Eigene Tabs: Leistungen / Über mich
+  // 2) Leistungen (neue Route /leistungen)
+  if (path === "/leistungen") {
+    return (
+      <div className="min-h-screen bg-white">
+        <Navbar />
+        <ServicesView />
+        <Footer />
+      </div>
+    );
+  }
+
+  // 3) Eigene Tabs: Leistungen / Über mich (Query-basiert für Rückwärtskompatibilität)
   if (pageSlug === "services") {
     return (
       <div className="min-h-screen bg-white">
