@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   ArrowRight, ChevronRight, Sparkles, CheckCircle2, Workflow, FileText, BrainCircuit,
-  Users, Wrench, LineChart, ShieldCheck, Phone, Mail, Star, Clock4, Wallet, Trophy, Play
+  Users, Wrench, LineChart, ShieldCheck, Phone, Mail, Star, Clock4, Wallet, Trophy, Play,
+  Home, Menu, X, Grid3x3, BookOpen
 } from "lucide-react";
 import { Volume2, VolumeX } from "lucide-react";
 // oben ergänzen
@@ -719,9 +720,9 @@ const Navbar = () => {
         {/* ======== MOBILE TOGGLE ======== */}
         <button
           onClick={() => setOpen(true)}
-          className="md:hidden rounded-xl px-3 py-2 border border-[rgba(43,53,66,0.25)] text-graphite-900 font-medium  "
+          className="md:hidden rounded-xl px-4 py-2.5 border border-titanium-300 bg-white/80 backdrop-blur-sm text-graphite-900 font-medium hover:bg-white transition-colors shadow-sm"
         >
-          Menü
+          <Menu size={20} />
         </button>
       </nav>
 
@@ -729,47 +730,71 @@ const Navbar = () => {
       {open && (
           <>
             <div
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[199]"
+              className="fixed inset-0 bg-graphite-900/70 backdrop-blur-md z-[199]"
               onClick={() => setOpen(false)}
             />
             <div
-              className="fixed top-0 right-0 h-screen w-full sm:w-[80%] z-[200]
-                         bg-gradient-to-b from-[#fdfefe] to-[#f7f9fc]
-                         backdrop-blur-2xl shadow-[0_0_50px_rgba(15,23,42,0.25)]
-                         border-l border-[rgba(43,53,66,0.1)]
-                         flex flex-col"
+              className="fixed top-0 right-0 h-screen w-full sm:w-[85%] z-[200]
+                         bg-gradient-to-br from-white via-titanium-50 to-white
+                         backdrop-blur-2xl shadow-[0_0_60px_rgba(15,23,42,0.3)]
+                         border-l border-titanium-200
+                         flex flex-col overflow-y-auto"
             >
-              <div className="flex items-center justify-between px-6 h-20 border-b border-[rgba(43,53,66,0.08)]">
-                <span className="font-semibold text-graphite-900 text-lg tracking-tight">
-                  Navigation
-                </span>
+              {/* Header */}
+              <div className="flex items-center justify-between px-6 py-5 border-b border-titanium-200 bg-white/50 backdrop-blur-sm">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-graphite-700 to-graphite-800 flex items-center justify-center">
+                    <Menu size={20} className="text-white" />
+                  </div>
+                  <span className="font-extrabold text-graphite-900 text-lg font-sans tracking-tight">
+                    Navigation
+                  </span>
+                </div>
                 <button
                   onClick={() => setOpen(false)}
-                  className="p-2 rounded-xl border border-[rgba(43,53,66,0.2)] 
-                             bg-white/60 backdrop-blur  "
+                  className="p-2 rounded-xl bg-titanium-100 hover:bg-titanium-200 transition-colors border border-titanium-300"
                 >
-                  ✕
+                  <X size={20} className="text-graphite-700" />
                 </button>
               </div>
 
-              <div className="flex-1 px-8 py-10 flex flex-col gap-6 text-[18px] font-medium text-graphite-900">
-                <a onClick={goHome} href="/" className=" ">
-                  Home
+              {/* Menu Items */}
+              <div className="flex-1 px-6 py-8 flex flex-col gap-2">
+                <a 
+                  onClick={goHome} 
+                  href="/" 
+                  className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-white border border-titanium-200 hover:border-titanium-300 hover:bg-titanium-50 transition-all group shadow-sm"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-titanium-200 to-titanium-300 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Home size={18} className="text-graphite-700" />
+                  </div>
+                  <span className="font-semibold text-graphite-900 text-base font-sans">Home</span>
                 </a>
+
                 <button
                   onClick={() => {
                     setOpen(false);
                     window.location.href = "?page=services";
                   }}
-                  className="text-left  "
+                  className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-white border border-titanium-200 hover:border-titanium-300 hover:bg-titanium-50 transition-all group shadow-sm text-left"
                 >
-                  Leistungen
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-titanium-200 to-titanium-300 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Workflow size={18} className="text-graphite-700" />
+                  </div>
+                  <span className="font-semibold text-graphite-900 text-base font-sans">Leistungen</span>
                 </button>
-                <details className="text-left">
-                  <summary className="cursor-pointer list-none flex items-center justify-between  ">
-                    Branchen <ChevronRight size={16} />
+
+                <details className="group">
+                  <summary className="flex items-center justify-between px-4 py-4 rounded-2xl bg-white border border-titanium-200 hover:border-titanium-300 hover:bg-titanium-50 transition-all cursor-pointer list-none shadow-sm">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-titanium-200 to-titanium-300 flex items-center justify-center">
+                        <Grid3x3 size={18} className="text-graphite-700" />
+                      </div>
+                      <span className="font-semibold text-graphite-900 text-base font-sans">Branchen</span>
+                    </div>
+                    <ChevronRight size={18} className="text-graphite-600 group-open:rotate-90 transition-transform" />
                   </summary>
-                  <div className="mt-3 pl-2 flex flex-col gap-2">
+                  <div className="mt-2 ml-14 flex flex-col gap-2">
                     {SECTORS.map((s) => (
                       <button
                         key={s.key}
@@ -777,44 +802,59 @@ const Navbar = () => {
                           setOpen(false);
                           window.location.href = `?sector=${s.key}`;
                         }}
-                        className="text-left text-[16px] text-graphite-800  "
+                        className="text-left px-4 py-2.5 rounded-xl text-[15px] text-graphite-700 hover:bg-titanium-100 hover:text-graphite-900 transition-colors font-sans"
                       >
                         {s.title}
                       </button>
                     ))}
                   </div>
                 </details>
+
                 <button
                   onClick={() => {
                     setOpen(false);
                     window.location.href = "?page=about";
                   }}
-                  className="text-left  "
+                  className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-white border border-titanium-200 hover:border-titanium-300 hover:bg-titanium-50 transition-all group shadow-sm text-left"
                 >
-                  Über mich / Vision
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-titanium-200 to-titanium-300 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Users size={18} className="text-graphite-700" />
+                  </div>
+                  <span className="font-semibold text-graphite-900 text-base font-sans">Über mich / Vision</span>
                 </button>
+
                 <button
                   onClick={() => {
                     setOpen(false);
                     window.location.href = "/insights";
                   }}
-                  className="text-left  "
+                  className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-white border border-titanium-200 hover:border-titanium-300 hover:bg-titanium-50 transition-all group shadow-sm text-left"
                 >
-                  Insights
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-titanium-200 to-titanium-300 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <BookOpen size={18} className="text-graphite-700" />
+                  </div>
+                  <span className="font-semibold text-graphite-900 text-base font-sans">Insights</span>
                 </button>
+
                 <button
                   onClick={() => {
                     setOpen(false);
                     window.location.href = "/kontakt";
                   }}
-                  className="text-left  "
+                  className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-gradient-to-r from-graphite-700 to-graphite-800 border border-graphite-800 hover:from-graphite-800 hover:to-graphite-900 transition-all group shadow-lg text-left mt-2"
                 >
-                  Kontakt / Erstgespräch
+                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Phone size={18} className="text-white" />
+                  </div>
+                  <span className="font-semibold text-white text-base font-sans">Kontakt / Erstgespräch</span>
                 </button>
               </div>
 
-              <div className="px-8 py-6 border-t border-[rgba(43,53,66,0.1)] text-sm text-graphite-600">
-                © {new Date().getFullYear()} Izenic · Alle Rechte vorbehalten
+              {/* Footer */}
+              <div className="px-6 py-5 border-t border-titanium-200 bg-titanium-50/50">
+                <p className="text-xs text-graphite-500 font-sans text-center">
+                  © {new Date().getFullYear()} Izenic · Alle Rechte vorbehalten
+                </p>
               </div>
             </div>
           </>
@@ -3119,7 +3159,7 @@ export default function App() {
   if (insightMatch) {
     const insightId = insightMatch[1];
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white" style={{ backgroundColor: "#ffffff" }}>
         <Navbar />
         <InsightDetail insightId={insightId} />
         <Footer />
