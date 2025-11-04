@@ -1,59 +1,108 @@
 import React, { useState, useEffect } from "react";
 import { Send, Trash2 } from "lucide-react";
 
+const API_BASE_URL = "https://backend-0jvt.onrender.com";
+
 const CommentSection = ({ insightId }) => {
   const [comments, setComments] = useState([]);
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Load comments from localStorage
+  // Load comments from API
   useEffect(() => {
-    const stored = localStorage.getItem(`insight_comments_${insightId}`);
-    if (stored) {
+    const loadComments = async () => {
+      setLoading(true);
+      setError(null);
       try {
-        const parsed = JSON.parse(stored);
-        setComments(parsed);
+        const response = await fetch(`${API_BASE_URL}/api/comments/${insightId}`);
+        if (!response.ok) {
+          throw new Error("Fehler beim Laden der Kommentare");
+        }
+        const data = await response.json();
+        setComments(data || []);
       } catch (e) {
         console.error("Error loading comments:", e);
+        setError("Kommentare konnten nicht geladen werden.");
+        // Fallback: Versuche LocalStorage als Backup
+        const stored = localStorage.getItem(`insight_comments_${insightId}`);
+        if (stored) {
+          try {
+            const parsed = JSON.parse(stored);
+            setComments(parsed);
+          } catch (err) {
+            // Ignore
+          }
+        }
+      } finally {
+        setLoading(false);
       }
-    }
+    };
+
+    loadComments();
   }, [insightId]);
 
-  // Save comments to localStorage
-  const saveComments = (newComments) => {
-    localStorage.setItem(`insight_comments_${insightId}`, JSON.stringify(newComments));
-    setComments(newComments);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!comment.trim()) return;
 
     setSubmitting(true);
+    setError(null);
 
-    const newComment = {
-      id: Date.now().toString(),
-      name: name.trim() || "Anonym",
-      comment: comment.trim(),
-      date: new Date().toISOString()
-    };
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/comments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name.trim() || "Anonym",
+          comment: comment.trim(),
+          insightId: insightId,
+        }),
+      });
 
-    const updated = [newComment, ...comments];
-    saveComments(updated);
+      if (!response.ok) {
+        throw new Error("Fehler beim Speichern des Kommentars");
+      }
 
-    // Reset form
-    setName("");
-    setComment("");
-    setSubmitting(false);
+      const newComment = await response.json();
+      
+      // Kommentar zur Liste hinzufügen (am Anfang für neueste zuerst)
+      setComments([newComment, ...comments]);
+
+      // Reset form
+      setName("");
+      setComment("");
+    } catch (e) {
+      console.error("Error submitting comment:", e);
+      setError("Kommentar konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const handleDelete = (commentId) => {
+  const handleDelete = async (commentId) => {
     if (!window.confirm("Möchten Sie diesen Kommentar wirklich löschen?")) return;
 
-    const updated = comments.filter(comment => comment.id !== commentId);
-    saveComments(updated);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/comments/${insightId}/${commentId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Fehler beim Löschen des Kommentars");
+      }
+
+      // Kommentar aus der Liste entfernen
+      setComments(comments.filter(comment => comment.id !== commentId));
+    } catch (e) {
+      console.error("Error deleting comment:", e);
+      alert("Kommentar konnte nicht gelöscht werden. Bitte versuchen Sie es erneut.");
+    }
   };
 
   const formatDate = (dateString) => {
@@ -133,9 +182,20 @@ const CommentSection = ({ insightId }) => {
           </div>
         </form>
 
+        {/* Error Message */}
+        {error && (
+          <div className="mb-4 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm font-sans">
+            {error}
+          </div>
+        )}
+
         {/* Comments List */}
         <div className="space-y-4 md:space-y-5">
-          {comments.length === 0 ? (
+          {loading ? (
+            <div className="text-center py-8 md:py-12 text-graphite-500 font-sans text-sm md:text-base">
+              <p>Kommentare werden geladen...</p>
+            </div>
+          ) : comments.length === 0 ? (
               <div className="text-center py-8 md:py-12 text-graphite-500 font-sans text-sm md:text-base">
                 <p>Noch keine Kommentare. Seien Sie der Erste!</p>
               </div>
