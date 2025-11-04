@@ -87,9 +87,6 @@ const InsightsOverview = () => {
             </div>
           </div>
         </div>
-
-        {/* Bottom Fade Transition */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent via-white/20 to-white" />
       </section>
 
       {/* Insights Grid */}

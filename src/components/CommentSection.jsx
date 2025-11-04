@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Send, Trash2 } from "lucide-react";
 
 const CommentSection = ({ insightId }) => {
@@ -78,16 +77,14 @@ const CommentSection = ({ insightId }) => {
   };
 
   return (
-    <section className="mt-12 md:mt-16 pt-8 md:pt-12 border-t border-titanium-200">
+    <section className="mt-12 md:mt-16 pt-8 md:pt-12 border-t border-titanium-200 bg-white">
       <div className="container-max max-w-4xl px-4 md:px-6">
         <h2 className="text-2xl md:text-3xl font-extrabold text-graphite-900 mb-6 md:mb-8 font-sans tracking-tight">
           Kommentare
         </h2>
 
         {/* Comment Form */}
-        <motion.form
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+        <form
           onSubmit={handleSubmit}
           className="mb-8 md:mb-12"
         >
@@ -103,7 +100,7 @@ const CommentSection = ({ insightId }) => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Ihr Name"
-                  className="input text-sm md:text-base font-sans"
+                  className="w-full rounded-xl px-4 py-3 bg-white border border-titanium-300 focus:outline-none focus:border-graphite-700 focus:ring-2 focus:ring-graphite-700/20 text-sm md:text-base font-sans transition-colors"
                 />
               </div>
 
@@ -117,7 +114,7 @@ const CommentSection = ({ insightId }) => {
                   onChange={(e) => setComment(e.target.value)}
                   placeholder="Ihre Gedanken..."
                   rows={4}
-                  className="input resize-none text-sm md:text-base font-sans"
+                  className="w-full rounded-xl px-4 py-3 bg-white border border-titanium-300 focus:outline-none focus:border-graphite-700 focus:ring-2 focus:ring-graphite-700/20 resize-none text-sm md:text-base font-sans transition-colors"
                   required
                 />
               </div>
@@ -134,33 +131,18 @@ const CommentSection = ({ insightId }) => {
               </div>
             </div>
           </div>
-        </motion.form>
+        </form>
 
         {/* Comments List */}
         <div className="space-y-4 md:space-y-5">
-          <AnimatePresence mode="popLayout">
-            {comments.length === 0 ? (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="text-center py-8 md:py-12 text-graphite-500 font-sans text-sm md:text-base"
-              >
+          {comments.length === 0 ? (
+              <div className="text-center py-8 md:py-12 text-graphite-500 font-sans text-sm md:text-base">
                 <p>Noch keine Kommentare. Seien Sie der Erste!</p>
-              </motion.div>
+              </div>
             ) : (
               comments.map((comment) => (
-                <motion.div
+                <div
                   key={comment.id}
-                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 25,
-                    mass: 0.8
-                  }}
                   className="card p-4 md:p-5"
                 >
                   <div className="flex items-start gap-3 md:gap-4">
@@ -190,10 +172,9 @@ const CommentSection = ({ insightId }) => {
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))
             )}
-          </AnimatePresence>
         </div>
       </div>
     </section>

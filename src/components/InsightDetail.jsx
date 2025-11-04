@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { Calendar, ArrowLeft, Quote } from "lucide-react";
 import CommentSection from "./CommentSection";
 
@@ -268,26 +267,20 @@ const InsightDetail = ({ insightId }) => {
   return (
     <main className="min-h-screen bg-white">
       {/* Back Button */}
-      <div className="container-max pt-8">
-          <motion.button
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
+      <div className="container-max pt-8 px-4 md:px-6">
+          <button
           onClick={handleBack}
           className="flex items-center gap-2 text-graphite-700 hover:text-graphite-900 transition-colors mb-6 md:mb-8 text-sm md:text-base font-sans"
         >
           <ArrowLeft size={18} />
           <span>Zurück zu Insights</span>
-        </motion.button>
+        </button>
       </div>
 
       {/* Hero Section */}
       <section className="relative">
-        <div className="container-max">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-12"
-          >
+        <div className="container-max px-4 md:px-6">
+          <div className="mb-8 md:mb-12">
             {/* Category Badge */}
             <div className="mb-3 md:mb-4">
               <span className="inline-flex items-center px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium bg-titanium-100 text-graphite-800 border border-titanium-300 font-sans">
@@ -310,15 +303,10 @@ const InsightDetail = ({ insightId }) => {
               <Calendar size={16} />
               <time>{formatDate(insight.date)}</time>
             </div>
-          </motion.div>
+          </div>
 
           {/* Hero Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="relative h-56 sm:h-64 md:h-80 lg:h-96 xl:h-[500px] rounded-xl md:rounded-2xl overflow-hidden mb-8 md:mb-16 bg-gradient-to-br from-titanium-100 to-titanium-200"
-          >
+          <div className="relative h-56 sm:h-64 md:h-80 lg:h-96 xl:h-[500px] rounded-xl md:rounded-2xl overflow-hidden mb-8 md:mb-16 bg-gradient-to-br from-titanium-100 to-titanium-200">
             <img
               src={insight.image}
               alt={insight.title}
@@ -327,24 +315,19 @@ const InsightDetail = ({ insightId }) => {
                 e.target.style.display = "none";
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
-          </motion.div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent" />
+          </div>
         </div>
       </section>
 
       {/* Article Content */}
-      <article className="py-6 md:py-8 lg:py-12">
+      <article className="py-6 md:py-8 lg:py-12 bg-white">
         <div className="container-max max-w-4xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="prose prose-lg max-w-none"
-          >
+          <div className="prose prose-lg max-w-none">
             {contentElements.map((element, index) => (
               <div key={index}>{renderContent(element)}</div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </article>
 
