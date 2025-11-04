@@ -10,6 +10,8 @@ import {
   Landmark, Factory, Megaphone, Hammer, PlayCircle
 } from "lucide-react";
 import { GraduationCap, BarChart2, Cpu, Settings2 } from "lucide-react";
+import InsightsOverview from "./components/InsightsOverview";
+import InsightDetail from "./components/InsightDetail";
 
 
 /* =========================
@@ -697,6 +699,13 @@ const Navbar = () => {
           </button>
 
           <button
+            onClick={() => (window.location.href = "/insights")}
+            className={linkFx}
+          >
+            Insights
+          </button>
+
+          <button
             onClick={() => (window.location.href = "/kontakt")}
             className="px-5 py-3 rounded-2xl font-semibold text-white 
                        bg-gradient-to-r from-[#2b3542] to-[#6c737f] 
@@ -783,6 +792,15 @@ const Navbar = () => {
                   className="text-left  "
                 >
                   Über mich / Vision
+                </button>
+                <button
+                  onClick={() => {
+                    setOpen(false);
+                    window.location.href = "/insights";
+                  }}
+                  className="text-left  "
+                >
+                  Insights
                 </button>
                 <button
                   onClick={() => {
@@ -2988,8 +3006,26 @@ export default function App() {
       window.scrollTo({ top: 0, behavior: "instant" }); // 🚀 immer oben starten
     };
     window.addEventListener("popstate", onPop);
-    return () => window.removeEventListener("popstate", onPop);
-  }, []);
+    
+    // Path-State auch bei direkter Navigation aktualisieren
+    const checkPath = () => {
+      const currentPath = window.location.pathname;
+      if (currentPath !== path) {
+        setPath(currentPath);
+        setSectorSlug(getSectorFromQuery());
+        setPageSlug(getPageFromQuery());
+      }
+    };
+    
+    // Check on mount and periodically (für Navigation via window.location.href)
+    checkPath();
+    const interval = setInterval(checkPath, 100);
+    
+    return () => {
+      window.removeEventListener("popstate", onPop);
+      clearInterval(interval);
+    };
+  }, [path]);
 
   // 1) Branchen-Tab
   if (sectorSlug) {
@@ -3056,12 +3092,36 @@ export default function App() {
     );
   }
   
-    // 6) Kontaktformular eigenes Tab
+  // 6) Kontaktformular eigenes Tab
   if (window.location.pathname === "/kontakt") {
     return (
       <div className="min-h-screen bg-white">
         <Navbar />
         <KontaktPage />
+        <Footer />
+      </div>
+    );
+  }
+
+  // 7) Insights Overview
+  if (path === "/insights") {
+    return (
+      <div className="min-h-screen bg-white">
+        <Navbar />
+        <InsightsOverview />
+        <Footer />
+      </div>
+    );
+  }
+
+  // 8) Insight Detail (e.g., /insights/1)
+  const insightMatch = path.match(/^\/insights\/(.+)$/);
+  if (insightMatch) {
+    const insightId = insightMatch[1];
+    return (
+      <div className="min-h-screen bg-white">
+        <Navbar />
+        <InsightDetail insightId={insightId} />
         <Footer />
       </div>
     );
