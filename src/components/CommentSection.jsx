@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Send, Trash2 } from "lucide-react";
+import { Send } from "lucide-react";
 
 const API_BASE_URL = "https://backend-0jvt.onrender.com";
 
@@ -82,26 +82,6 @@ const CommentSection = ({ insightId }) => {
       setError("Kommentar konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.");
     } finally {
       setSubmitting(false);
-    }
-  };
-
-  const handleDelete = async (commentId) => {
-    if (!window.confirm("Möchten Sie diesen Kommentar wirklich löschen?")) return;
-
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/comments/${insightId}/${commentId}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) {
-        throw new Error("Fehler beim Löschen des Kommentars");
-      }
-
-      // Kommentar aus der Liste entfernen
-      setComments(comments.filter(comment => comment.id !== commentId));
-    } catch (e) {
-      console.error("Error deleting comment:", e);
-      alert("Kommentar konnte nicht gelöscht werden. Bitte versuchen Sie es erneut.");
     }
   };
 
@@ -218,18 +198,9 @@ const CommentSection = ({ insightId }) => {
                         <span className="text-xs text-graphite-500">•</span>
                         <time className="text-xs text-graphite-500 font-sans">{formatDate(comment.date)}</time>
                       </div>
-                      <p className="text-graphite-700 leading-relaxed whitespace-pre-wrap text-sm md:text-base font-sans mb-3">
+                      <p className="text-graphite-700 leading-relaxed whitespace-pre-wrap text-sm md:text-base font-sans">
                         {comment.comment}
                       </p>
-
-                      {/* Delete Button */}
-                      <button
-                        onClick={() => handleDelete(comment.id)}
-                        className="flex items-center gap-1.5 text-xs md:text-sm text-graphite-600 hover:text-graphite-800 transition-colors font-sans"
-                      >
-                        <Trash2 size={14} />
-                        <span>Löschen</span>
-                      </button>
                     </div>
                   </div>
                 </div>
