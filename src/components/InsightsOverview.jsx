@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, BookOpen, Sparkles } from "lucide-react";
 
 // Sample insights data
 const SAMPLE_INSIGHTS = [
@@ -16,7 +16,6 @@ const SAMPLE_INSIGHTS = [
 const formatDate = (date) => {
   const options = { day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" };
   const formatted = date.toLocaleDateString("de-DE", options);
-  // Format: "4. November, 21:00" -> "4. November, 21:00 Uhr"
   return formatted.replace(/(\d{1,2}):(\d{2})/, "$1:$2 Uhr");
 };
 
@@ -26,167 +25,148 @@ const InsightsOverview = () => {
   };
 
   return (
-    <main className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative min-h-[85vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/insights-0.jpg"
-            alt="IZENIC Insights"
-            className="absolute inset-0 w-full h-full object-cover"
-            loading="eager"
-            fetchpriority="high"
+    <main className="min-h-screen bg-[#fafbfc] text-graphite-900 overflow-x-hidden">
+      {/* =========================
+         HERO — Premium Design
+      ========================== */}
+      <header className="relative min-h-[85vh] flex flex-col items-center justify-center text-center overflow-hidden">
+        {/* Background mit subtilen Effekten */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-[#fafbfc] to-white">
+          <div 
+            className="absolute inset-0 opacity-[0.015]"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(43, 53, 66, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(43, 53, 66, 0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: '60px 60px'
+            }}
           />
-          
-          {/* Layered Gradients for Depth */}
-          <div className="absolute inset-0 bg-gradient-to-b from-graphite-900/85 via-graphite-900/70 to-graphite-900/85" />
-          <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_center,rgba(255,255,255,0.15),transparent_70%)] mix-blend-overlay" />
-          
-          {/* Subtle Mesh Pattern */}
-          <div className="absolute inset-0 opacity-20 mesh-bg" />
         </div>
+
+        {/* Decorative Gradient Orbs */}
+        <div className="absolute top-20 left-10 w-96 h-96 bg-cyan-100/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-100/20 rounded-full blur-3xl" />
         
-        <div className="container-max relative z-10 px-4 md:px-6">
-          <div className="text-center max-w-5xl mx-auto">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full 
-                       bg-white/10 backdrop-blur-md border border-white/20 
-                       text-white/95 text-sm font-medium mb-6 md:mb-8 font-sans shadow-lg">
-              <span className="w-2 h-2 rounded-full bg-titanium-400" />
-              <span>Strategie & Expertise</span>
-            </div>
-
-            <h1 className="text-6xl sm:text-7xl md:text-7xl lg:text-8xl font-extrabold mb-4 md:mb-8 font-sans tracking-tight leading-[1.1] md:leading-[1.1] overflow-visible">
-              <span className="block bg-clip-text text-transparent 
-                             bg-[linear-gradient(120deg,#ffffff_0%,#e4ebf2_50%,#cfd6de_100%)]
-                             drop-shadow-[0_4px_20px_rgba(255,255,255,0.2)]
-                             pb-1 md:pb-2">
-                IZENIC
-              </span>
-              <span className="block mt-0.5 md:mt-3 bg-clip-text text-transparent 
-                             bg-[linear-gradient(90deg,#cfd6de_0%,#ffffff_50%,#e4ebf2_100%)]
-                             drop-shadow-[0_4px_20px_rgba(255,255,255,0.15)]
-                             pb-3 md:pb-4 overflow-visible">
-                Insights
-              </span>
-            </h1>
-            
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white/95 leading-relaxed font-sans px-4 md:px-0 font-medium max-w-3xl mx-auto">
-              Strategie, Automatisierung & KI
-              <span className="block mt-2 md:mt-3 text-white/80 text-lg sm:text-xl md:text-2xl font-normal">
-                wo sie wirklich wirkt
-              </span>
-            </p>
-
-            {/* Decorative Elements */}
-            <div className="mt-8 md:mt-12 flex items-center justify-center gap-4">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-              <div className="w-2 h-2 rounded-full bg-white/60" />
-              <div className="h-px w-16 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-            </div>
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-6xl px-6">
+          <div className="inline-flex items-center gap-2.5 text-xs uppercase tracking-widest text-cyan-600 mb-8 font-mono font-bold bg-gradient-to-r from-cyan-50 to-cyan-100/50 px-5 py-2.5 rounded-full border border-cyan-200/50 shadow-sm">
+            <Sparkles size={14} className="text-cyan-600" />
+            <span>STRATEGIE & EXPERTISE</span>
           </div>
+          
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold leading-[1.05] mb-8 tracking-tight text-graphite-900">
+            <span className="bg-gradient-to-br from-graphite-900 via-graphite-800 to-graphite-900 bg-clip-text text-transparent">
+              IZENIC
+            </span>
+            <br />
+            <span className="bg-gradient-to-br from-cyan-600 via-cyan-500 to-cyan-600 bg-clip-text text-transparent">
+              Insights
+            </span>
+          </h1>
+          
+          <p className="text-xl md:text-2xl lg:text-3xl text-graphite-700 max-w-4xl mx-auto leading-relaxed font-light">
+            Strategie, Automatisierung und KI, wo sie wirklich wirkt.
+            <br />
+            <span className="text-graphite-600 text-lg md:text-xl lg:text-2xl">
+              Erkenntnisse aus der Praxis für nachhaltiges Wachstum.
+            </span>
+          </p>
         </div>
-      </section>
+      </header>
 
-      {/* Insights Grid */}
-      <section className="relative py-16 md:py-20 lg:py-28 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-titanium-50/50 to-white" />
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: 'radial-gradient(circle at 2px 2px, rgb(0,0,0) 1px, transparent 0)',
-          backgroundSize: '50px 50px'
-        }} />
-        
-        {/* Subtle Blobs */}
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-titanium-200/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-graphite-100/30 rounded-full blur-3xl" />
-        
-        <div className="container-max relative z-10 px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
+      {/* =========================
+         INSIGHTS GRID — Premium Cards
+      ========================== */}
+      <section className="relative py-24 md:py-32 bg-[#fafbfc]">
+        {/* Background Decorations */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-50/40 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-50/30 rounded-full blur-3xl" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
             {SAMPLE_INSIGHTS.map((insight, index) => (
               <article
                 key={insight.id}
                 onClick={() => handleInsightClick(insight.id)}
                 className="group cursor-pointer"
               >
-                <div className="relative h-full rounded-2xl md:rounded-3xl overflow-hidden 
-                              bg-white border border-titanium-200/80 
-                              shadow-[0_8px_24px_rgba(10,16,25,.08)] 
-                              hover:shadow-[0_20px_60px_rgba(10,16,25,.15)]
-                              hover:border-titanium-300
-                              transition-all duration-500
-                              flex flex-col
-                              group-hover:scale-[1.02]">
+                <div className="relative h-full rounded-[36px] border-2 border-[rgba(12,18,26,.08)] bg-white/80 backdrop-blur-xl p-0
+                              shadow-[0_8px_24px_rgba(15,23,42,.08)] hover:shadow-[0_24px_80px_rgba(15,23,42,.2)]
+                              transition-all duration-700 hover:-translate-y-3 hover:border-cyan-300/50
+                              flex flex-col overflow-hidden
+                              group-hover:bg-white">
                   
                   {/* Glow Effect on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-titanium-50/0 via-titanium-50/0 to-titanium-100/0 
-                                group-hover:from-titanium-50/30 group-hover:via-titanium-50/20 group-hover:to-titanium-100/40
-                                transition-all duration-500 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-cyan-500/0 to-purple-500/0 
+                                group-hover:from-cyan-500/5 group-hover:via-cyan-500/10 group-hover:to-purple-500/5
+                                transition-all duration-700 rounded-[36px] pointer-events-none" />
                   
-                  {/* Image */}
-                  <div className="relative w-full h-56 md:h-64 lg:h-72 overflow-hidden bg-gradient-to-br from-titanium-100 to-titanium-200">
+                  {/* Image Container */}
+                  <div className="relative w-full h-64 md:h-72 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-100/20 via-transparent to-purple-100/20 z-10" />
                     <img
                       src={insight.image}
                       alt={insight.title}
-                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-105"
+                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
                       onError={(e) => {
                         e.target.style.display = "none";
                       }}
                     />
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-graphite-900/40 via-transparent to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
                     
-                    {/* Category Badge */}
-                    <div className="absolute top-4 left-4">
-                      <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold 
-                                     bg-white/95 backdrop-blur-md text-graphite-800 
-                                     border border-white/40 shadow-lg
-                                     font-sans uppercase tracking-wide">
+                    {/* Category Badge - Premium Design */}
+                    <div className="absolute top-5 left-5 z-20">
+                      <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold 
+                                     bg-white/95 backdrop-blur-md text-cyan-700 
+                                     border border-cyan-200/50 shadow-xl
+                                     uppercase tracking-wider
+                                     group-hover:bg-cyan-50 group-hover:border-cyan-300 group-hover:shadow-2xl
+                                     transition-all duration-300">
+                        <div className="w-1.5 h-1.5 rounded-full bg-cyan-600 animate-pulse" />
                         {insight.category}
                       </span>
                     </div>
 
-                    {/* Read More Overlay (appears on hover) */}
-                    <div className="absolute inset-0 flex items-center justify-center 
-                                  bg-graphite-900/0 group-hover:bg-graphite-900/20
-                                  transition-all duration-500">
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 
-                                    flex items-center gap-2 px-4 py-2 rounded-full
-                                    bg-white/95 backdrop-blur-md text-graphite-900 font-medium text-sm">
-                        <span>Artikel lesen</span>
-                        <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                    {/* Read Indicator */}
+                    <div className="absolute top-5 right-5 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-10 h-10 rounded-full bg-white/95 backdrop-blur-md flex items-center justify-center shadow-xl border border-white/40">
+                        <ArrowRight size={18} className="text-cyan-600" />
                       </div>
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 p-5 md:p-6 lg:p-7 flex flex-col relative z-10 bg-white">
-                    <h2 className="text-lg md:text-xl lg:text-2xl font-extrabold text-graphite-900 mb-3 
-                                  group-hover:text-graphite-700 transition-colors 
-                                  line-clamp-2 font-sans tracking-tight
+                  <div className="flex-1 p-7 md:p-8 flex flex-col bg-white/80 backdrop-blur-sm relative z-10">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-graphite-900 mb-5 
+                                  group-hover:text-cyan-600 transition-colors duration-300
                                   leading-tight">
                       {insight.title}
                     </h2>
                     
-                    <p className="text-graphite-600 text-sm md:text-base mb-4 
-                                line-clamp-3 flex-1 leading-relaxed font-sans">
+                    <p className="text-graphite-700 text-base md:text-lg mb-6 
+                                line-clamp-3 flex-1 leading-relaxed font-normal">
                       {insight.excerpt}
                     </p>
 
-                    {/* Date & Footer */}
-                    <div className="mt-auto pt-4 border-t border-titanium-200">
+                    {/* Footer - Premium Design */}
+                    <div className="mt-auto pt-6 border-t-2 border-[rgba(12,18,26,.06)]">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-xs text-graphite-500 font-sans">
-                          <Calendar size={14} className="text-graphite-400" />
+                        <div className="flex items-center gap-2.5 text-sm text-graphite-600 font-medium">
+                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-50 to-cyan-100 flex items-center justify-center border border-cyan-200/50">
+                            <Calendar size={14} className="text-cyan-600" />
+                          </div>
                           <time className="whitespace-nowrap">{formatDate(insight.date)}</time>
                         </div>
                         
-                        <div className="flex items-center gap-2 text-graphite-700 font-semibold text-sm 
-                                      group-hover:text-graphite-900 transition-colors font-sans">
-                          <span className="hidden sm:inline">Mehr lesen</span>
-                          <ArrowRight size={16} className="transition-transform group-hover:translate-x-2" />
+                        <div className="flex items-center gap-2 text-cyan-600 font-bold text-sm 
+                                      group-hover:text-cyan-700 group-hover:gap-3 transition-all duration-300">
+                          <span className="hidden sm:inline">Artikel lesen</span>
+                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-50 to-cyan-100 flex items-center justify-center border border-cyan-200/50 group-hover:border-cyan-300 group-hover:shadow-lg transition-all">
+                            <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -196,6 +176,19 @@ const InsightsOverview = () => {
               </article>
             ))}
           </div>
+
+          {/* Empty State - Premium Design */}
+          {SAMPLE_INSIGHTS.length === 0 && (
+            <div className="text-center py-24">
+              <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-cyan-100 via-cyan-50 to-purple-50 mb-8 border-2 border-cyan-200/50 shadow-xl">
+                <BookOpen className="w-12 h-12 text-cyan-600" />
+              </div>
+              <h3 className="text-3xl font-bold text-graphite-900 mb-4">Weitere Insights folgen</h3>
+              <p className="text-graphite-600 max-w-md mx-auto text-lg">
+                Neue Artikel und Erkenntnisse werden regelmäßig veröffentlicht.
+              </p>
+            </div>
+          )}
         </div>
       </section>
     </main>
