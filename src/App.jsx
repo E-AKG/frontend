@@ -5,27 +5,27 @@ import {
   Home, Menu, X, Grid3x3, BookOpen
 } from "lucide-react";
 import { Volume2, VolumeX } from "lucide-react";
-// oben ergänzen
-import {
-  Scale, ShoppingCart, Building2, Stethoscope, Truck, Users2,
-  Landmark, Factory, Megaphone, Hammer, PlayCircle
-} from "lucide-react";
 import { GraduationCap, BarChart2, Cpu, Settings2 } from "lucide-react";
 import InsightsOverview from "./components/InsightsOverview";
 import InsightDetail from "./components/InsightDetail";
+import Navbar from "./components/Navbar";
+import ServicesPage from "./pages/ServicesPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import UseCasesPage from "./pages/UseCasesPage";
+import { USE_CASES } from "./data/useCases.jsx";
+import HeroSection from "./components/home/HeroSection";
+import ProblemSection from "./components/home/ProblemSection";
+import ServicesSection from "./components/home/ServicesSection";
+import ProcessSection from "./components/home/ProcessSection";
+import USPSection from "./components/home/USPSection";
+import CTASection from "./components/home/CTASection";
 
 
 /* =========================
    THEME — Titanium × Weiß
 ========================= */
-const LOGO = "/izenic-logo.png";
-const btnSolid =
-  "inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 font-semibold text-white " +
-  "bg-[linear-gradient(135deg,#2b3542,#0b121a)] border border-white/10 " +
-  "shadow-[0_14px_28px_rgba(13,18,26,.32),inset_0_1px_0_rgba(255,255,255,.10)]";
-const btnGhost =
-  "inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 font-medium " +
-  "border border-[rgba(12,18,26,.18)] bg-white/80 backdrop-blur text-graphite-900";
+import { btnSolid, btnGhost } from "./constants";
 
 
 /* =========================
@@ -89,196 +89,15 @@ const toLanding = (id) => (e) => {
 };
 
 /* =========================
-   PAGE-QUERY (Leistungen / Über uns)
+   PAGE-QUERY (Leistungen / Über uns) - für Rückwärtskompatibilität
 ========================= */
 const getPageFromQuery = () => {
   const p = new URLSearchParams(window.location.search);
   return p.get("page"); // "services" | "about" | null
 };
-const openPageTab = (slug /* "services" | "about" */) => {
-  const url = new URL(window.location.href);
-  url.searchParams.set("page", slug);
-  url.searchParams.delete("sector"); // falls man aus einem Branchen-Tab kommt
-  window.open(url.toString(), "_blank", "noopener,noreferrer");
-};
 
 /* =========================
-   VIEW: Leistungen — Cinematic Titanium Experience
-========================= */
-const ServicesView = () => {
-
-  const ref = useRef(null);
-
-  return (
-    <main className="min-h-screen bg-white text-graphite-900 overflow-x-hidden">
-      {/* =========================
-         HERO — Cinematic Entry
-      ========================== */}
-      <header
-        ref={ref}
-        className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden"
-      >
-{/* Background Image */}
-        <div className="absolute inset-0">
-  {/* Hintergrundbild */}
-  <img
-    src="/impact.jpg"
-    alt="Impact Background"
-    className="absolute inset-0 w-full h-full object-cover"
-    loading="eager"
-    fetchpriority="high"
-  />
-
-  {/* Dunkles Overlay */}
-  <div className="absolute inset-0 bg-black/40" /> 
-  {/* bg-black/40 = 40% Schwarz, kannst du feintunen: /30 = heller, /60 = dunkler */}
-</div>
-        {/* Hero Content */}
-        <div
-          className="relative z-10 max-w-4xl px-6"
-        >
-          <h1
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.1]
-                       bg-clip-text text-transparent bg-[linear-gradient(100deg,#ffffff_0%,#cfd6df_45%,#9ca6b3_100%)]
-                       drop-shadow-[0_4px_20px_rgba(255,255,255,0.15)]"
-          >
-            Leistungen mit messbarem Impact
-          </h1>
-          <p className="mt-5 text-white/90 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            IZENIC hilft Unternehmen, ihre Prozesse mit Automatisierung und KI zu optimieren. Strategisch beratend, technisch entwickelnd und menschlich befähigend.
-          </p>
-        </div>
-
-      </header>
-
-      {/* =========================
-         SERVICES GRID
-      ========================== */}
-      <section
-        className="relative max-w-7xl mx-auto px-6 py-28"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#f8fafc] via-white to-[#f7f9fc]" />
-        <div className="relative grid md:grid-cols-3 gap-10 z-10">
-          {[
-            {
-              title: "Beratung",
-              kicker: "Von Analyse zu Wirkung",
-              desc: "Strategische Grundlage für intelligente Automatisierung. Bestehende Abläufe werden analysiert, Engpässe erkannt und Quick-Wins priorisiert.",
-              points: [
-                "Identifikation automatisierbarer Prozesse",
-                "Machbarkeits- & ROI-Bewertung",
-                "Individuelle Automatisierungs-Roadmaps",
-              ],
-              icon: <Users className="w-6 h-6" />,
-              bg: "/leistung-beratung.jpg",
-            },
-            {
-              title: "Umsetzung",
-              kicker: "Von Konzept zu Realität",
-              desc: "Von der Idee zum funktionierenden System. Skalierbare, sichere Automatisierungen, die sich nahtlos integrieren.",
-              points: [
-                "Individuelle Automatisierungstools",
-                "KI-gestützte Analysen & Dashboards",
-                "Integration in ERP-, CRM- & Datensysteme",
-              ],
-              icon: <Wrench className="w-6 h-6" />,
-              bg: "/leistung-dev.jpg",
-            },
-            {
-              title: "Coaching",
-              kicker: "Wissen schafft Wirkung",
-              desc: "Teams werden befähigt, KI- und Automatisierungstechnologien sicher einzusetzen. Praxisnah, verständlich, nachhaltig.",
-              points: [
-                "Workshops & Schulungen mit Praxisbezug",
-                "Aufbau interner Automatisierungskompetenzen",
-                "Trainings zu KI, Data Science & Prompt Engineering",
-              ],
-              icon: <FileText className="w-6 h-6" />,
-              bg: "/leistung-coaching.jpg",
-            },
-          ].map((c, i) => (
-            <div
-              key={i}
-              className="relative group rounded-[28px] overflow-hidden
-                         border border-[rgba(255,255,255,0.15)] bg-white/90 backdrop-blur-xl
-                         shadow-[0_20px_50px_rgba(15,23,42,.08)] "
-            >
-              <img
-                src={c.bg}
-                alt={c.title}
-                className="absolute inset-0 w-full h-full object-cover opacity-35  "
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
-              <div className="relative z-10 p-8 flex flex-col justify-end text-white">
-                <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] mb-2
-                                rounded-full bg-white/15 px-3 py-1 backdrop-blur-sm">
-                  {c.icon} {c.kicker}
-                </div>
-                <h3 className="text-2xl font-bold">{c.title}</h3>
-                <p className="mt-2 text-sm text-white/85 leading-relaxed">{c.desc}</p>
-                <ul className="mt-4 space-y-2 text-sm text-white/90">
-                  {c.points.map((p, j) => (
-                    <li key={j} className="flex items-center gap-2">
-                      <CheckCircle2 size={16} /> {p}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Trust Row */}
-        <div
-          className="relative z-10 mt-20 grid sm:grid-cols-3 gap-5 text-sm text-graphite-700"
-        >
-          {[
-            { icon: <ShieldCheck size={18} />, text: "DSGVO-konform & revisionssicher" },
-            { icon: <LineChart size={18} />, text: "Transparente KPIs & klarer ROI" },
-            { icon: <Wrench size={18} />, text: "Flexibel in EU-Cloud oder On-Premises" },
-          ].map((t, i) => (
-            <div
-              key={i}
-              className="flex items-center justify-center gap-2 rounded-2xl bg-white/95 backdrop-blur
-                         px-4 py-3 border border-[rgba(12,18,26,.12)]
-                         shadow-sm  "
-            >
-              {t.icon} {t.text}
-            </div>
-          ))}
-        </div>
-
-        {/* CTA Stripe */}
-        <div
-          className="relative z-10 mt-24 rounded-[32px] p-[2px]
-                     bg-[linear-gradient(135deg,#cfd6df,#aab4c2,#2b3542)]
-                     shadow-[0_30px_80px_rgba(15,23,42,.15)]"
-        >
-<div className="rounded-[30px] bg-white/95 backdrop-blur-xl p-10 text-center">
-  <h3 className="text-2xl md:text-3xl font-bold text-graphite-900">
-    Der erste Schritt zu messbarer Wirkung
-  </h3>
-  <p className="mt-3 text-graphite-700 max-w-2xl mx-auto">
-  Erhalten Sie in einem unverbindlichen Erstgespräch Klarheit darüber, wo Automatisierung unmittelbar entlastet und KI echten Mehrwert schafft. Ohne Risiko. Mit messbaren Ergebnissen.
-  </p>
-  <a
-    href="/kontakt"
-    className={
-      btnSolid +
-      " mt-6 inline-flex px-8 py-4 justify-center text-lg  "
-    }
-  >
-    Erstgespräch vereinbaren
-  </a>
-</div>
-        </div>
-      </section>
-    </main>
-  );
-};
-
-/* =========================
-   VIEW: Über mich — IZENIC Titanium Vision Contrast v2
+   HOME PAGE COMPONENTS (bleiben in App.jsx)
 ========================= */
 const AboutView = () => {
   return (
@@ -517,665 +336,7 @@ const AboutView = () => {
 };
 
 /* =========================
-   NAVBAR — Titanium Fullscreen Slide Edition + Branchen-Mega-Menü
-========================= */
-const Navbar = () => {
-  const [open, setOpen] = useState(false);
-  const [openSectors, setOpenSectors] = useState(false);
-
-  const goHome = (e) => {
-    e.preventDefault();
-    setOpen(false);
-    setOpenSectors(false);
-    window.location.href = "/";
-  };
-
-  const linkFx = `
-    relative -all              after:absolute after:bottom-[-6px] after:left-0 after:h-[2px]
-    after:w-0 after:bg-gradient-to-r after:from-[#2b3542] after:to-[#9ca3af]
-    hover:after:w-full after:-all after: after:rounded-full
-  `;
-
-  // ESC-Taste schließt Menüs
-  useEffect(() => {
-    const closeOnEsc = (e) => {
-      if (e.key === "Escape") {
-        setOpen(false);
-        setOpenSectors(false);
-      }
-    };
-    window.addEventListener("keydown", closeOnEsc);
-    return () => window.removeEventListener("keydown", closeOnEsc);
-  }, []);
-
-  // Klick außerhalb des Branchen-Menüs schließt es
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      const menu = document.getElementById("sectors-menu");
-      const button = document.getElementById("sectors-button");
-      if (
-        openSectors &&
-        menu &&
-        button &&
-        !menu.contains(e.target) &&
-        !button.contains(e.target)
-      ) {
-        setOpenSectors(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, [openSectors]);
-
-  return (
-    <header className="sticky top-0 z-[100] bg-white/70 backdrop-blur-2xl border-b border-[rgba(43,53,66,0.2)] shadow-[0_4px_30px_rgba(0,0,0,0.08)]">
-      <nav className="max-w-7xl mx-auto px-4 h-32 flex items-center justify-between">
-        {/* Logo */}
-        <a
-          href="/"
-          onClick={goHome}
-          className="flex items-center group"
-          aria-label="Izenic Home"
-        >
-          <img
-            src={LOGO}
-            alt="Izenic Logo"
-            className="h-28 w-auto md:h-36 object-contain shrink-0                         group- group- drop-shadow-[0_8px_24px_rgba(43,53,66,0.25)]"
-          />
-        </a>
-
-        {/* ======== DESKTOP NAVIGATION ======== */}
-        <div className="hidden md:flex items-center gap-7 text-[15px]">
-          <a href="/" onClick={goHome} className={linkFx}>
-            Home
-          </a>
-
-          <button
-            onClick={() => (window.location.href = "/leistungen")}
-            className={linkFx}
-          >
-            Leistungen
-          </button>
-
-          {/* Branchen (Mega-Menü) */}
-          <div className="relative">
-            <button
-              id="sectors-button"
-              onClick={() => setOpenSectors(!openSectors)}
-              className={`${linkFx} inline-flex items-center gap-1`}
-            >
-              Branchen
-              <ChevronRight
-                size={16}
-                className={`  ${
-                  openSectors ? "" : ""
-                }`}
-              />
-            </button>
-
-            {openSectors && (
-              <div
-                id="sectors-menu"
-                className="absolute right-0 mt-4 w-[880px] max-w-[94vw] z-[999] rounded-3xl border border-[rgba(43,53,66,0.2)]
-                             bg-white/95 backdrop-blur-xl shadow-[0_25px_70px_rgba(15,23,42,0.15)] p-5"
-                >
-                  <div className="px-2 pb-2 flex items-center justify-between">
-                    <span className="text-[11px] uppercase tracking-[0.18em] text-graphite-600">
-                      Branchen & Use-Cases
-                    </span>
-                    <a
-                      href="#usecases"
-                      onClick={() => {
-                        setOpenSectors(false);
-                        document
-                          .getElementById("usecases")
-                          ?.scrollIntoView({ behavior: "smooth" });
-                      }}
-                      className="text-xs text-graphite-700  flex items-center gap-1"
-                    >
-                      Alle Use Cases <ChevronRight size={14} />
-                    </a>
-                  </div>
-
-                  {/* Branchen-GRID */}
-                  <div className="grid grid-cols-3 gap-3 max-h-[65vh] overflow-y-auto pr-1">
-                    {SECTORS.map((s) => (
-                      <button
-                        key={s.key}
-                        onClick={() => {
-                          setOpenSectors(false);
-                          window.location.href = `/branchen/${s.key}`;
-                        }}
-                        className="group relative text-left rounded-2xl p-3 border border-[rgba(43,53,66,.12)] bg-white -all shadow-[0_6px_20px_rgba(15,23,42,.06)] hover:shadow-[0_14px_35px_rgba(15,23,42,.1)]"
-                      >
-                        <div className="relative h-28 rounded-xl overflow-hidden border border-[rgba(43,53,66,.15)]">
-                          <img
-                            src={s.hero}
-                            alt={s.title}
-                            className="absolute inset-0 w-full h-full object-cover group-  "
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
-                          <span className="absolute top-2 left-2 inline-flex items-center gap-1 rounded-full bg-white/90 backdrop-blur px-2.5 py-0.5 border border-[rgba(43,53,66,.2)] text-[11px] text-graphite-800">
-                            {s.icon} {s.title.split(" ")[0]}
-                          </span>
-                        </div>
-
-                        <div className="mt-3">
-                          <div className="text-[15px] font-semibold text-graphite-900">
-                            {s.title}
-                          </div>
-                          <div className="text-xs text-graphite-600 line-clamp-2">
-                            {s.intro}
-                          </div>
-                          <div className="mt-2 flex flex-wrap gap-1.5">
-                            {(s.chips || []).slice(0, 3).map((c, i) => (
-                              <span
-                                key={i}
-                                className="px-2.5 py-1 rounded-full border border-[rgba(43,53,66,.16)] bg-white text-[11px] text-graphite-800"
-                              >
-                                {c}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-
-                        <ChevronRight
-                          size={16}
-                          className="absolute right-3 top-3 text-graphite-700 opacity-0   "
-                        />
-                      </button>
-                    ))}
-                  </div>
-              </div>
-            )}
-          </div>
-
-          <button
-            onClick={() => (window.location.href = "/ueber-mich")}
-            className={linkFx}
-          >
-            Über mich / Vision
-          </button>
-
-          <button
-            onClick={() => (window.location.href = "/insights")}
-            className={linkFx}
-          >
-            Insights
-          </button>
-
-          <button
-            onClick={() => (window.location.href = "/kontakt")}
-            className="px-5 py-3 rounded-2xl font-semibold text-white 
-                       bg-gradient-to-r from-[#2b3542] to-[#6c737f] 
-                       shadow-[0_8px_20px_rgba(43,53,66,0.35)] 
-  "
-          >
-            Kontakt / Erstgespräch
-          </button>
-        </div>
-
-        {/* ======== MOBILE TOGGLE ======== */}
-        <button
-          onClick={() => setOpen(true)}
-          className="md:hidden rounded-xl px-4 py-2.5 border border-titanium-300 bg-white/80 backdrop-blur-sm text-graphite-900 font-medium hover:bg-white transition-colors shadow-sm"
-        >
-          <Menu size={20} />
-        </button>
-      </nav>
-
-      {/* ======== MOBILE FULLSCREEN SLIDE MENU ======== */}
-      {open && (
-          <>
-            <div
-              className="fixed inset-0 bg-graphite-900/70 backdrop-blur-md z-[199]"
-              onClick={() => setOpen(false)}
-            />
-            <div
-              className="fixed top-0 right-0 h-screen w-full sm:w-[85%] z-[200]
-                         bg-gradient-to-br from-white via-titanium-50 to-white
-                         backdrop-blur-2xl shadow-[0_0_60px_rgba(15,23,42,0.3)]
-                         border-l border-titanium-200
-                         flex flex-col overflow-y-auto"
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between px-6 py-5 border-b border-titanium-200 bg-white/50 backdrop-blur-sm">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-graphite-700 to-graphite-800 flex items-center justify-center">
-                    <Menu size={20} className="text-white" />
-                  </div>
-                  <span className="font-extrabold text-graphite-900 text-lg font-sans tracking-tight">
-                    Navigation
-                  </span>
-                </div>
-                <button
-                  onClick={() => setOpen(false)}
-                  className="p-2 rounded-xl bg-titanium-100 hover:bg-titanium-200 transition-colors border border-titanium-300"
-                >
-                  <X size={20} className="text-graphite-700" />
-                </button>
-              </div>
-
-              {/* Menu Items */}
-              <div className="flex-1 px-6 py-8 flex flex-col gap-2">
-                <a 
-                  onClick={goHome} 
-                  href="/" 
-                  className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-white border border-titanium-200 hover:border-titanium-300 hover:bg-titanium-50 transition-all group shadow-sm"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-titanium-200 to-titanium-300 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Home size={18} className="text-graphite-700" />
-                  </div>
-                  <span className="font-semibold text-graphite-900 text-base font-sans">Home</span>
-                </a>
-
-                <button
-                  onClick={() => {
-                    setOpen(false);
-                    window.location.href = "/leistungen";
-                  }}
-                  className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-white border border-titanium-200 hover:border-titanium-300 hover:bg-titanium-50 transition-all group shadow-sm text-left"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-titanium-200 to-titanium-300 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Workflow size={18} className="text-graphite-700" />
-                  </div>
-                  <span className="font-semibold text-graphite-900 text-base font-sans">Leistungen</span>
-                </button>
-
-                <details className="group">
-                  <summary className="flex items-center justify-between px-4 py-4 rounded-2xl bg-white border border-titanium-200 hover:border-titanium-300 hover:bg-titanium-50 transition-all cursor-pointer list-none shadow-sm">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-titanium-200 to-titanium-300 flex items-center justify-center">
-                        <Grid3x3 size={18} className="text-graphite-700" />
-                      </div>
-                      <span className="font-semibold text-graphite-900 text-base font-sans">Branchen</span>
-                    </div>
-                    <ChevronRight size={18} className="text-graphite-600 group-open:rotate-90 transition-transform" />
-                  </summary>
-                  <div className="mt-2 ml-14 flex flex-col gap-2">
-                    {SECTORS.map((s) => (
-                      <button
-                        key={s.key}
-                        onClick={() => {
-                          setOpen(false);
-                          window.location.href = `/branchen/${s.key}`;
-                        }}
-                        className="text-left px-4 py-2.5 rounded-xl text-[15px] text-graphite-700 hover:bg-titanium-100 hover:text-graphite-900 transition-colors font-sans"
-                      >
-                        {s.title}
-                      </button>
-                    ))}
-                  </div>
-                </details>
-
-                <button
-                  onClick={() => {
-                    setOpen(false);
-                    window.location.href = "/ueber-mich";
-                  }}
-                  className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-white border border-titanium-200 hover:border-titanium-300 hover:bg-titanium-50 transition-all group shadow-sm text-left"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-titanium-200 to-titanium-300 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Users size={18} className="text-graphite-700" />
-                  </div>
-                  <span className="font-semibold text-graphite-900 text-base font-sans">Über mich / Vision</span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    setOpen(false);
-                    window.location.href = "/insights";
-                  }}
-                  className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-white border border-titanium-200 hover:border-titanium-300 hover:bg-titanium-50 transition-all group shadow-sm text-left"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-titanium-200 to-titanium-300 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <BookOpen size={18} className="text-graphite-700" />
-                  </div>
-                  <span className="font-semibold text-graphite-900 text-base font-sans">Insights</span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    setOpen(false);
-                    window.location.href = "/kontakt";
-                  }}
-                  className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-gradient-to-r from-graphite-700 to-graphite-800 border border-graphite-800 hover:from-graphite-800 hover:to-graphite-900 transition-all group shadow-lg text-left mt-2"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Phone size={18} className="text-white" />
-                  </div>
-                  <span className="font-semibold text-white text-base font-sans">Kontakt / Erstgespräch</span>
-                </button>
-              </div>
-
-              {/* Footer */}
-              <div className="px-6 py-5 border-t border-titanium-200 bg-titanium-50/50">
-                <p className="text-xs text-graphite-500 font-sans text-center">
-                  © {new Date().getFullYear()} Izenic · Alle Rechte vorbehalten
-                </p>
-              </div>
-            </div>
-          </>
-        )}
-    </header>
-  );
-};
-
-// * =========================
-// SECTORS - Branchen mit maximalem Impact
-// ========================= */
-const SECTORS = [
-  {
-    key: "recht",
-    title: "Rechts- & Steuerwesen",
-    icon: <Scale className="w-4 h-4" />,
-    intro: "Abläufe verschlanken, Fristen sicher überwachen und Fachwissen zentral verfügbar machen. Ohne permanente Zusatzbelastung für Ihre Teams.",
-    hero: "/legal.jpg",
-    video: "/legal2.jpg",
-    chips: ["Dokumente strukturiert ablegen", "Fristen verlässlich einhalten", "Antwortzeiten verkürzen"],
-    highlights: ["Höhere Transparenz", "Schnellere Entscheidungen", "Weniger Routineaufwand"],
-    kpis: [{v:"-40%", l:"Bearbeitungszeit"}, {v:"+25%", l:"Zuverlässigkeit"}, {v:"-50%", l:"E-Mail-Volumen"}]
-  },
-  {
-    key: "onlinehandel",
-    title: "E-Commerce & Onlinehandel",
-    icon: <ShoppingCart className="w-4 h-4" />,
-    intro: "Vom Erstkontakt bis zur Retoure: Prozesse klar steuern, Servicekosten senken und Kundenerfahrungen messbar verbessern.",
-    hero: "/ecommerce.jpg",
-    video: "/ecommerce2.jpg",
-    chips: ["Customer Journey optimieren", "Service skalierbar machen", "Feedback automatisiert auswerten"],
-    highlights: ["Weniger Rückfragen", "Schnellere Reaktion", "Fundierte Datenbasis"],
-    kpis: [{v:"+20%", l:"Conversion"}, {v:"-50%", l:"Supportaufwand"}, {v:"-30%", l:"Retourenkosten"}]
-  },
-  {
-    key: "immobilien",
-    title: "Immobilienwirtschaft",
-    icon: <Building2 className="w-4 h-4" />,
-    intro: "Von der Anfrage bis zum Reporting: Verwaltung effizient organisieren, Kommunikation vereinfachen und Compliance sicherstellen.",
-    hero: "/realestate.jpg",
-    video: "/realestate2.jpg",
-    chips: ["Anfragen effizient beantworten", "Dokumente verständlich aufbereiten", "Reports automatisiert erstellen"],
-    highlights: ["Weniger Rückfragen", "Klare Strukturen", "Steigende Mieterzufriedenheit"],
-    kpis: [{v:"-40%", l:"Durchlaufzeit"}, {v:"+30%", l:"Kundenzufriedenheit"}]
-  },
-  {
-    key: "gesundheitswesen",
-    title: "Gesundheitswesen",
-    icon: <Stethoscope className="w-4 h-4" />,
-    intro: "Praxisabläufe und Verwaltung entlasten, Patienten gezielt informieren und medizinische Daten sicher nutzbar machen.",
-    hero: "/healthcare.jpg",
-    video: "/healthcare2.jpg",
-    chips: ["Patientenanfragen bündeln", "Informationen verdichten", "Abläufe verlässlich dokumentieren"],
-    highlights: ["Weniger Telefonlast", "Schnellere Orientierung", "Nachvollziehbare Prozesse"],
-    kpis: [{v:"-35%", l:"Telefonaufkommen"}, {v:"+20%", l:"Planungssicherheit"}]
-  },
-  {
-    key: "logistik",
-    title: "Logistik & Transport",
-    icon: <Truck className="w-4 h-4" />,
-    intro: "Lieferketten präzise steuern, Abweichungen früh erkennen und Kommunikation durchgängig sichern. Ohne operative Hektik.",
-    hero: "/logistics.jpg",
-    video: "/logistics2.jpg",
-    chips: ["Lieferzeiten zuverlässig planen", "Ausnahmen rechtzeitig erkennen", "Transparenz für alle Beteiligten"],
-    highlights: ["Mehr Planungssicherheit", "Weniger Stress", "Frühzeitige Reaktionen"],
-    kpis: [{v:"-30%", l:"Verspätungen"}, {v:"-45%", l:"Nachfassaufwand"}]
-  },
-  {
-    key: "personal",
-    title: "Personal & Recruiting",
-    icon: <Users2 className="w-4 h-4" />,
-    intro: "Administrative Aufgaben reduzieren, Bewerberprozesse beschleunigen und Mitarbeiterwissen nachhaltig sichern.",
-    hero: "/hr.jpg",
-    video: "/hr2.jpg",
-    chips: ["Kandidaten schneller bewerten", "Onboarding strukturiert gestalten", "Wissen zentral verfügbar machen"],
-    highlights: ["Zeitersparnis", "Mehr Fokus auf das Team", "Klar definierte Abläufe"],
-    kpis: [{v:"-45%", l:"Screeningzeit"}, {v:"+18%", l:"Akzeptanzquote"}]
-  },
-  {
-    key: "finanzen",
-    title: "Finanz- & Versicherungsdienstleister",
-    icon: <Landmark className="w-4 h-4" />,
-    intro: "Vorgänge prüfen, Risiken bewerten und Entscheidungen fundiert treffen. Mit konsistenter Dokumentation und klarer Nachvollziehbarkeit.",
-    hero: "/finance.jpg",
-    video: "/finance2.jpg",
-    chips: ["Risiken präzise einschätzen", "Prüfungen konsistent durchführen", "Kunden professionell informieren"],
-    highlights: ["Weniger Doppelarbeit", "Mehr Transparenz", "Verlässliche Nachweise"],
-    kpis: [{v:"-35%", l:"Durchlaufzeit"}, {v:"+25%", l:"Erstlösungsquote"}]
-  },
-  {
-    key: "produktion",
-    title: "Produktion & Mittelstand",
-    icon: <Factory className="w-4 h-4" />,
-    intro: "Qualität sichern, Ausfälle reduzieren und Ressourcen produktiv einsetzen. Mit datenbasierter Transparenz und planbarer Steuerung.",
-    hero: "/manufacturing.jpg",
-    video: "/manufacturing2.jpg",
-    chips: ["Wartung planbar machen", "Berichte vereinfachen", "Bedarfe frühzeitig erkennen"],
-    highlights: ["Weniger Stillstand", "Höhere Effizienz", "Bessere Prognosen"],
-    kpis: [{v:"-25%", l:"Stillstand"}, {v:"+18%", l:"Produktivität"}]
-  },
-  {
-    key: "marketing",
-    title: "Marketing- & Werbeagenturen",
-    icon: <Megaphone className="w-4 h-4" />,
-    intro: "Briefings präzisieren, Content schneller produzieren und Abstimmungsprozesse beschleunigen. Ohne Qualitätsverlust.",
-    hero: "/marketing.jpg",
-    video: "/marketing2.jpg",
-    chips: ["Ideen schneller realisieren", "Freigaben effizient steuern", "Auswertungen automatisieren"],
-    highlights: ["Klarere Prozesse", "Weniger Nacharbeit", "Höhere Schlagkraft"],
-    kpis: [{v:"+30%", l:"Output"}, {v:"-35%", l:"Korrekturschleifen"}]
-  },
-  {
-    key: "bau",
-    title: "Bauunternehmen",
-    icon: <Hammer className="w-4 h-4" />,
-    intro: "Von der Planung bis zur Übergabe: Projekte nahtlos steuern, Informationen zentral bündeln und Ausführung zuverlässig absichern.",
-    hero: "/construction.jpg",
-    image: "/construction2.jpg",
-    chips: ["Angebote strukturiert erstellen", "Baustelleninformationen teilen", "Dokumente sofort verfügbar machen"],
-    highlights: ["Schnellere Angebote", "Weniger Missverständnisse", "Mehr Projektsicherheit"],
-    kpis: [{v:"-30%", l:"Bearbeitungszeit"}, {v:"+20%", l:"Projektsicherheit"}] 
-  }
-];
-
-/* =========================
-   SECTOR VIEW — Cinematic Titanium Edition
-========================= */
-const SectorView = ({ slug }) => {
-  const sector = SECTORS.find((s) => s.key === slug);
-  if (!sector) return null;
-
-  const ref = useRef(null);
-  const [spot, setSpot] = useState({ x: 55, y: 60 });
-
-  useEffect(() => {
-    const move = (e) => {
-      const r = document.getElementById("sector-hero")?.getBoundingClientRect();
-      if (!r) return;
-      setSpot({
-        x: ((e.clientX - r.left) / r.width) * 100,
-        y: ((e.clientY - r.top) / r.height) * 100,
-      });
-    };
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
-  }, []);
-
-  return (
-    <main className="min-h-screen bg-white text-graphite-900 overflow-x-hidden">
-      {/* =========================
-         HERO — Cinematic Centered Titanium Edition
-      ========================== */}
-      <header
-        id="sector-hero"
-        ref={ref}
-        className="relative min-h-screen flex items-center justify-center text-center overflow-hidden"
-      >
-{/* Background Media */}
-        <div className="absolute inset-0">
-  {sector.video?.endsWith(".mp4") ? (
-    <video
-      autoPlay
-      muted
-      loop
-      playsInline
-      className="absolute inset-0 w-full h-full object-cover"
-    >
-      <source src={sector.video} type="video/mp4" />
-    </video>
-  ) : (
-    <img
-      src={sector.image || sector.video}
-      alt={sector.title}
-      className="absolute inset-0 w-full h-full object-cover"
-      loading="eager"
-      fetchpriority="high"
-    />
-  )}
-
-  <div className="absolute inset-0 bg-black/40" />
-</div>
-
-        {/* Moving Light Spot */}
-        <div
-          className="pointer-events-none absolute inset-0 mix-blend-screen"
-          style={{
-            WebkitMaskImage: `radial-gradient(350px 350px at ${spot.x}% ${spot.y}%, rgba(255,255,255,.9), transparent 60%)`,
-            maskImage: `radial-gradient(350px 350px at ${spot.x}% ${spot.y}%, rgba(255,255,255,.9), transparent 60%)`,
-            background: "radial-gradient(closest-side, rgba(255,255,255,.1), transparent)",
-          }}
-        />
-
-        {/* Content */}
-        <div
-          className="relative z-10 max-w-4xl px-6 flex flex-col items-center justify-center"
-        >
-          <h1
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.1]
-                       bg-clip-text text-transparent bg-[linear-gradient(100deg,#ffffff_0%,#cfd6df_45%,#9ca6b3_100%)]
-                       drop-shadow-[0_4px_20px_rgba(255,255,255,0.15)]"
-          >
-            {sector.title}
-          </h1>
-
-          <p className="mt-5 text-white/90 text-base md:text-lg max-w-2xl leading-relaxed">
-            {sector.intro}
-          </p>
-
-          {/* Chips */}
-          <div className="mt-8 flex flex-wrap justify-center gap-3 text-white/85 text-sm">
-            {sector.chips.map((chip, i) => (
-              <span
-                key={i}
-                className="px-4 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-sm  "
-              >
-                {chip}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Glow Bottom */}
-        <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[1200px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.12)_0%,transparent_70%)] blur-[120px] opacity-70" />
-      </header>
-
-      {/* =========================
-         IMPULSE SECTION
-      ========================== */}
-      <section className="py-24 px-6 bg-gradient-to-b from-white to-[#f8fafc] text-center">
-        <h2
-          className="text-2xl md:text-4xl font-bold text-graphite-900"
-        >
-          Neue Impulse für messbare Fortschritte
-        </h2>
-        <p className="mt-4 max-w-3xl mx-auto text-graphite-700 text-lg leading-relaxed">
-          Effizienz entsteht nicht durch radikale Brüche, sondern durch gezielte
-          Verbesserungen. Strukturen, die Komplexität reduzieren, Entscheidungswege
-          verkürzen und Ressourcen gezielt einsetzen.
-        </p>
-      </section>
-
-      {/* =========================
-         EINBLICKE SECTION
-      ========================== */}
-      <section className="py-24 px-6 bg-white">
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {[
-            {
-              t: "Anfragen im Griff",
-              d: "Alle Anfragen werden automatisch priorisiert und strukturiert, sodass nichts verloren geht.",
-            },
-            {
-              t: "Prozesse automatisiert",
-              d: "Routineaufgaben laufen eigenständig und fehlerfrei ab. Ihr Team gewinnt Zeit für Wertschöpfung.",
-            },
-            {
-              t: "Wissen verfügbar",
-              d: "Relevante Informationen sind jederzeit abrufbar und sichern fundierte Entscheidungen.",
-            },
-          ].map((b, i) => (
-            <div
-              key={i}
-              className="group rounded-3xl bg-white/70 backdrop-blur-xl border border-white/30 shadow-xl p-8   "
-            >
-              <h3 className="text-lg font-semibold text-graphite-900 mb-2">{b.t}</h3>
-              <p className="text-graphite-700">{b.d}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* =========================
-         ERGEBNISSE SECTION
-      ========================== */}
-      <section className="py-24 px-6 bg-gradient-to-b from-[#f8fafc] to-white">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2
-            className="text-2xl md:text-4xl font-bold text-graphite-900"
-          >
-            Nachweisbare Resultate
-          </h2>
-          <p className="mt-4 text-graphite-700 text-lg max-w-3xl mx-auto leading-relaxed">
-            Entscheidend sind Ergebnisse, die sich messen lassen. Weniger operative
-            Belastung, klarere Abläufe und mehr Transparenz in jedem Schritt. Kein
-            theoretisches Versprechen, sondern konkrete Wertschöpfung im Alltag.
-          </p>
-
-          <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-6">
-            {sector.kpis.map((k, i) => (
-              <div
-                key={i}
-                className="rounded-3xl p-[1px] bg-gradient-to-br from-[#2b3542] via-[#4a515a] to-[#aab4c2] shadow-lg"
-              >
-                <div className="rounded-3xl bg-white py-6 px-4">
-                  <div className="text-2xl font-bold text-graphite-900">{k.v}</div>
-                  <div className="text-graphite-700 mt-1 text-sm">{k.l}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </main>
-  );
-};
-
-/* =========================
-   Query-Helpers
-========================= */
-const getSectorFromQuery = () => {
-  const p = new URLSearchParams(window.location.search);
-  return p.get("sector"); // z.B. "sales"
-};
-
-const openSectorTab = (slug) => {
-  const url = new URL(window.location.href);
-  url.searchParams.set("sector", slug);
-  window.open(url.toString(), "_blank", "noopener,noreferrer");
-};
-
-/* =========================
-   HERO — Video + Parallax + Mobile-Optimierung
+   HOME PAGE COMPONENTS (bleiben in App.jsx)
 ========================= */
 /* =========================
    HERO — Cinematic Centered Titanium Edition
@@ -1438,7 +599,7 @@ const WhyNow = () => {
                       </button>
                     </div>
                     <span className="hidden md:block text-xs text-white/70">
-                      60–90 Sek • Full HD
+                      60 bis 90 Sek • Full HD
                     </span>
                   </div>
                 </div>
@@ -2067,7 +1228,7 @@ const UseCases = () => {
   // kuratierte Auswahl für das Teasing
   const FEATURED = ["recht", "onlinehandel", "immobilien", "gesundheitswesen", "logistik", "personal", "finanzen", "produktion", "marketing", "bau"];
 
-  const list = SECTORS.filter(s => FEATURED.includes(s.key));
+  const list = USE_CASES.filter(s => FEATURED.includes(s.key));
   const [active, setActive] = React.useState(list[0]?.key || null);
   const current = list.find(s => s.key === active) || list[0];
 
@@ -2095,8 +1256,8 @@ const UseCases = () => {
   onFocus={() => setActive(s.key)}
   className="group cursor-pointer relative"
   onClick={(e) => {
-    e.preventDefault(); // 🚫 blockiert Standard-Href Verhalten
-    window.location.href = `/branchen/${s.key}`;
+    e.preventDefault();
+    window.location.href = `/use-cases`;
   }}
 >
                     {/* Hover-Highlight */}
@@ -2155,7 +1316,7 @@ const UseCases = () => {
   }}
   className={btnSolid}
 >
-  Details im Branchen-Tab <ArrowRight size={18} />
+  Zu Use Cases <ArrowRight size={18} />
 </button>
                 <a href="#kontakt" onClick={toLanding("kontakt")} className={btnGhost}>
   Quick-Wins klären
@@ -2197,7 +1358,7 @@ const UseCases = () => {
   }}
   className={btnSolid + " mt-4 w-full justify-center"}
 >
-  Branchen-Tab öffnen <ArrowRight size={18} />
+  Zu Use Cases <ArrowRight size={18} />
 </button>
                 </div>
               </div>
@@ -2207,7 +1368,7 @@ const UseCases = () => {
 
         {/* Mini-Hinweis (Desktop sichtbar) */}
         <p className="hidden md:block mt-4 text-center text-sm text-graphite-600">
-          Tipp: Eintrag anklicken oder in der Navigation über Branchen direkt zum Tab springen.
+          Tipp: Eintrag anklicken oder in der Navigation über Use Case direkt zur Seite springen.
         </p>
       </div>
     </section>
@@ -3024,20 +2185,16 @@ const KontaktPage = () => {
    APP ROOT — erkennt ?sector= oder Seiten
 ========================= */
 export default function App() {
-  // 🧭 1) Path in React-State legen, damit Re-Render bei URL-Änderung
+  // 🧭 Path in React-State legen, damit Re-Render bei URL-Änderung
   const [path, setPath] = useState(window.location.pathname);
-
-  // 2) Query-basierte Slugs (wie bei dir)
-  const [sectorSlug, setSectorSlug] = useState(getSectorFromQuery());
   const [pageSlug, setPageSlug] = useState(getPageFromQuery()); // "services" | "about" | null
 
-  // 3) Wenn Browsernavigation (Vor/Zurück oder interner Tab-Klick)
+  // Wenn Browsernavigation (Vor/Zurück oder interner Tab-Klick)
   useEffect(() => {
     const onPop = () => {
-      setSectorSlug(getSectorFromQuery());
       setPageSlug(getPageFromQuery());
-      setPath(window.location.pathname); // ✅ triggert Re-Render
-      window.scrollTo({ top: 0, behavior: "instant" }); // 🚀 immer oben starten
+      setPath(window.location.pathname);
+      window.scrollTo({ top: 0, behavior: "instant" });
     };
     window.addEventListener("popstate", onPop);
     
@@ -3046,12 +2203,10 @@ export default function App() {
       const currentPath = window.location.pathname;
       if (currentPath !== path) {
         setPath(currentPath);
-        setSectorSlug(getSectorFromQuery());
         setPageSlug(getPageFromQuery());
       }
     };
     
-    // Check on mount and periodically (für Navigation via window.location.href)
     checkPath();
     const interval = setInterval(checkPath, 100);
     
@@ -3061,73 +2216,40 @@ export default function App() {
     };
   }, [path]);
 
-  // 1) Branchen-Route (neue Route /branchen/:slug)
-  const branchMatch = path.match(/^\/branchen\/(.+)$/);
-  if (branchMatch) {
-    const branchSlug = branchMatch[1];
+  // Leistungen (Route /leistungen)
+  if (path === "/leistungen" || pageSlug === "services") {
     return (
       <div className="min-h-screen bg-white">
         <Navbar />
-        <SectorView slug={branchSlug} />
+        <ServicesPage />
         <Footer />
       </div>
     );
   }
 
-  // 2) Branchen-Tab (Query-basiert für Rückwärtskompatibilität)
-  if (sectorSlug) {
+  // Über mich (Route /ueber-mich)
+  if (path === "/ueber-mich" || pageSlug === "about") {
     return (
       <div className="min-h-screen bg-white">
         <Navbar />
-        <SectorView slug={sectorSlug} />
+        <AboutPage />
         <Footer />
       </div>
     );
   }
 
-  // 3) Leistungen (neue Route /leistungen)
-  if (path === "/leistungen") {
+  // Use Cases (Route /use-cases)
+  if (path === "/use-cases") {
     return (
       <div className="min-h-screen bg-white">
         <Navbar />
-        <ServicesView />
+        <UseCasesPage />
         <Footer />
       </div>
     );
   }
 
-  // 4) Über mich (neue Route /ueber-mich)
-  if (path === "/ueber-mich") {
-    return (
-      <div className="min-h-screen bg-white">
-        <Navbar />
-        <AboutView />
-        <Footer />
-      </div>
-    );
-  }
-
-  // 5) Eigene Tabs: Leistungen / Über mich (Query-basiert für Rückwärtskompatibilität)
-  if (pageSlug === "services") {
-    return (
-      <div className="min-h-screen bg-white">
-        <Navbar />
-        <ServicesView />
-        <Footer />
-      </div>
-    );
-  }
-  if (pageSlug === "about") {
-    return (
-      <div className="min-h-screen bg-white">
-        <Navbar />
-        <AboutView />
-        <Footer />
-      </div>
-    );
-  }
-
-  // 3) Impressum
+  // Impressum
   if (path === "/impressum") {
     return (
       <div className="min-h-screen bg-white">
@@ -3138,7 +2260,7 @@ export default function App() {
     );
   }
 
-  // 4) Datenschutz
+  // Datenschutz
   if (path === "/datenschutz") {
     return (
       <div className="min-h-screen bg-white">
@@ -3150,7 +2272,7 @@ export default function App() {
   }
 
 
-  // 5) Vertrauen & Sicherheit
+  // Vertrauen & Sicherheit
   if (path === "/trust") {
     return (
       <div className="min-h-screen bg-white">
@@ -3161,18 +2283,18 @@ export default function App() {
     );
   }
   
-  // 6) Kontaktformular eigenes Tab
-  if (window.location.pathname === "/kontakt") {
+  // Kontakt (Route /kontakt)
+  if (path === "/kontakt") {
     return (
       <div className="min-h-screen bg-white">
         <Navbar />
-        <KontaktPage />
+        <ContactPage />
         <Footer />
       </div>
     );
   }
 
-  // 7) Insights Overview
+  // Insights Overview
   if (path === "/insights") {
     return (
       <div className="min-h-screen bg-white">
@@ -3183,7 +2305,7 @@ export default function App() {
     );
   }
 
-  // 8) Insight Detail (e.g., /insights/1)
+  // Insight Detail (e.g., /insights/1)
   const insightMatch = path.match(/^\/insights\/(.+)$/);
   if (insightMatch) {
     const insightId = insightMatch[1];
@@ -3196,25 +2318,16 @@ export default function App() {
     );
   }
 
-  // 5) Landing (Home)
+  // Landing (Home)
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <Hero />
-      <SectionCut label="Warum jetzt" />
-      <Reveal><WhyNow /></Reveal>
-      <SectionCut label="Herausforderung → Lösung" />
-      <Reveal><ProblemSolution /></Reveal>
-      <SectionCut label="Fokuspunkt" />
-      <Reveal><USP /></Reveal>
-      <SectionCut label="Ablauf" />
-      <Reveal><Journey /></Reveal>
-      <SectionCut label="Automation × KI" />
-      <Reveal><Principle /></Reveal>
-      <SectionCut label="Use Cases" />
-      <Reveal><UseCases /></Reveal>
-      <SectionCut label="Kontakt" />
-      <Reveal><FinalCall /></Reveal>
+      <HeroSection />
+      <ProblemSection />
+      <ServicesSection />
+      <ProcessSection />
+      <USPSection />
+      <CTASection />
       <Footer />
     </div>
   );
