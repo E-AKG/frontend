@@ -251,10 +251,10 @@ const InsightDetail = ({ insightId }) => {
         );
       case "quote":
         return (
-          <blockquote className="my-8 md:my-10 pl-6 md:pl-8 border-l-4 border-cyan-500 bg-gradient-to-r from-cyan-50/50 to-transparent py-6 md:py-8 rounded-r-2xl">
+          <blockquote className="my-8 md:my-10 pl-6 md:pl-8 border-l-4 border-cyan-500 bg-gradient-to-r from-cyan-50/50 to-transparent py-6 md:py-8 rounded-r-2xl shadow-sm">
             <div className="flex items-start gap-3 md:gap-4">
               <Quote className="text-cyan-600 flex-shrink-0 mt-1" size={24} />
-              <p className="text-lg md:text-xl text-graphite-800 italic leading-relaxed">{renderText(element.content)}</p>
+              <p className="text-lg md:text-xl text-graphite-800 italic leading-relaxed font-medium">{renderText(element.content)}</p>
             </div>
           </blockquote>
         );
@@ -269,7 +269,7 @@ const InsightDetail = ({ insightId }) => {
           <ul className="list-none space-y-3 md:space-y-4 mb-6 md:mb-8">
             {element.items.map((item, i) => (
               <li key={i} className="flex items-start gap-4 text-lg md:text-xl text-graphite-700 leading-relaxed">
-                <div className="w-2 h-2 rounded-full bg-cyan-600 mt-2.5 flex-shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-cyan-600 mt-2.5 flex-shrink-0 shadow-sm" />
                 <span>{renderText(item)}</span>
               </li>
             ))}
@@ -370,8 +370,8 @@ const InsightDetail = ({ insightId }) => {
       {/* Article Content */}
       <article className="relative py-12 md:py-16 lg:py-20">
         <div className="max-w-4xl mx-auto px-4 md:px-6">
-          {/* Content Card */}
-          <div className="bg-white rounded-3xl border border-[rgba(12,18,26,.08)] shadow-xl p-8 md:p-12 lg:p-16">
+          {/* Content Card - Premium Design */}
+          <div className="bg-white rounded-[32px] md:rounded-3xl border-2 border-[rgba(12,18,26,.08)] shadow-[0_12px_32px_rgba(15,23,42,.1)] p-8 md:p-12 lg:p-16">
             <div className="prose prose-lg max-w-none">
               {contentElements.map((element, index) => (
                 <div key={index}>{renderContent(element)}</div>

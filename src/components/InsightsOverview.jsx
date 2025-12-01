@@ -29,7 +29,7 @@ const InsightsOverview = () => {
       {/* =========================
          HERO — Premium Design
       ========================== */}
-      <header className="relative min-h-[85vh] flex flex-col items-center justify-center text-center overflow-hidden">
+      <header className="relative min-h-[80vh] flex flex-col items-center justify-center text-center overflow-hidden">
         {/* Background mit subtilen Effekten */}
         <div className="absolute inset-0 bg-gradient-to-b from-white via-[#fafbfc] to-white">
           <div 
@@ -49,28 +49,18 @@ const InsightsOverview = () => {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-100/20 rounded-full blur-3xl" />
         
         {/* Hero Content */}
-        <div className="relative z-10 max-w-6xl px-6">
-          <div className="inline-flex items-center gap-2.5 text-xs uppercase tracking-widest text-cyan-600 mb-8 font-mono font-bold bg-gradient-to-r from-cyan-50 to-cyan-100/50 px-5 py-2.5 rounded-full border border-cyan-200/50 shadow-sm">
+        <div className="relative z-10 max-w-6xl px-4 md:px-6">
+          <div className="inline-flex items-center gap-2.5 text-xs uppercase tracking-widest text-cyan-600 mb-6 md:mb-8 font-mono font-bold bg-gradient-to-r from-cyan-50 to-cyan-100/50 px-4 py-2 md:px-5 md:py-2.5 rounded-full border border-cyan-200/50 shadow-sm">
             <Sparkles size={14} className="text-cyan-600" />
             <span>STRATEGIE & EXPERTISE</span>
           </div>
           
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold leading-[1.05] mb-8 tracking-tight text-graphite-900">
-            <span className="bg-gradient-to-br from-graphite-900 via-graphite-800 to-graphite-900 bg-clip-text text-transparent">
-              IZENIC
-            </span>
-            <br />
-            <span className="bg-gradient-to-br from-cyan-600 via-cyan-500 to-cyan-600 bg-clip-text text-transparent">
-              Insights
-            </span>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-[1.05] mb-6 md:mb-10 tracking-tight text-graphite-900">
+            IZENIC Insights
           </h1>
           
           <p className="text-xl md:text-2xl lg:text-3xl text-graphite-700 max-w-4xl mx-auto leading-relaxed font-light">
-            Strategie, Automatisierung und KI, wo sie wirklich wirkt.
-            <br />
-            <span className="text-graphite-600 text-lg md:text-xl lg:text-2xl">
-              Erkenntnisse aus der Praxis für nachhaltiges Wachstum.
-            </span>
+            Strategie, Automatisierung und KI, wo sie wirklich wirkt. Erkenntnisse aus der Praxis für nachhaltiges Wachstum.
           </p>
         </div>
       </header>
@@ -93,16 +83,15 @@ const InsightsOverview = () => {
                 onClick={() => handleInsightClick(insight.id)}
                 className="group cursor-pointer"
               >
-                <div className="relative h-full rounded-[36px] border-2 border-[rgba(12,18,26,.08)] bg-white/80 backdrop-blur-xl p-0
-                              shadow-[0_8px_24px_rgba(15,23,42,.08)] hover:shadow-[0_24px_80px_rgba(15,23,42,.2)]
-                              transition-all duration-700 hover:-translate-y-3 hover:border-cyan-300/50
-                              flex flex-col overflow-hidden
-                              group-hover:bg-white">
+                <div className="relative h-full rounded-[32px] md:rounded-[36px] border-2 border-[rgba(12,18,26,.12)] bg-white p-0
+                              shadow-[0_12px_32px_rgba(15,23,42,.1)] hover:shadow-[0_24px_64px_rgba(15,23,42,.18)]
+                              transition-all duration-500 hover:-translate-y-2 hover:border-cyan-300/50
+                              flex flex-col overflow-hidden">
                   
                   {/* Glow Effect on Hover */}
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-cyan-500/0 to-purple-500/0 
                                 group-hover:from-cyan-500/5 group-hover:via-cyan-500/10 group-hover:to-purple-500/5
-                                transition-all duration-700 rounded-[36px] pointer-events-none" />
+                                transition-all duration-500 rounded-[32px] md:rounded-[36px] pointer-events-none" />
                   
                   {/* Image Container */}
                   <div className="relative w-full h-64 md:h-72 overflow-hidden">
@@ -139,33 +128,33 @@ const InsightsOverview = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 p-7 md:p-8 flex flex-col bg-white/80 backdrop-blur-sm relative z-10">
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-graphite-900 mb-5 
+                  <div className="flex-1 p-6 md:p-7 lg:p-8 flex flex-col bg-white relative z-10">
+                    <h2 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-graphite-900 mb-4 md:mb-5 
                                   group-hover:text-cyan-600 transition-colors duration-300
                                   leading-tight">
                       {insight.title}
                     </h2>
                     
-                    <p className="text-graphite-700 text-base md:text-lg mb-6 
-                                line-clamp-3 flex-1 leading-relaxed font-normal">
+                    <p className="text-graphite-700 text-base md:text-lg mb-5 md:mb-6 
+                                line-clamp-3 flex-1 leading-relaxed">
                       {insight.excerpt}
                     </p>
 
                     {/* Footer - Premium Design */}
-                    <div className="mt-auto pt-6 border-t-2 border-[rgba(12,18,26,.06)]">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2.5 text-sm text-graphite-600 font-medium">
-                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-50 to-cyan-100 flex items-center justify-center border border-cyan-200/50">
-                            <Calendar size={14} className="text-cyan-600" />
+                    <div className="mt-auto pt-5 md:pt-6 border-t border-[rgba(12,18,26,.08)]">
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-2 md:gap-2.5 text-xs md:text-sm text-graphite-600 font-medium">
+                          <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-br from-cyan-50 to-cyan-100 flex items-center justify-center border border-cyan-200/50 flex-shrink-0">
+                            <Calendar size={12} className="md:w-3.5 md:h-3.5 text-cyan-600" />
                           </div>
                           <time className="whitespace-nowrap">{formatDate(insight.date)}</time>
                         </div>
                         
-                        <div className="flex items-center gap-2 text-cyan-600 font-bold text-sm 
-                                      group-hover:text-cyan-700 group-hover:gap-3 transition-all duration-300">
+                        <div className="flex items-center gap-2 text-cyan-600 font-semibold text-xs md:text-sm 
+                                      group-hover:text-cyan-700 group-hover:gap-2.5 transition-all duration-300">
                           <span className="hidden sm:inline">Artikel lesen</span>
-                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-50 to-cyan-100 flex items-center justify-center border border-cyan-200/50 group-hover:border-cyan-300 group-hover:shadow-lg transition-all">
-                            <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+                          <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-br from-cyan-50 to-cyan-100 flex items-center justify-center border border-cyan-200/50 group-hover:border-cyan-300 group-hover:shadow-lg transition-all flex-shrink-0">
+                            <ArrowRight size={14} className="md:w-4 md:h-4 transition-transform group-hover:translate-x-0.5" />
                           </div>
                         </div>
                       </div>
