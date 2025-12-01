@@ -243,7 +243,7 @@ const ContactPage = () => {
                 {
                   icon: <Clock className="w-6 h-6 md:w-8 md:h-8" />,
                   title: "20 Minuten Fokus",
-                  text: "Keine Verkaufsgespräche. Nur eine ehrliche Einschätzung, wo Technologie wirklich wirkt."
+                  text: "Eine ehrliche Einschätzung, wo Technologie Ihnen wirklich wirkt."
                 },
                 {
                   icon: <Mail className="w-6 h-6 md:w-8 md:h-8" />,
